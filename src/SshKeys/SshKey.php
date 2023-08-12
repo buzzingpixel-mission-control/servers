@@ -53,4 +53,9 @@ readonly class SshKey
             'private' => $this->private->toNative(),
         ];
     }
+
+    public function withSlugFromString(string $slug): static
+    {
+        return $this->with(slug: Slug::fromNative($slug));
+    }
 }
