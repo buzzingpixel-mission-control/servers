@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MissionControlServers\SshKeys\Persistence;
+namespace MissionControlServers\Servers\Persistence;
 
 use Assert\Assert;
 use MissionControlBackend\ActionResult;
@@ -12,15 +12,15 @@ use Throwable;
 use function count;
 use function implode;
 
-readonly class SaveSshKey
+readonly class SaveServer
 {
     public function __construct(
         private MissionControlPdo $pdo,
-        private FindSshKeys $findSshKeys,
+        private FindServers $findServers,
     ) {
     }
 
-    public function save(SshKeyRecord $record): ActionResult
+    public function save(ServerRecord $record): ActionResult
     {
         $validationResult = $this->validateRecord($record);
 
@@ -47,7 +47,7 @@ readonly class SaveSshKey
         return new ActionResult();
     }
 
-    private function validateRecord(SshKeyRecord $record): ActionResult
+    private function validateRecord(ServerRecord $record): ActionResult
     {
         $errors = [];
 
@@ -67,24 +67,8 @@ readonly class SaveSshKey
             $errors[] = $exception->getMessage();
         }
 
-        try {
-            Assert::that($record->public)->notEmpty(
-                'Public key must be provided',
-            );
-        } catch (Throwable $exception) {
-            $errors[] = $exception->getMessage();
-        }
-
-        try {
-            Assert::that($record->private)->notEmpty(
-                'Private key must be provided',
-            );
-        } catch (Throwable $exception) {
-            $errors[] = $exception->getMessage();
-        }
-
-        $existingSshKey = $this->findSshKeys->findOneOrNull(
-            FindSshKeyParameters::create()
+        $existingSshKey = $this->findServers->findOneOrNull(
+            FindServerParameters::create()
                 ->withSlug($record->slug)
                 ->withNotId($record->id),
         );

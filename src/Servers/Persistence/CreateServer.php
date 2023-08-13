@@ -2,25 +2,29 @@
 
 declare(strict_types=1);
 
-namespace MissionControlServers\SshKeys\Persistence;
+namespace MissionControlServers\Servers\Persistence;
+
+// phpcs:disable Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
 
 use Assert\Assert;
 use MissionControlBackend\ActionResult;
 use MissionControlBackend\Persistence\MissionControlPdo;
+use MissionControlBackend\Persistence\UuidFactoryWithOrderedTimeCodec;
 use Throwable;
 
 use function count;
 use function implode;
 
-readonly class SaveSshKey
+readonly class CreateServer
 {
     public function __construct(
         private MissionControlPdo $pdo,
-        private FindSshKeys $findSshKeys,
+        private FindServers $findServers,
+        private UuidFactoryWithOrderedTimeCodec $uuidFactory,
     ) {
     }
 
-    public function save(SshKeyRecord $record): ActionResult
+    public function create(ServerRecord $record): ActionResult
     {
         $validationResult = $this->validateRecord($record);
 
@@ -28,12 +32,14 @@ readonly class SaveSshKey
             return $validationResult;
         }
 
+        $record->id = $this->uuidFactory->uuid4()->toString();
+
         $statement = $this->pdo->prepare(implode(' ', [
-            'UPDATE',
+            'INSERT INTO',
             $record->tableName(),
-            'SET',
-            $record->columnsAsUpdateSetPlaceholders(),
-            'WHERE id = :id',
+            $record->columnsAsInsertIntoString(),
+            'VALUES',
+            $record->columnsAsValuePlaceholders(),
         ]));
 
         if (! $statement->execute($record->asParametersArray())) {
@@ -47,7 +53,7 @@ readonly class SaveSshKey
         return new ActionResult();
     }
 
-    private function validateRecord(SshKeyRecord $record): ActionResult
+    private function validateRecord(ServerRecord $record): ActionResult
     {
         $errors = [];
 
@@ -67,29 +73,13 @@ readonly class SaveSshKey
             $errors[] = $exception->getMessage();
         }
 
-        try {
-            Assert::that($record->public)->notEmpty(
-                'Public key must be provided',
-            );
-        } catch (Throwable $exception) {
-            $errors[] = $exception->getMessage();
-        }
-
-        try {
-            Assert::that($record->private)->notEmpty(
-                'Private key must be provided',
-            );
-        } catch (Throwable $exception) {
-            $errors[] = $exception->getMessage();
-        }
-
-        $existingSshKey = $this->findSshKeys->findOneOrNull(
-            FindSshKeyParameters::create()
-                ->withSlug($record->slug)
-                ->withNotId($record->id),
+        $existing = $this->findServers->findOneOrNull(
+            FindServerParameters::create()->withSlug(
+                $record->slug,
+            ),
         );
 
-        if ($existingSshKey !== null) {
+        if ($existing !== null) {
             $errors[] = 'Slug must be unique';
         }
 

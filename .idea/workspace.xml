@@ -6,14 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8c8273f2-18a5-4161-892d-93478ef60dd9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/ServersRoutes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/ServersRoutes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/SshKey/AddSshKeyOverlay.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/SshKey/AddSshKeyOverlay.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/SshKey/SshKeyData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/SshKey/SshKeyData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/SshKey/SshKeyList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/SshKey/SshKeyList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/SshKey/SshKeyListItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/SshKey/SshKeyListItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/SshKey/SshKeyListItemEditor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/SshKey/SshKeyListItemEditor.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ServersRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/ServersRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SshKeys/AddEdit/PatchEditSshKeyAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SshKeys/AddEdit/PatchEditSshKeyAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SshKeys/Persistence/SaveSshKey.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SshKeys/Persistence/SaveSshKey.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
