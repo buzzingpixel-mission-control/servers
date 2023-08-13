@@ -6,11 +6,15 @@ namespace MissionControlServers\SshKeys;
 
 use Cocur\Slugify\Slugify;
 use MissionControlBackend\ActionResult;
+use MissionControlServers\SshKeys\Generate\GenerateKeyPair;
 use MissionControlServers\SshKeys\Persistence\CreateSshKey;
 use MissionControlServers\SshKeys\Persistence\FindSshKeyParameters;
 use MissionControlServers\SshKeys\Persistence\FindSshKeys;
 use MissionControlServers\SshKeys\Persistence\SaveSshKey;
 use MissionControlServers\SshKeys\Persistence\SshKeyRecord;
+use MissionControlServers\SshKeys\ValueObjects\PrivateKey;
+use MissionControlServers\SshKeys\ValueObjects\PublicKey;
+use MissionControlServers\SshKeys\ValueObjects\Title;
 
 readonly class SshKeyRepository
 {
@@ -19,7 +23,19 @@ readonly class SshKeyRepository
         private SaveSshKey $save,
         private FindSshKeys $find,
         private CreateSshKey $create,
+        private GenerateKeyPair $generateKeyPair,
     ) {
+    }
+
+    public function generateSshKey(string $title): NewSshKey
+    {
+        $key = $this->generateKeyPair->generate();
+
+        return new NewSshKey(
+            Title::fromNative($title),
+            PublicKey::fromNative($key->publicKey->toNative()),
+            PrivateKey::fromNative($key->privateKey->toNative()),
+        );
     }
 
     public function createSshKey(NewSshKey $entity): ActionResult

@@ -5,14 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c8273f2-18a5-4161-892d-93478ef60dd9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/phpunit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpunit.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/ServersBoot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/ServersBoot.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/ServersMenuItems.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/ServersMenuItems.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/ServersRoutes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/ServersRoutes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ServersBoot.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/ServersBoot.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ServersMenuItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/ServersMenuItems.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ServersRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/ServersRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EventListeners/Routing.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventListeners/Routing.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SshKeys/SshKeyRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SshKeys/SshKeyRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,6 +138,8 @@
       <path value="$PROJECT_DIR$/vendor/intervention/httpauth" />
       <path value="$PROJECT_DIR$/vendor/chrisharrison/php-array-of" />
       <path value="$PROJECT_DIR$/vendor/marcusschwarz/lesserphp" />
+      <path value="$PROJECT_DIR$/vendor/phpseclib/phpseclib" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/constant_time_encoding" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
