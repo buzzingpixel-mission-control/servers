@@ -11,11 +11,15 @@ use MissionControlServers\SshKeys\AddEdit\PatchUnArchiveSshKeyAction;
 use MissionControlServers\SshKeys\AddEdit\PostAddSshKeyAction;
 use MissionControlServers\SshKeys\GetSshKeysListAction;
 use MissionControlServers\SshKeys\GetSshKeysListArchivedAction;
+use MissionControlServers\SshKeys\PatchSshKeysArchiveAction;
+use MissionControlServers\SshKeys\PatchSshKeysUnArchiveAction;
 
 class Routing
 {
     public function onApplyRoutes(ApiApplyRoutesEvent $event): void
     {
+        PatchSshKeysArchiveAction::registerRoute($event);
+        PatchSshKeysUnArchiveAction::registerRoute($event);
         GetSshKeysListAction::registerRoute($event);
         GetSshKeysListArchivedAction::registerRoute($event);
         PostAddSshKeyAction::registerRoute($event);
