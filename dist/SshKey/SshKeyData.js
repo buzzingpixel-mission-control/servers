@@ -17,7 +17,10 @@ var useSshKeyData = function (archive) {
 };
 exports.useSshKeyData = useSshKeyData;
 var useAddSshKeyMutation = function () { return (0, buzzingpixel_mission_control_frontend_core_1.useApiMutation)({
-    invalidateQueryKeysOnSuccess: [],
+    invalidateQueryKeysOnSuccess: [
+        '/ssh-keys/list',
+        '/ssh-keys/list/archived',
+    ],
     prepareApiParams: function (data) { return ({
         uri: '/ssh-keys/add',
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment

@@ -1,8 +1,13 @@
-import { RequestMethod, useApiMutation, useApiQueryWithSignInRedirect } from 'buzzingpixel-mission-control-frontend-core';
-import { useQueryClient } from '@tanstack/react-query';
-import { unknown } from 'zod';
 import {
-    SshKeys, SshKeysSchema, SshKeysWithViewOptions, transformSshKeys,
+    RequestMethod,
+    useApiMutation,
+    useApiQueryWithSignInRedirect,
+} from 'buzzingpixel-mission-control-frontend-core';
+import {
+    SshKeys,
+    SshKeysSchema,
+    SshKeysWithViewOptions,
+    transformSshKeys,
 } from './SshKeys';
 import SshKeyFormValues from './SshKeyFormValues';
 
@@ -28,7 +33,10 @@ export const useSshKeyData = (archive = false): {
 };
 
 export const useAddSshKeyMutation = () => useApiMutation({
-    invalidateQueryKeysOnSuccess: [],
+    invalidateQueryKeysOnSuccess: [
+        '/ssh-keys/list',
+        '/ssh-keys/list/archived',
+    ],
     prepareApiParams: (data) => ({
         uri: '/ssh-keys/add',
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
