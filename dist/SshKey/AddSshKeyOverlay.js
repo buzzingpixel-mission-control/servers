@@ -56,7 +56,7 @@ var AddSshKeyOverlay = function (_a) {
             },
         });
     };
-    return (react_1.default.createElement(buzzingpixel_mission_control_frontend_core_1.EditorShellFloating, { title: "Add New Ping", isSaving: isSaving, submitButtonText: "Add", errorMessage: errorMessage, saveHandler: function () {
+    return (react_1.default.createElement(buzzingpixel_mission_control_frontend_core_1.EditorShellFloating, { title: "Add New SSH Key", isSaving: isSaving, submitButtonText: "Add", errorMessage: errorMessage, saveHandler: function () {
             saveHandler(getValues());
         }, setEditorIsOpen: setIsOpen },
         react_1.default.createElement(buzzingpixel_mission_control_frontend_core_1.EditorShellForm, { inputs: inputs, register: register, onSubmit: function () {

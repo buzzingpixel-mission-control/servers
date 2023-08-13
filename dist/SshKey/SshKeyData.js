@@ -63,14 +63,14 @@ var useArchiveSshKeyMutation = function (sshKeyId, isArchive) {
     });
 };
 exports.useArchiveSshKeyMutation = useArchiveSshKeyMutation;
-var useEditSshKeyMutation = function (sshKeyId) { return (0, buzzingpixel_mission_control_frontend_core_1.useApiMutation)({
+var useEditSshKeyMutation = function (slug) { return (0, buzzingpixel_mission_control_frontend_core_1.useApiMutation)({
     invalidateQueryKeysOnSuccess: [
-        "/ssh-keys/".concat(sshKeyId),
+        "/ssh-keys/".concat(slug),
         '/ssh-keys/list',
         '/ssh-keys/list/archived',
     ],
     prepareApiParams: function (data) { return ({
-        uri: "/ssh-keys/edit/".concat(sshKeyId),
+        uri: "/ssh-keys/edit/".concat(slug),
         payload: data,
         method: buzzingpixel_mission_control_frontend_core_1.RequestMethod.PATCH,
     }); },

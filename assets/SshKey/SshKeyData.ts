@@ -90,15 +90,15 @@ export const useArchiveSshKeyMutation = (
 };
 
 export const useEditSshKeyMutation = (
-    sshKeyId: string,
+    slug: string,
 ) => useApiMutation<unknown, SshKeyFormValues>({
     invalidateQueryKeysOnSuccess: [
-        `/ssh-keys/${sshKeyId}`,
+        `/ssh-keys/${slug}`,
         '/ssh-keys/list',
         '/ssh-keys/list/archived',
     ],
     prepareApiParams: (data) => ({
-        uri: `/ssh-keys/edit/${sshKeyId}`,
+        uri: `/ssh-keys/edit/${slug}`,
         payload: data,
         method: RequestMethod.PATCH,
     }),

@@ -112,13 +112,13 @@ const SshKeyList = (
             <div className="text-right pr-4 mb-4">
                 <label
                     className="text-xs text-gray-900 mr-2"
-                    htmlFor="select_all_pings"
+                    htmlFor="select_all_ssh_keys"
                 >
                     select all visible
                 </label>
                 <input
-                    id="select_all_pings"
-                    name="ping_select[]"
+                    id="select_all_ssh_keys"
+                    name="ssh_key_select[]"
                     type="checkbox"
                     className="h-4 w-4 rounded border-gray-300 text-cyan-600 focus:ring-cyan-600"
                     onChange={(e) => {

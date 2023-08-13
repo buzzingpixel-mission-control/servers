@@ -26,15 +26,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var react_hook_form_1 = require("react-hook-form");
 var buzzingpixel_mission_control_frontend_core_1 = require("buzzingpixel-mission-control-frontend-core");
-var SshKeyData_1 = require("./SshKeyData");
-var SshKeyListItemEditor = function (_a) {
-    var item = _a.item, setEditorIsOpen = _a.setEditorIsOpen;
-    var _b = (0, react_hook_form_1.useForm)({
+var SshKeyData_1 = require("../SshKeyData");
+var EditOverlay = function (_a) {
+    var item = _a.item, setIsOpen = _a.setIsOpen;
+    var _b = (0, react_1.useState)(false), isSaving = _b[0], setIsSaving = _b[1];
+    var _c = (0, react_hook_form_1.useForm)({
         defaultValues: {
             title: item.title,
         },
-    }), getValues = _b.getValues, register = _b.register, setValue = _b.setValue;
-    var _c = (0, react_1.useState)(false), isSaving = _c[0], setIsSaving = _c[1];
+    }), getValues = _c.getValues, register = _c.register, setValue = _c.setValue;
     var inputs = [
         {
             title: 'Title',
@@ -53,20 +53,18 @@ var SshKeyListItemEditor = function (_a) {
             setErrorMessage('');
         }
         mutation.mutate(data, {
-            onSuccess: function () { return setEditorIsOpen(false); },
+            onSuccess: function () { return setIsOpen(false); },
             onError: function (error) {
-                setErrorMessage(error.message || 'Unable to edit SSH key');
+                setErrorMessage(error.message || 'Unable to add SSH Key');
                 setIsSaving(false);
             },
         });
     };
-    return (react_1.default.createElement("div", { style: { paddingBottom: '1.5rem' } },
-        react_1.default.createElement("div", { className: "border border-gray-300 rounded-md shadow-md mx-auto p-4", style: { maxWidth: '600px' } },
-            react_1.default.createElement(buzzingpixel_mission_control_frontend_core_1.EditorShellInline, { isSaving: isSaving, setEditorIsOpen: setEditorIsOpen, errorMessage: errorMessage, saveHandler: function () {
-                    saveHandler(getValues());
-                } },
-                react_1.default.createElement(buzzingpixel_mission_control_frontend_core_1.EditorShellForm, { inputs: inputs, register: register, onSubmit: function () {
-                        saveHandler(getValues());
-                    } })))));
+    return (react_1.default.createElement(buzzingpixel_mission_control_frontend_core_1.EditorShellFloating, { title: "Edit SSH Key", isSaving: isSaving, submitButtonText: "Submit", errorMessage: errorMessage, saveHandler: function () {
+            saveHandler(getValues());
+        }, setEditorIsOpen: setIsOpen },
+        react_1.default.createElement(buzzingpixel_mission_control_frontend_core_1.EditorShellForm, { inputs: inputs, register: register, onSubmit: function () {
+                saveHandler(getValues());
+            } })));
 };
-exports.default = SshKeyListItemEditor;
+exports.default = EditOverlay;

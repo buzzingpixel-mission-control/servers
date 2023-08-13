@@ -141,7 +141,7 @@ const SshKeyListItem = (
                         return (
                             <input
                                 id={`select_${item.id}`}
-                                name="ping_select[]"
+                                name="ssh_key_select[]"
                                 type="checkbox"
                                 className="h-4 w-4 rounded border-gray-300 text-cyan-600 focus:ring-cyan-600"
                                 checked={isSelected}

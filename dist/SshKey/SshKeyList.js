@@ -107,8 +107,8 @@ var SshKeyList = function (_a) {
     };
     return (react_1.default.createElement(react_1.default.Fragment, null,
         react_1.default.createElement("div", { className: "text-right pr-4 mb-4" },
-            react_1.default.createElement("label", { className: "text-xs text-gray-900 mr-2", htmlFor: "select_all_pings" }, "select all visible"),
-            react_1.default.createElement("input", { id: "select_all_pings", name: "ping_select[]", type: "checkbox", className: "h-4 w-4 rounded border-gray-300 text-cyan-600 focus:ring-cyan-600", onChange: function (e) {
+            react_1.default.createElement("label", { className: "text-xs text-gray-900 mr-2", htmlFor: "select_all_ssh_keys" }, "select all visible"),
+            react_1.default.createElement("input", { id: "select_all_ssh_keys", name: "ssh_key_select[]", type: "checkbox", className: "h-4 w-4 rounded border-gray-300 text-cyan-600 focus:ring-cyan-600", onChange: function (e) {
                     if (e.currentTarget.checked) {
                         setSelectedItems(items.map(function (item) { return item.id; }));
                         return;

@@ -1,18 +1,21 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import {
     EditorShellFloating,
     EditorShellForm,
     FormInput,
     FormInputText,
 } from 'buzzingpixel-mission-control-frontend-core';
-import SshKeyFormValues from './SshKeyFormValues';
-import { useAddSshKeyMutation } from './SshKeyData';
+import SshKeyFormValues from '../SshKeyFormValues';
+import { useEditSshKeyMutation } from '../SshKeyData';
+import { SshKey } from '../SshKeys';
 
-const AddSshKeyOverlay = (
+const EditOverlay = (
     {
+        item,
         setIsOpen,
     }: {
+        item: SshKey;
         setIsOpen: Dispatch<SetStateAction<boolean>>;
     },
 ) => {
@@ -22,7 +25,11 @@ const AddSshKeyOverlay = (
         getValues,
         register,
         setValue,
-    } = useForm<SshKeyFormValues>();
+    } = useForm<SshKeyFormValues>({
+        defaultValues: {
+            title: item.title,
+        },
+    });
 
     const inputs = [
         {
@@ -37,11 +44,9 @@ const AddSshKeyOverlay = (
 
     const [errorMessage, setErrorMessage] = useState<string>('');
 
-    const mutation = useAddSshKeyMutation();
+    const mutation = useEditSshKeyMutation(item.slug);
 
-    const saveHandler: SubmitHandler<SshKeyFormValues> = (
-        data,
-    ) => {
+    const saveHandler: SubmitHandler<SshKeyFormValues> = (data) => {
         setIsSaving(true);
 
         if (errorMessage) {
@@ -51,9 +56,7 @@ const AddSshKeyOverlay = (
         mutation.mutate(data, {
             onSuccess: () => setIsOpen(false),
             onError: (error) => {
-                setErrorMessage(
-                    error.message || 'Unable to add SSH Key',
-                );
+                setErrorMessage(error.message || 'Unable to add SSH Key');
 
                 setIsSaving(false);
             },
@@ -62,9 +65,9 @@ const AddSshKeyOverlay = (
 
     return (
         <EditorShellFloating
-            title="Add New SSH Key"
+            title="Edit SSH Key"
             isSaving={isSaving}
-            submitButtonText="Add"
+            submitButtonText="Submit"
             errorMessage={errorMessage}
             saveHandler={() => {
                 saveHandler(getValues());
@@ -82,4 +85,4 @@ const AddSshKeyOverlay = (
     );
 };
 
-export default AddSshKeyOverlay;
+export default EditOverlay;

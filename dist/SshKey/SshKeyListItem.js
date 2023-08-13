@@ -97,7 +97,7 @@ var SshKeyListItem = function (_a) {
                     if (!selectedItemsManager) {
                         return null;
                     }
-                    return (react_1.default.createElement("input", { id: "select_".concat(item.id), name: "ping_select[]", type: "checkbox", className: "h-4 w-4 rounded border-gray-300 text-cyan-600 focus:ring-cyan-600", checked: isSelected, onChange: function (e) {
+                    return (react_1.default.createElement("input", { id: "select_".concat(item.id), name: "ssh_key_select[]", type: "checkbox", className: "h-4 w-4 rounded border-gray-300 text-cyan-600 focus:ring-cyan-600", checked: isSelected, onChange: function (e) {
                             if (e.currentTarget.checked) {
                                 selectedItemsManager.addSelectedItem(item.id);
                                 return;

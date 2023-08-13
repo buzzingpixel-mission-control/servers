@@ -23,7 +23,7 @@ readonly class PatchEditSshKeyAction
 {
     public static function registerRoute(ApplyRoutesEvent $event): void
     {
-        $event->patch('/ssh-keys/edit/{id}', self::class)
+        $event->patch('/ssh-keys/edit/{slug}', self::class)
             ->add(RequireAdminMiddleware::class)
             ->add(ResourceServerMiddlewareWrapper::class);
     }
@@ -39,11 +39,11 @@ readonly class PatchEditSshKeyAction
         ServerRequestInterface $request,
         ResponseInterface $response,
     ): ResponseInterface {
-        $id = $request->getAttribute('id');
-        assert(is_string($id));
+        $slug = $request->getAttribute('slug');
+        assert(is_string($slug));
 
         $sshKey = $this->repository->findOne(
-            FindSshKeyParameters::create()->withId($id),
+            FindSshKeyParameters::create()->withSlug($slug),
         );
 
         $rawPostData = $request->getParsedBody();

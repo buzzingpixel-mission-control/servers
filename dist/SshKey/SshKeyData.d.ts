@@ -14,4 +14,4 @@ export declare const useArchiveSelectedSshKeysMutation: (sshKeys: {
     private?: string;
 }[], isArchive: boolean) => import("@tanstack/react-query/src/types").UseMutationResult<unknown, import("buzzingpixel-mission-control-frontend-core/dist/Api/ApiError").default, unknown>;
 export declare const useArchiveSshKeyMutation: (sshKeyId: string, isArchive: boolean) => import("@tanstack/react-query/src/types").UseMutationResult<unknown, import("buzzingpixel-mission-control-frontend-core/dist/Api/ApiError").default, unknown>;
-export declare const useEditSshKeyMutation: (sshKeyId: string) => import("@tanstack/react-query/src/types").UseMutationResult<unknown, import("buzzingpixel-mission-control-frontend-core/dist/Api/ApiError").default, SshKeyFormValues>;
+export declare const useEditSshKeyMutation: (slug: string) => import("@tanstack/react-query/src/types").UseMutationResult<unknown, import("buzzingpixel-mission-control-frontend-core/dist/Api/ApiError").default, SshKeyFormValues>;

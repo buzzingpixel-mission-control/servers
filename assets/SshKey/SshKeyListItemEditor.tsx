@@ -44,7 +44,7 @@ const SshKeyListItemEditor = (
 
     const [errorMessage, setErrorMessage] = useState<string>('');
 
-    const mutation = useEditSshKeyMutation(item.id);
+    const mutation = useEditSshKeyMutation(item.slug);
 
     const saveHandler: SubmitHandler<SshKeyFormValues> = (
         data,
