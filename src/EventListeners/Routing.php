@@ -9,6 +9,7 @@ use MissionControlServers\SshKeys\AddEdit\PatchArchiveSshKeyAction;
 use MissionControlServers\SshKeys\AddEdit\PatchEditSshKeyAction;
 use MissionControlServers\SshKeys\AddEdit\PatchUnArchiveSshKeyAction;
 use MissionControlServers\SshKeys\AddEdit\PostAddSshKeyAction;
+use MissionControlServers\SshKeys\GetDetails\GetDetailsBySlugAction;
 use MissionControlServers\SshKeys\GetSshKeysListAction;
 use MissionControlServers\SshKeys\GetSshKeysListArchivedAction;
 use MissionControlServers\SshKeys\PatchSshKeysArchiveAction;
@@ -26,5 +27,6 @@ class Routing
         PatchEditSshKeyAction::registerRoute($event);
         PatchArchiveSshKeyAction::registerRoute($event);
         PatchUnArchiveSshKeyAction::registerRoute($event);
+        GetDetailsBySlugAction::registerRoute($event);
     }
 }
