@@ -17,5 +17,12 @@ var ServersMenuItems = function () { return [
         // @ts-ignore
         icon: outline_1.ServerStackIcon,
     },
+    {
+        name: 'Pipelines',
+        href: '/pipelines',
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        icon: outline_1.RectangleGroupIcon,
+    },
 ]; };
 exports.default = ServersMenuItems;
