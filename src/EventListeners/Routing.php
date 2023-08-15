@@ -11,6 +11,8 @@ use MissionControlServers\Servers\AddEdit\PatchUnArchiveServerAction;
 use MissionControlServers\Servers\AddEdit\PostAddServerAction;
 use MissionControlServers\Servers\GetServersListAction;
 use MissionControlServers\Servers\GetServersListArchivedAction;
+use MissionControlServers\Servers\PatchServersArchiveAction;
+use MissionControlServers\Servers\PatchServersUnArchiveAction;
 use MissionControlServers\SshKeys\AddEdit\PatchArchiveSshKeyAction;
 use MissionControlServers\SshKeys\AddEdit\PatchEditSshKeyAction;
 use MissionControlServers\SshKeys\AddEdit\PatchUnArchiveSshKeyAction;
@@ -39,6 +41,8 @@ class Routing
         PostAddServerAction::registerRoute($event);
         PatchArchiveServerAction::registerRoute($event);
         PatchUnArchiveServerAction::registerRoute($event);
+        PatchServersArchiveAction::registerRoute($event);
+        PatchServersUnArchiveAction::registerRoute($event);
         PatchEditServerAction::registerRoute($event);
     }
 }
