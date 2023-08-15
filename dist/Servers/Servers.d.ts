@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { ProjectsWithViewOptions, ProjectWithViewOptions } from 'buzzingpixel-mission-control-frontend-core';
+import { SshKeysWithViewOptions, SshKeyWithViewOptions } from '../SshKey/SshKeys';
 export declare const ServerSchema: z.ZodObject<{
     id: z.ZodString;
     isActive: z.ZodBoolean;
@@ -66,11 +67,13 @@ export declare const ServersSchema: z.ZodArray<z.ZodObject<{
 export type Servers = z.infer<typeof ServersSchema>;
 export type ServerWithViewOptions = Server & {
     href: string;
+    manageAuthorizedKeysHref: string;
     activeOrArchivedText: string;
     project?: ProjectWithViewOptions;
+    sshKey?: SshKeyWithViewOptions;
 };
 export type ServersWithViewOptions = Array<ServerWithViewOptions>;
-export declare const transformServer: (server: Server, projects?: ProjectsWithViewOptions) => ServerWithViewOptions;
+export declare const transformServer: (server: Server, projects?: ProjectsWithViewOptions, sshKeys?: SshKeysWithViewOptions) => ServerWithViewOptions;
 export declare const transformServers: (servers: {
     id?: string;
     isActive?: boolean;
@@ -81,4 +84,4 @@ export declare const transformServers: (servers: {
     address?: string;
     sshPort?: number;
     sshKeyId?: string;
-}[], projects?: ProjectsWithViewOptions) => ServersWithViewOptions;
+}[], projects?: ProjectsWithViewOptions, sshKeys?: SshKeysWithViewOptions) => ServersWithViewOptions;

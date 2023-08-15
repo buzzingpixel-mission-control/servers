@@ -19,10 +19,12 @@ const ServerListItem = (
     {
         isArchive,
         item,
+        projectPageSlug,
         selectedItemsManager,
     }: {
         isArchive: boolean;
         item: ServerWithViewOptions;
+        projectPageSlug?: string | null | undefined;
         selectedItemsManager?: undefined | null | {
             selectedItems?: Array<string> | null | undefined;
             addSelectedItem?: (id: string) => void;
@@ -32,7 +34,17 @@ const ServerListItem = (
 ) => {
     const [editIsOpen, setEditIsOpen] = useState<boolean>(false);
 
-    const archiveMutation = useArchiveServerMutation(item.id, isArchive);
+    const archiveMutation = useArchiveServerMutation(
+        item.id,
+        isArchive,
+        item.projectId,
+    );
+
+    let viewDetailsLink = item.href;
+
+    if (projectPageSlug) {
+        viewDetailsLink += `?fromProjectPageSlug=${projectPageSlug}`;
+    }
 
     let isSelected = false;
 
@@ -62,6 +74,25 @@ const ServerListItem = (
                         >
                             {item.activeOrArchivedText}
                         </p>
+                        {(() => {
+                            if (!item.project || projectPageSlug) {
+                                return null;
+                            }
+
+                            return (
+                                <Link
+                                    to={item.project.href}
+                                    className={classNames(
+                                        'text-cyan-700 bg-cyan-50 ring-cyan-600/20 hover:bg-cyan-100 hover:text-cyan-800',
+                                        'rounded-md whitespace-nowrap mt-0.5 px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset',
+                                    )}
+                                >
+                                    Project:
+                                    {' '}
+                                    {item.project.title}
+                                </Link>
+                            );
+                        })()}
                     </div>
                     <div className="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500 truncate">
                         <p>
@@ -75,7 +106,7 @@ const ServerListItem = (
                 </div>
                 <div className="mt-2 sm:mt-0 flex flex-none items-center gap-x-4">
                     <Link
-                        to={item.href}
+                        to={viewDetailsLink}
                         className="block rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                     >
                         View Details
@@ -189,6 +220,7 @@ const ServerListItem = (
 };
 
 ServerListItem.defaultProps = {
+    projectPageSlug: undefined,
     selectedItemsManager: undefined,
 };
 

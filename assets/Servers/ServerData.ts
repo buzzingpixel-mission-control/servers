@@ -9,6 +9,7 @@ import {
     ServersWithViewOptions, transformServers,
 } from './Servers';
 import ServerFormValues from './ServerFormValues';
+import { useSshKeyData } from '../SshKey/SshKeyData';
 
 export const useServerData = (archive = false): {
     status: 'loading' | 'error' | 'success';
@@ -27,14 +28,24 @@ export const useServerData = (archive = false): {
 
     const projects = useAllProjectsData();
 
-    if (response.status === 'loading' || projects.status === 'loading') {
+    const sshKeys = useSshKeyData();
+
+    if (
+        response.status === 'loading'
+        || projects.status === 'loading'
+        || sshKeys.status === 'loading'
+    ) {
         return {
             status: 'loading',
             data: [],
         };
     }
 
-    if (response.status === 'error' || projects.status === 'error') {
+    if (
+        response.status === 'error'
+        || projects.status === 'error'
+        || sshKeys.status === 'error'
+    ) {
         return {
             status: 'error',
             data: [],
@@ -43,7 +54,7 @@ export const useServerData = (archive = false): {
 
     return {
         status: 'success',
-        data: transformServers(response.data, projects.data),
+        data: transformServers(response.data, projects.data, sshKeys.data),
     };
 };
 
@@ -89,11 +100,18 @@ export const useArchiveSelectedServersMutation = (
 export const useArchiveServerMutation = (
     serverId: string,
     isArchive: boolean,
+    projectId?: string | undefined | null,
 ) => {
     const invalidateQueryKeysOnSuccess = [
         '/servers',
         '/servers/archived',
     ];
+
+    if (projectId) {
+        invalidateQueryKeysOnSuccess.push(
+            `/servers/project/${projectId}`,
+        );
+    }
 
     return useApiMutation({
         invalidateQueryKeysOnSuccess,

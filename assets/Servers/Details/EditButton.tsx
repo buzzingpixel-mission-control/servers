@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { createPortal } from 'buzzingpixel-mission-control-frontend-core';
-import { SshKey } from '../SshKeys';
 import EditOverlay from './EditOverlay';
+import { Server } from '../Servers';
 
 const EditButton = (
     {
         item,
     }: {
-        item: SshKey;
+        item: Server;
     },
 ) => {
     const [isOpen, setIsOpen] = useState(false);

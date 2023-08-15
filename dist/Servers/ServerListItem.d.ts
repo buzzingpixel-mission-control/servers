@@ -1,9 +1,10 @@
 import React from 'react';
 import { ServerWithViewOptions } from './Servers';
 declare const ServerListItem: {
-    ({ isArchive, item, selectedItemsManager, }: {
+    ({ isArchive, item, projectPageSlug, selectedItemsManager, }: {
         isArchive: boolean;
         item: ServerWithViewOptions;
+        projectPageSlug?: string | null | undefined;
         selectedItemsManager?: {
             selectedItems?: Array<string> | null | undefined;
             addSelectedItem?: (id: string) => void;
@@ -11,6 +12,7 @@ declare const ServerListItem: {
         };
     }): React.JSX.Element;
     defaultProps: {
+        projectPageSlug: any;
         selectedItemsManager: any;
     };
 };

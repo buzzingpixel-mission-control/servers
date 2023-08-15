@@ -1,6 +1,9 @@
 import { useApiQueryWithSignInRedirect } from 'buzzingpixel-mission-control-frontend-core';
 import {
-    SshKey, SshKeySchema, SshKeyWithViewOptions, transformSshKey,
+    SshKey,
+    SshKeySchema,
+    SshKeyWithViewOptions,
+    transformSshKey,
 } from '../SshKeys';
 
 // eslint-disable-next-line import/prefer-default-export

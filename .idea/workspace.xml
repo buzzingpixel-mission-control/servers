@@ -6,7 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="8c8273f2-18a5-4161-892d-93478ef60dd9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EventListeners/Routing.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventListeners/Routing.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Servers/ServerData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Servers/ServerData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Servers/ServerListItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Servers/ServerListItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Servers/Servers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Servers/Servers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/ServersRoutes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/ServersRoutes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/SshKey/Details/Details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/SshKey/Details/Details.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/SshKey/Details/EditButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/SshKey/Details/EditButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/SshKey/Details/SshKeyDetailsData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/SshKey/Details/SshKeyDetailsData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Servers/ServerData.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Servers/ServerData.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Servers/ServerData.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Servers/ServerData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Servers/ServerListItem.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Servers/ServerListItem.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Servers/ServerListItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Servers/ServerListItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Servers/Servers.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Servers/Servers.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Servers/Servers.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Servers/Servers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/ServersRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/ServersRoutes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

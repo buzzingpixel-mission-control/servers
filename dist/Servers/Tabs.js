@@ -33,10 +33,10 @@ var Tabs = function (_a) {
     var activeHref = _a.activeHref, addOnClick = _a.addOnClick;
     activeHref = activeHref || '/servers';
     return (react_1.default.createElement(buzzingpixel_mission_control_frontend_core_1.PageTabs, { tabs: tabs.map(function (tab) { return (__assign(__assign({}, tab), { current: tab.href === activeHref })); }), rightHandButtons: [{
-                key: 'add-ssh-key',
+                key: 'add-server',
                 text: (react_1.default.createElement(react_1.default.Fragment, null,
                     react_1.default.createElement(solid_1.PlusIcon, { className: "-ml-1 mr-2 h-5 w-5", "aria-hidden": "true" }),
-                    "Add SSH Key")),
+                    "Add Server")),
                 onClick: addOnClick,
             }] }));
 };

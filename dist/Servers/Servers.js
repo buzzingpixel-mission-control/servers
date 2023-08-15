@@ -25,16 +25,26 @@ exports.ServerSchema = zod_1.z.object({
     sshKeyId: zod_1.z.string().nullable(),
 });
 exports.ServersSchema = zod_1.z.array(exports.ServerSchema);
-var transformServer = function (server, projects) {
+var transformServer = function (server, projects, sshKeys) {
     projects = projects || [];
     var project;
-    var filteredProjects = projects.filter(function (p) { return p.id === server.projectId; });
-    if (filteredProjects[0]) {
-        // eslint-disable-next-line prefer-destructuring
-        project = filteredProjects[0];
+    if (projects) {
+        var filteredProjects = projects.filter(function (p) { return p.id === server.projectId; });
+        if (filteredProjects[0]) {
+            // eslint-disable-next-line prefer-destructuring
+            project = filteredProjects[0];
+        }
     }
-    return (__assign(__assign({}, server), { href: "/servers/".concat(server.slug), activeOrArchivedText: server.isActive ? 'Active' : 'Archive', project: project }));
+    var sshKey;
+    if (sshKeys) {
+        var filteredSshKeys = sshKeys.filter(function (k) { return k.id === server.sshKeyId; });
+        if (filteredSshKeys[0]) {
+            // eslint-disable-next-line prefer-destructuring
+            sshKey = filteredSshKeys[0];
+        }
+    }
+    return (__assign(__assign({}, server), { href: "/servers/".concat(server.slug), manageAuthorizedKeysHref: "/servers/".concat(server.slug, "/authorized-keys"), activeOrArchivedText: server.isActive ? 'Active' : 'Archive', project: project, sshKey: sshKey }));
 };
 exports.transformServer = transformServer;
-var transformServers = function (servers, projects) { return servers.map(function (server) { return (0, exports.transformServer)(server, projects); }); };
+var transformServers = function (servers, projects, sshKeys) { return servers.map(function (server) { return (0, exports.transformServer)(server, projects, sshKeys); }); };
 exports.transformServers = transformServers;

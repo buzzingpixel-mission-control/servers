@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.useEditServerMutation = exports.useArchiveServerMutation = exports.useArchiveSelectedServersMutation = exports.useAddServerMutation = exports.useServerData = void 0;
 var buzzingpixel_mission_control_frontend_core_1 = require("buzzingpixel-mission-control-frontend-core");
 var Servers_1 = require("./Servers");
+var SshKeyData_1 = require("../SshKey/SshKeyData");
 var useServerData = function (archive) {
     if (archive === void 0) { archive = false; }
     var uri = archive ? '/servers/archived' : '/servers';
@@ -11,13 +12,18 @@ var useServerData = function (archive) {
         staleTime: Infinity,
     });
     var projects = (0, buzzingpixel_mission_control_frontend_core_1.useAllProjectsData)();
-    if (response.status === 'loading' || projects.status === 'loading') {
+    var sshKeys = (0, SshKeyData_1.useSshKeyData)();
+    if (response.status === 'loading'
+        || projects.status === 'loading'
+        || sshKeys.status === 'loading') {
         return {
             status: 'loading',
             data: [],
         };
     }
-    if (response.status === 'error' || projects.status === 'error') {
+    if (response.status === 'error'
+        || projects.status === 'error'
+        || sshKeys.status === 'error') {
         return {
             status: 'error',
             data: [],
@@ -25,7 +31,7 @@ var useServerData = function (archive) {
     }
     return {
         status: 'success',
-        data: (0, Servers_1.transformServers)(response.data, projects.data),
+        data: (0, Servers_1.transformServers)(response.data, projects.data, sshKeys.data),
     };
 };
 exports.useServerData = useServerData;
@@ -62,11 +68,14 @@ var useArchiveSelectedServersMutation = function (servers, isArchive) {
     });
 };
 exports.useArchiveSelectedServersMutation = useArchiveSelectedServersMutation;
-var useArchiveServerMutation = function (serverId, isArchive) {
+var useArchiveServerMutation = function (serverId, isArchive, projectId) {
     var invalidateQueryKeysOnSuccess = [
         '/servers',
         '/servers/archived',
     ];
+    if (projectId) {
+        invalidateQueryKeysOnSuccess.push("/servers/project/".concat(projectId));
+    }
     return (0, buzzingpixel_mission_control_frontend_core_1.useApiMutation)({
         invalidateQueryKeysOnSuccess: invalidateQueryKeysOnSuccess,
         prepareApiParams: function () { return ({

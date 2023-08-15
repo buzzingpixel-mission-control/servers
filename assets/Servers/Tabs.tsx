@@ -37,11 +37,11 @@ const Tabs = (
                 current: tab.href === activeHref,
             }))}
             rightHandButtons={[{
-                key: 'add-ssh-key',
+                key: 'add-server',
                 text: (
                     <>
                         <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-                        Add SSH Key
+                        Add Server
                     </>
                 ),
                 onClick: addOnClick,
