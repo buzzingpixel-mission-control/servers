@@ -63,6 +63,15 @@ const ServerListItem = (
                             {item.activeOrArchivedText}
                         </p>
                     </div>
+                    <div className="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500 truncate">
+                        <p>
+                            Address:
+                            {' '}
+                            <strong>
+                                {item.address}
+                            </strong>
+                        </p>
+                    </div>
                 </div>
                 <div className="mt-2 sm:mt-0 flex flex-none items-center gap-x-4">
                     <Link
