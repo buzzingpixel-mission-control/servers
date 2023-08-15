@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace MissionControlServers\EventListeners;
 
 use MissionControlBackend\Http\ApiApplyRoutesEvent;
+use MissionControlServers\Servers\AddEdit\PatchEditServerAction;
 use MissionControlServers\Servers\AddEdit\PostAddServerAction;
 use MissionControlServers\Servers\GetServersListAction;
 use MissionControlServers\Servers\GetServersListArchivedAction;
@@ -34,5 +35,6 @@ class Routing
         GetServersListAction::registerRoute($event);
         GetServersListArchivedAction::registerRoute($event);
         PostAddServerAction::registerRoute($event);
+        PatchEditServerAction::registerRoute($event);
     }
 }

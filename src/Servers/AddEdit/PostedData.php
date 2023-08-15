@@ -22,7 +22,7 @@ readonly class PostedData
                 $data['ssh_user_name'] ?? '',
             ),
             Address::fromNative($data['address'] ?? ''),
-            SshPort::fromString($data['ssh_port'] ?? ''),
+            SshPort::fromStringOrInt($data['ssh_port'] ?? ''),
             SshKeyId::fromNative($data['ssh_key_id'] ?? ''),
             ProjectId::fromNative($data['project_id'] ?? ''),
         );

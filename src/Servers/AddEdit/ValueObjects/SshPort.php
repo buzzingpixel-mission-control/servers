@@ -11,7 +11,7 @@ class SshPort implements ValueObject
 {
     use IntegerTrait;
 
-    public static function fromString(string $value): self
+    public static function fromStringOrInt(string|int $value): self
     {
         return new self((int) $value);
     }
