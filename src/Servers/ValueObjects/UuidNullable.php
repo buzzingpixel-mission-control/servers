@@ -12,6 +12,8 @@ use Ramsey\Uuid\UuidInterface;
 use function is_string;
 
 // phpcs:disable SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingAnyTypeHint
+// phpcs:disable SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
+// phpcs:disable SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint
 
 trait UuidNullable
 {
@@ -29,7 +31,12 @@ trait UuidNullable
         return $this->toNative() === $object->toNative();
     }
 
-    public static function fromNative(string|null $native): static
+    /**
+     * @param string|null $native
+     *
+     * @return static
+     */
+    public static function fromNative($native)
     {
         if ($native === null) {
             return new static(null);

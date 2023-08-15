@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace MissionControlServers\EventListeners;
 
 use MissionControlBackend\Http\ApiApplyRoutesEvent;
+use MissionControlServers\Servers\AddEdit\PostAddServerAction;
 use MissionControlServers\Servers\GetServersListAction;
 use MissionControlServers\Servers\GetServersListArchivedAction;
 use MissionControlServers\SshKeys\AddEdit\PatchArchiveSshKeyAction;
@@ -32,5 +33,6 @@ class Routing
         GetDetailsBySlugAction::registerRoute($event);
         GetServersListAction::registerRoute($event);
         GetServersListArchivedAction::registerRoute($event);
+        PostAddServerAction::registerRoute($event);
     }
 }

@@ -22,7 +22,7 @@ readonly class ServerRepository
     ) {
     }
 
-    public function createSshKey(NewServer $entity): ActionResult
+    public function create(NewServer $entity): ActionResult
     {
         return $this->create->create(
             ServerRecord::fromNewEntity(
@@ -35,7 +35,7 @@ readonly class ServerRepository
         );
     }
 
-    public function saveSshKey(Server $entity): ActionResult
+    public function save(Server $entity): ActionResult
     {
         return $this->save->save(
             ServerRecord::fromEntity(
