@@ -3,7 +3,7 @@ type ServerFormValues = {
     ssh_user_name: string;
     address: string;
     ssh_port: number;
-    ssh_key_id: number;
+    ssh_key_id: string;
     project_id: string;
 };
 

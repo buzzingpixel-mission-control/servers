@@ -36,6 +36,11 @@ var ServerListItemEditor = function (_a) {
     var _b = (0, react_hook_form_1.useForm)({
         defaultValues: {
             title: item.title,
+            ssh_user_name: item.sshUserName,
+            address: item.address,
+            ssh_port: item.sshPort,
+            ssh_key_id: item.sshKeyId,
+            project_id: item.projectId,
         },
     }), getValues = _b.getValues, register = _b.register, setValue = _b.setValue;
     var _c = (0, react_1.useState)(false), isSaving = _c[0], setIsSaving = _c[1];
@@ -74,12 +79,14 @@ var ServerListItemEditor = function (_a) {
             title: 'SSH Key',
             name: 'ssh_key_id',
             renderInput: FormInputSshKeys_1.default,
+            initialValue: item.sshKeyId,
             setValue: setValue,
         },
         {
             title: 'Project',
             name: 'project_id',
             renderInput: buzzingpixel_mission_control_frontend_core_1.FormInputProjects,
+            initialValue: item.projectId,
             setValue: setValue,
         },
     ];

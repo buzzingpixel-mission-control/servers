@@ -27,6 +27,11 @@ const ServerListItemEditor = (
     } = useForm<ServerFormValues>({
         defaultValues: {
             title: item.title,
+            ssh_user_name: item.sshUserName,
+            address: item.address,
+            ssh_port: item.sshPort,
+            ssh_key_id: item.sshKeyId,
+            project_id: item.projectId,
         },
     });
 
@@ -67,12 +72,14 @@ const ServerListItemEditor = (
             title: 'SSH Key',
             name: 'ssh_key_id',
             renderInput: FormInputSshKeys,
+            initialValue: item.sshKeyId,
             setValue,
         },
         {
             title: 'Project',
             name: 'project_id',
             renderInput: FormInputProjects,
+            initialValue: item.projectId,
             setValue,
         },
     ] as Array<FormInput>;
