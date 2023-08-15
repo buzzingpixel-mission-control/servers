@@ -9,6 +9,7 @@ use MissionControlServers\Servers\AddEdit\PatchArchiveServerAction;
 use MissionControlServers\Servers\AddEdit\PatchEditServerAction;
 use MissionControlServers\Servers\AddEdit\PatchUnArchiveServerAction;
 use MissionControlServers\Servers\AddEdit\PostAddServerAction;
+use MissionControlServers\Servers\GetDetails\GetDetailsBySlugAction as GetServerDetailsBySlugAction;
 use MissionControlServers\Servers\GetServersListAction;
 use MissionControlServers\Servers\GetServersListArchivedAction;
 use MissionControlServers\Servers\PatchServersArchiveAction;
@@ -17,7 +18,7 @@ use MissionControlServers\SshKeys\AddEdit\PatchArchiveSshKeyAction;
 use MissionControlServers\SshKeys\AddEdit\PatchEditSshKeyAction;
 use MissionControlServers\SshKeys\AddEdit\PatchUnArchiveSshKeyAction;
 use MissionControlServers\SshKeys\AddEdit\PostAddSshKeyAction;
-use MissionControlServers\SshKeys\GetDetails\GetDetailsBySlugAction;
+use MissionControlServers\SshKeys\GetDetails\GetDetailsBySlugAction as GetSshKeyDetailsBySlugAction;
 use MissionControlServers\SshKeys\GetSshKeysListAction;
 use MissionControlServers\SshKeys\GetSshKeysListArchivedAction;
 use MissionControlServers\SshKeys\PatchSshKeysArchiveAction;
@@ -35,7 +36,7 @@ class Routing
         PatchEditSshKeyAction::registerRoute($event);
         PatchArchiveSshKeyAction::registerRoute($event);
         PatchUnArchiveSshKeyAction::registerRoute($event);
-        GetDetailsBySlugAction::registerRoute($event);
+        GetSshKeyDetailsBySlugAction::registerRoute($event);
         GetServersListAction::registerRoute($event);
         GetServersListArchivedAction::registerRoute($event);
         PostAddServerAction::registerRoute($event);
@@ -44,5 +45,6 @@ class Routing
         PatchServersArchiveAction::registerRoute($event);
         PatchServersUnArchiveAction::registerRoute($event);
         PatchEditServerAction::registerRoute($event);
+        GetServerDetailsBySlugAction::registerRoute($event);
     }
 }
