@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace MissionControlServers\EventListeners;
 
 use MissionControlBackend\Http\ApiApplyRoutesEvent;
+use MissionControlServers\Servers\GetServersListAction;
+use MissionControlServers\Servers\GetServersListArchivedAction;
 use MissionControlServers\SshKeys\AddEdit\PatchArchiveSshKeyAction;
 use MissionControlServers\SshKeys\AddEdit\PatchEditSshKeyAction;
 use MissionControlServers\SshKeys\AddEdit\PatchUnArchiveSshKeyAction;
@@ -28,5 +30,7 @@ class Routing
         PatchArchiveSshKeyAction::registerRoute($event);
         PatchUnArchiveSshKeyAction::registerRoute($event);
         GetDetailsBySlugAction::registerRoute($event);
+        GetServersListAction::registerRoute($event);
+        GetServersListArchivedAction::registerRoute($event);
     }
 }

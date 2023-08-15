@@ -5,9 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c8273f2-18a5-4161-892d-93478ef60dd9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servers/Persistence/ServerRecord.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servers/Persistence/ServerRecord.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Servers/Page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Servers/Page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Servers/ServerData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Servers/ServerData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Servers/Servers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Servers/Servers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Servers/Page.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Servers/Page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Servers/ServerData.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Servers/ServerData.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Servers/ServerData.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Servers/ServerData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Servers/Servers.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Servers/Servers.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Servers/Servers.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Servers/Servers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EventListeners/Routing.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventListeners/Routing.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servers/ServerRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servers/ServerRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servers/ValueObjects/UuidNullable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servers/ValueObjects/UuidNullable.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

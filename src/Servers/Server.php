@@ -58,6 +58,7 @@ readonly class Server
         return [
             'id' => $this->id->toNative(),
             'isActive' => $this->isActive->toNative(),
+            'projectId' => $this->projectId->toNative(),
             'title' => $this->title->toNative(),
             'slug' => $this->slug->toNative(),
             'sshUserName' => $this->sshUserName->toNative(),

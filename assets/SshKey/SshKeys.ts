@@ -28,6 +28,6 @@ export const transformSshKey = (sshKey: SshKey): SshKeyWithViewOptions => ({
     activeOrArchivedText: sshKey.isActive ? 'Active' : 'Archive',
 });
 
-export const transformSshKeys = (sshKeys: SshKeys): SshKeysWithViewOptions => sshKeys.map(
-    (sshKey) => transformSshKey(sshKey),
-);
+export const transformSshKeys = (
+    sshKeys: SshKeys,
+): SshKeysWithViewOptions => sshKeys.map((sshKey) => transformSshKey(sshKey));
