@@ -9,6 +9,7 @@ use MissionControlServers\Servers\AddEdit\PatchArchiveServerAction;
 use MissionControlServers\Servers\AddEdit\PatchEditServerAction;
 use MissionControlServers\Servers\AddEdit\PatchUnArchiveServerAction;
 use MissionControlServers\Servers\AddEdit\PostAddServerAction;
+use MissionControlServers\Servers\AuthorizedKeys\GetAuthorizedKeysAction;
 use MissionControlServers\Servers\GetDetails\GetDetailsBySlugAction as GetServerDetailsBySlugAction;
 use MissionControlServers\Servers\GetServersListAction;
 use MissionControlServers\Servers\GetServersListArchivedAction;
@@ -46,5 +47,6 @@ class Routing
         PatchServersUnArchiveAction::registerRoute($event);
         PatchEditServerAction::registerRoute($event);
         GetServerDetailsBySlugAction::registerRoute($event);
+        GetAuthorizedKeysAction::registerRoute($event);
     }
 }
