@@ -4,6 +4,7 @@ import SshKeyListPage from './SshKey/SshKeyListPage';
 import SshKeyDetailsPage from './SshKey/Details/SshKeyDetailsPage';
 import { default as ServersPage } from './Servers/Page';
 import { default as ServerDetailsPage } from './Servers/Details/Page';
+import { default as AuthorizedKeysPage } from './Servers/AuthorizedKeys/Page';
 
 const ServersRoutes = () => (
     <>
@@ -13,6 +14,7 @@ const ServersRoutes = () => (
         <Route path="/servers" element={<ServersPage />} />
         <Route path="/servers/archived" element={<ServersPage isArchive />} />
         <Route path="/servers/:slug" element={<ServerDetailsPage />} />
+        <Route path="/servers/:slug/authorized-keys" element={<AuthorizedKeysPage />} />
     </>
 );
 

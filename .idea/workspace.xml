@@ -6,9 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="8c8273f2-18a5-4161-892d-93478ef60dd9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Servers/Tabs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Servers/Tabs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/Servers/Tabs.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Servers/Tabs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EventListeners/Routing.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventListeners/Routing.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Servers/AuthorizedKeys/AuthorizedKeysData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Servers/AuthorizedKeys/AuthorizedKeysData.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Servers/AuthorizedKeys/Page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Servers/AuthorizedKeys/Page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Servers/AuthorizedKeys/PageHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Servers/AuthorizedKeys/PageHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Servers/AuthorizedKeys/AuthorizedKeysData.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Servers/AuthorizedKeys/AuthorizedKeysData.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Servers/AuthorizedKeys/AuthorizedKeysData.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Servers/AuthorizedKeys/AuthorizedKeysData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Servers/AuthorizedKeys/Page.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Servers/AuthorizedKeys/Page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Servers/AuthorizedKeys/PageHeader.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Servers/AuthorizedKeys/PageHeader.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Servers/AuthorizedKeys/PageHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Servers/AuthorizedKeys/PageHeader.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
