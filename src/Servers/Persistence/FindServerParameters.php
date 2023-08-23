@@ -75,7 +75,7 @@ readonly class FindServerParameters extends FetchParameters
         $notProjectIds = $this->notProjectIds ?? new StringCollection();
 
         return $this->with(
-            projectIds: $notProjectIds->withString($notProjectId),
+            notProjectIds: $notProjectIds->withString($notProjectId),
         );
     }
 
