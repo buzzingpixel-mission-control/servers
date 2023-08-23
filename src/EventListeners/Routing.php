@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace MissionControlServers\EventListeners;
 
 use MissionControlBackend\Http\ApiApplyRoutesEvent;
+use MissionControlServers\Pipelines\GetPipelinesListAction;
+use MissionControlServers\Pipelines\GetPipelinesListArchivedAction;
 use MissionControlServers\Servers\AddEdit\PatchArchiveServerAction;
 use MissionControlServers\Servers\AddEdit\PatchEditServerAction;
 use MissionControlServers\Servers\AddEdit\PatchUnArchiveServerAction;
@@ -30,6 +32,9 @@ class Routing
 {
     public function onApplyRoutes(ApiApplyRoutesEvent $event): void
     {
+        /**
+         * SSH Keys
+         */
         PatchSshKeysArchiveAction::registerRoute($event);
         PatchSshKeysUnArchiveAction::registerRoute($event);
         GetSshKeysListAction::registerRoute($event);
@@ -39,6 +44,10 @@ class Routing
         PatchArchiveSshKeyAction::registerRoute($event);
         PatchUnArchiveSshKeyAction::registerRoute($event);
         GetSshKeyDetailsBySlugAction::registerRoute($event);
+
+        /**
+         * Servers
+         */
         GetServersListAction::registerRoute($event);
         GetServersListArchivedAction::registerRoute($event);
         PostAddServerAction::registerRoute($event);
@@ -50,5 +59,11 @@ class Routing
         GetServerDetailsBySlugAction::registerRoute($event);
         GetAuthorizedKeysAction::registerRoute($event);
         PostAddAuthorizedKeyAction::registerRoute($event);
+
+        /**
+         * Pipelines
+         */
+        GetPipelinesListAction::registerRoute($event);
+        GetPipelinesListArchivedAction::registerRoute($event);
     }
 }
