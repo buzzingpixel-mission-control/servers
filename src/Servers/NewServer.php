@@ -13,7 +13,7 @@ use MissionControlServers\Servers\ValueObjects\SshUserName;
 use MissionControlServers\Servers\ValueObjects\Title;
 use Spatie\Cloneable\Cloneable;
 
-class NewServer
+readonly class NewServer
 {
     use Cloneable;
 
