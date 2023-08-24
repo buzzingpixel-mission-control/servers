@@ -1,24 +1,29 @@
 import React, {
-    useEffect, useState, Fragment,
+    Fragment,
+    useEffect,
+    useState,
 } from 'react';
-import { NoResultsAddItem } from 'buzzingpixel-mission-control-frontend-core';
+import {
+    NoResultsAddItem,
+} from 'buzzingpixel-mission-control-frontend-core';
+import { RectangleGroupIcon } from '@heroicons/react/24/outline';
 import { Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon, ServerIcon } from '@heroicons/react/20/solid';
-import { ServersWithViewOptions } from './Servers';
-import { useArchiveSelectedServersMutation } from './ServerData';
-import ServerListItem from './ServerListItem';
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import { useArchiveSelectedPipelinesMutation } from './PipelineData';
+import { PipelinesWithViewOptions } from './Pipelines';
+import PipelineListItem from './PipelineListItem';
 
 function classNames (...classes: Array<string>) {
     return classes.filter(Boolean).join(' ');
 }
 
-const ServerList = (
+const List = (
     {
         isArchive,
         items,
     }: {
         isArchive: boolean;
-        items: ServersWithViewOptions;
+        items: PipelinesWithViewOptions;
     },
 ) => {
     const [selectedItems, setSelectedItems] = useState<Array<string>>(
@@ -51,7 +56,7 @@ const ServerList = (
         }, 200);
     });
 
-    const archiveSelectedMutation = useArchiveSelectedServersMutation(
+    const archiveSelectedMutation = useArchiveSelectedPipelinesMutation(
         items.filter((i) => selectedItems.indexOf(i.id) > -1),
         isArchive,
     );
@@ -59,8 +64,8 @@ const ServerList = (
     if (items.length < 1) {
         return (
             <NoResultsAddItem
-                icon={<ServerIcon />}
-                headline="No Servers match your filters"
+                icon={<RectangleGroupIcon />}
+                headline="No Pipelines match your filters"
             />
         );
     }
@@ -172,7 +177,7 @@ const ServerList = (
             <div className="bg-white rounded-md shadow-sm">
                 <ul className="divide-y divide-gray-100">
                     {items.map((item) => (
-                        <ServerListItem
+                        <PipelineListItem
                             key={item.id}
                             isArchive={isArchive}
                             item={item}
@@ -185,4 +190,4 @@ const ServerList = (
     );
 };
 
-export default ServerList;
+export default List;

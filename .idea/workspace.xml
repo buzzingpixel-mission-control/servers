@@ -6,6 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="8c8273f2-18a5-4161-892d-93478ef60dd9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Servers/Page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Servers/Page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Servers/ServerData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Servers/ServerData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Servers/ServerList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Servers/ServerList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/ServersRoutes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/ServersRoutes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/SshKey/SshKeyListPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/SshKey/SshKeyListPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/SshKey/useFilterText.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Servers/Page.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Servers/Page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/ServersRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/ServersRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/SshKey/SshKeyListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/SshKey/SshKeyListPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/SshKey/useFilterText.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/SshKey/useFilterText.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/SshKey/useFilterText.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/SshKey/useFilterText.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EventListeners/Routing.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventListeners/Routing.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -154,7 +165,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Volumes/Promenade/git/buzzingpixel-mission-control/servers&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Volumes/Promenade/git/buzzingpixel-mission-control/servers/assets/Pipelines&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -168,8 +179,12 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/Pipelines" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/cli" />
+    </key>
+    <key name="es6.move.members.recent.items">
+      <recent name="$PROJECT_DIR$/assets/useFilterText.ts" />
     </key>
   </component>
   <component name="RunManager">

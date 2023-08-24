@@ -1,6 +1,7 @@
 import {
     RequestMethod,
-    useAllProjectsData, useApiMutation,
+    useAllProjectsData,
+    useApiMutation,
     useApiQueryWithSignInRedirect,
 } from 'buzzingpixel-mission-control-frontend-core';
 import {

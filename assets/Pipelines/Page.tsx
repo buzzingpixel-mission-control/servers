@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import {
-    createPortal, NoResultsAddItem,
+    NoResultsAddItem,
     PartialPageLoading,
     usePageTitle,
 } from 'buzzingpixel-mission-control-frontend-core';
-import { ServerStackIcon } from '@heroicons/react/24/outline';
-import Tabs from './Tabs';
-import { useServerData } from './ServerData';
-import AddServerOverlay from './AddServerOverlay';
-import ServerList from './ServerList';
+import { RectangleGroupIcon } from '@heroicons/react/24/outline';
+import { useNavigate } from 'react-router-dom';
 import useFilterText from '../useFilterText';
+import { usePipelineData } from './PipelineData';
+import Tabs from './Tabs';
+import PipelineList from './PipelineList';
 
 const Page = (
     {
@@ -18,9 +18,11 @@ const Page = (
         isArchive?: boolean;
     },
 ) => {
+    const navigate = useNavigate();
+
     const [pageNameState, setPageNameState] = useState('');
 
-    const standardName = 'Servers';
+    const standardName = 'Pipelines';
     const archivedName = `Archived ${standardName}`;
 
     if (isArchive && pageNameState !== archivedName) {
@@ -33,15 +35,17 @@ const Page = (
 
     const [filterText, setFilterText] = useFilterText();
 
-    const [addIsOpen, setAddIsOpen] = useState<boolean>(false);
+    const goToAddPipeline = () => {
+        navigate('/pipelines/add');
+    };
 
     // eslint-disable-next-line prefer-const
-    let { status, data } = useServerData(isArchive);
+    let { status, data } = usePipelineData(isArchive);
 
     const LocalTabs = (
         <Tabs
-            activeHref={isArchive ? '/servers/archived' : '/servers'}
-            addOnClick={() => { setAddIsOpen(true); }}
+            activeHref={isArchive ? '/pipelines/archived' : '/pipelines'}
+            addOnClick={goToAddPipeline}
         />
     );
 
@@ -54,23 +58,14 @@ const Page = (
         );
     }
 
-    const portals = () => {
-        if (addIsOpen) {
-            return createPortal(<AddServerOverlay setIsOpen={setAddIsOpen} />);
-        }
-
-        return null;
-    };
-
     if (data.length < 1) {
         if (isArchive) {
             return (
                 <>
-                    {portals()}
                     {LocalTabs}
                     <NoResultsAddItem
-                        icon={<ServerStackIcon />}
-                        headline="No Archived Servers"
+                        icon={<RectangleGroupIcon />}
+                        headline="No Archived Pipelines"
                     />
                 </>
             );
@@ -78,15 +73,14 @@ const Page = (
 
         return (
             <>
-                {portals()}
                 {LocalTabs}
                 <NoResultsAddItem
-                    icon={<ServerStackIcon />}
-                    headline="No Servers"
-                    content="Would you like to add a Server?"
-                    actionText="Add Server"
+                    icon={<RectangleGroupIcon />}
+                    headline="No Pipelines"
+                    content="Would you like to add a Pipeline?"
+                    actionText="Add Pipeline"
                     actionUsesPlusIcon
-                    actionButtonOnClick={() => { setAddIsOpen(true); }}
+                    actionButtonOnClick={goToAddPipeline}
                 />
             </>
         );
@@ -94,17 +88,16 @@ const Page = (
 
     if (filterText !== '') {
         data = data.filter(
-            (server) => server.title.toLowerCase().indexOf(filterText.toLowerCase()) > -1
-                || server.slug.toLowerCase().indexOf(filterText.toLowerCase()) > -1
-                || server.sshUserName.toLowerCase().indexOf(filterText.toLowerCase()) > -1
-                || server.address.toLowerCase().indexOf(filterText.toLowerCase()) > -1
-                || server.sshPort.toString().indexOf(filterText.toLowerCase()) > -1,
+            (pipeline) => pipeline.title.toLowerCase().indexOf(filterText.toLowerCase()) > -1
+                || pipeline.slug.toLowerCase().indexOf(filterText.toLowerCase()) > -1
+                || pipeline.description.toLowerCase().indexOf(filterText.toLowerCase()) > -1
+                || pipeline.secretId.toLowerCase().indexOf(filterText.toLowerCase()) > -1
+                || pipeline.webhookCheckForBranch.toString().indexOf(filterText.toLowerCase()) > -1,
         );
     }
 
     return (
         <>
-            {portals()}
             {LocalTabs}
             <div>
                 <div className="sm:flex sm:mb-4">
@@ -116,14 +109,12 @@ const Page = (
                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6"
                             placeholder="Filter results"
                             value={filterText}
-                            onChange={(e) => {
-                                setFilterText(e.target.value);
-                            }}
+                            onChange={(e) => { setFilterText(e.target.value); }}
                         />
                     </div>
                 </div>
             </div>
-            <ServerList isArchive={isArchive} items={data} />
+            <PipelineList isArchive={isArchive} items={data} />
         </>
     );
 };

@@ -5,11 +5,11 @@ import {
     usePageTitle,
 } from 'buzzingpixel-mission-control-frontend-core';
 import { KeyIcon } from '@heroicons/react/20/solid';
-import useFilterText from './useFilterText';
 import { useSshKeyData } from './SshKeyData';
 import SshKeyTabs from './SshKeyTabs';
 import AddSshKeyOverlay from './AddSshKeyOverlay';
 import SshKeyList from './SshKeyList';
+import useFilterText from '../useFilterText';
 
 const SshKeyListPage = (
     {

@@ -1,0 +1,91 @@
+import { z } from 'zod';
+import { ProjectsWithViewOptions, ProjectWithViewOptions } from 'buzzingpixel-mission-control-frontend-core';
+export declare const PipelineSchema: z.ZodObject<{
+    id: z.ZodString;
+    projectId: z.ZodNullable<z.ZodString>;
+    secretId: z.ZodString;
+    isActive: z.ZodBoolean;
+    enableWebhook: z.ZodBoolean;
+    webhookCheckForBranch: z.ZodString;
+    title: z.ZodString;
+    slug: z.ZodString;
+    description: z.ZodString;
+    runBeforeEveryItem: z.ZodString;
+}, "strip", z.ZodTypeAny, {
+    id?: string;
+    projectId?: string;
+    secretId?: string;
+    isActive?: boolean;
+    enableWebhook?: boolean;
+    webhookCheckForBranch?: string;
+    title?: string;
+    slug?: string;
+    description?: string;
+    runBeforeEveryItem?: string;
+}, {
+    id?: string;
+    projectId?: string;
+    secretId?: string;
+    isActive?: boolean;
+    enableWebhook?: boolean;
+    webhookCheckForBranch?: string;
+    title?: string;
+    slug?: string;
+    description?: string;
+    runBeforeEveryItem?: string;
+}>;
+export type Pipeline = z.infer<typeof PipelineSchema>;
+export declare const PipelinesSchema: z.ZodArray<z.ZodObject<{
+    id: z.ZodString;
+    projectId: z.ZodNullable<z.ZodString>;
+    secretId: z.ZodString;
+    isActive: z.ZodBoolean;
+    enableWebhook: z.ZodBoolean;
+    webhookCheckForBranch: z.ZodString;
+    title: z.ZodString;
+    slug: z.ZodString;
+    description: z.ZodString;
+    runBeforeEveryItem: z.ZodString;
+}, "strip", z.ZodTypeAny, {
+    id?: string;
+    projectId?: string;
+    secretId?: string;
+    isActive?: boolean;
+    enableWebhook?: boolean;
+    webhookCheckForBranch?: string;
+    title?: string;
+    slug?: string;
+    description?: string;
+    runBeforeEveryItem?: string;
+}, {
+    id?: string;
+    projectId?: string;
+    secretId?: string;
+    isActive?: boolean;
+    enableWebhook?: boolean;
+    webhookCheckForBranch?: string;
+    title?: string;
+    slug?: string;
+    description?: string;
+    runBeforeEveryItem?: string;
+}>, "many">;
+export type Pipelines = z.infer<typeof PipelinesSchema>;
+export type PipelineWithViewOptions = Pipeline & {
+    href: string;
+    activeOrArchivedText: string;
+    project?: ProjectWithViewOptions;
+};
+export type PipelinesWithViewOptions = Array<PipelineWithViewOptions>;
+export declare const transformPipeline: (pipeline: Pipeline, projects?: ProjectsWithViewOptions) => PipelineWithViewOptions;
+export declare const transformPipelines: (pipelines: {
+    id?: string;
+    projectId?: string;
+    secretId?: string;
+    isActive?: boolean;
+    enableWebhook?: boolean;
+    webhookCheckForBranch?: string;
+    title?: string;
+    slug?: string;
+    description?: string;
+    runBeforeEveryItem?: string;
+}[], projects?: ProjectsWithViewOptions) => PipelinesWithViewOptions;

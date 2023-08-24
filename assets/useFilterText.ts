@@ -22,5 +22,4 @@ const useFilterText = (): [
         setFilterText,
     ];
 };
-
 export default useFilterText;

@@ -37,10 +37,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var buzzingpixel_mission_control_frontend_core_1 = require("buzzingpixel-mission-control-frontend-core");
+var outline_1 = require("@heroicons/react/24/outline");
 var react_2 = require("@headlessui/react");
 var solid_1 = require("@heroicons/react/20/solid");
-var ServerData_1 = require("./ServerData");
-var ServerListItem_1 = __importDefault(require("./ServerListItem"));
+var PipelineData_1 = require("./PipelineData");
+var PipelineListItem_1 = __importDefault(require("./PipelineListItem"));
 function classNames() {
     var classes = [];
     for (var _i = 0; _i < arguments.length; _i++) {
@@ -48,7 +49,7 @@ function classNames() {
     }
     return classes.filter(Boolean).join(' ');
 }
-var ServerList = function (_a) {
+var List = function (_a) {
     var isArchive = _a.isArchive, items = _a.items;
     var _b = (0, react_1.useState)([]), selectedItems = _b[0], setSelectedItems = _b[1];
     (0, react_1.useEffect)(function () {
@@ -70,9 +71,9 @@ var ServerList = function (_a) {
             setSelectedItems([]);
         }, 200);
     });
-    var archiveSelectedMutation = (0, ServerData_1.useArchiveSelectedServersMutation)(items.filter(function (i) { return selectedItems.indexOf(i.id) > -1; }), isArchive);
+    var archiveSelectedMutation = (0, PipelineData_1.useArchiveSelectedPipelinesMutation)(items.filter(function (i) { return selectedItems.indexOf(i.id) > -1; }), isArchive);
     if (items.length < 1) {
-        return (react_1.default.createElement(buzzingpixel_mission_control_frontend_core_1.NoResultsAddItem, { icon: react_1.default.createElement(solid_1.ServerIcon, null), headline: "No Servers match your filters" }));
+        return (react_1.default.createElement(buzzingpixel_mission_control_frontend_core_1.NoResultsAddItem, { icon: react_1.default.createElement(outline_1.RectangleGroupIcon, null), headline: "No Pipelines match your filters" }));
     }
     var selectedItemsManager = {
         selectedItems: selectedItems,
@@ -129,6 +130,6 @@ var ServerList = function (_a) {
                                 return (react_1.default.createElement("span", { className: classNames(active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm cursor-pointer'), onClick: archiveSelected }, isArchive ? 'Un-archive' : 'Archive'));
                             })))))),
         react_1.default.createElement("div", { className: "bg-white rounded-md shadow-sm" },
-            react_1.default.createElement("ul", { className: "divide-y divide-gray-100" }, items.map(function (item) { return (react_1.default.createElement(ServerListItem_1.default, { key: item.id, isArchive: isArchive, item: item, selectedItemsManager: selectedItemsManager })); })))));
+            react_1.default.createElement("ul", { className: "divide-y divide-gray-100" }, items.map(function (item) { return (react_1.default.createElement(PipelineListItem_1.default, { key: item.id, isArchive: isArchive, item: item, selectedItemsManager: selectedItemsManager })); })))));
 };
-exports.default = ServerList;
+exports.default = List;

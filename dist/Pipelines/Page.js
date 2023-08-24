@@ -29,15 +29,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var buzzingpixel_mission_control_frontend_core_1 = require("buzzingpixel-mission-control-frontend-core");
 var outline_1 = require("@heroicons/react/24/outline");
-var Tabs_1 = __importDefault(require("./Tabs"));
-var ServerData_1 = require("./ServerData");
-var AddServerOverlay_1 = __importDefault(require("./AddServerOverlay"));
-var ServerList_1 = __importDefault(require("./ServerList"));
+var react_router_dom_1 = require("react-router-dom");
 var useFilterText_1 = __importDefault(require("../useFilterText"));
+var PipelineData_1 = require("./PipelineData");
+var Tabs_1 = __importDefault(require("./Tabs"));
+var PipelineList_1 = __importDefault(require("./PipelineList"));
 var Page = function (_a) {
     var _b = _a.isArchive, isArchive = _b === void 0 ? false : _b;
+    var navigate = (0, react_router_dom_1.useNavigate)();
     var _c = (0, react_1.useState)(''), pageNameState = _c[0], setPageNameState = _c[1];
-    var standardName = 'Servers';
+    var standardName = 'Pipelines';
     var archivedName = "Archived ".concat(standardName);
     if (isArchive && pageNameState !== archivedName) {
         setPageNameState(archivedName);
@@ -47,50 +48,41 @@ var Page = function (_a) {
     }
     (0, buzzingpixel_mission_control_frontend_core_1.usePageTitle)(pageNameState);
     var _d = (0, useFilterText_1.default)(), filterText = _d[0], setFilterText = _d[1];
-    var _e = (0, react_1.useState)(false), addIsOpen = _e[0], setAddIsOpen = _e[1];
+    var goToAddPipeline = function () {
+        navigate('/pipelines/add');
+    };
     // eslint-disable-next-line prefer-const
-    var _f = (0, ServerData_1.useServerData)(isArchive), status = _f.status, data = _f.data;
-    var LocalTabs = (react_1.default.createElement(Tabs_1.default, { activeHref: isArchive ? '/servers/archived' : '/servers', addOnClick: function () { setAddIsOpen(true); } }));
+    var _e = (0, PipelineData_1.usePipelineData)(isArchive), status = _e.status, data = _e.data;
+    var LocalTabs = (react_1.default.createElement(Tabs_1.default, { activeHref: isArchive ? '/pipelines/archived' : '/pipelines', addOnClick: goToAddPipeline }));
     if (status === 'loading') {
         return (react_1.default.createElement(react_1.default.Fragment, null,
             LocalTabs,
             react_1.default.createElement(buzzingpixel_mission_control_frontend_core_1.PartialPageLoading, null)));
     }
-    var portals = function () {
-        if (addIsOpen) {
-            return (0, buzzingpixel_mission_control_frontend_core_1.createPortal)(react_1.default.createElement(AddServerOverlay_1.default, { setIsOpen: setAddIsOpen }));
-        }
-        return null;
-    };
     if (data.length < 1) {
         if (isArchive) {
             return (react_1.default.createElement(react_1.default.Fragment, null,
-                portals(),
                 LocalTabs,
-                react_1.default.createElement(buzzingpixel_mission_control_frontend_core_1.NoResultsAddItem, { icon: react_1.default.createElement(outline_1.ServerStackIcon, null), headline: "No Archived Servers" })));
+                react_1.default.createElement(buzzingpixel_mission_control_frontend_core_1.NoResultsAddItem, { icon: react_1.default.createElement(outline_1.RectangleGroupIcon, null), headline: "No Archived Pipelines" })));
         }
         return (react_1.default.createElement(react_1.default.Fragment, null,
-            portals(),
             LocalTabs,
-            react_1.default.createElement(buzzingpixel_mission_control_frontend_core_1.NoResultsAddItem, { icon: react_1.default.createElement(outline_1.ServerStackIcon, null), headline: "No Servers", content: "Would you like to add a Server?", actionText: "Add Server", actionUsesPlusIcon: true, actionButtonOnClick: function () { setAddIsOpen(true); } })));
+            react_1.default.createElement(buzzingpixel_mission_control_frontend_core_1.NoResultsAddItem, { icon: react_1.default.createElement(outline_1.RectangleGroupIcon, null), headline: "No Pipelines", content: "Would you like to add a Pipeline?", actionText: "Add Pipeline", actionUsesPlusIcon: true, actionButtonOnClick: goToAddPipeline })));
     }
     if (filterText !== '') {
-        data = data.filter(function (server) { return server.title.toLowerCase().indexOf(filterText.toLowerCase()) > -1
-            || server.slug.toLowerCase().indexOf(filterText.toLowerCase()) > -1
-            || server.sshUserName.toLowerCase().indexOf(filterText.toLowerCase()) > -1
-            || server.address.toLowerCase().indexOf(filterText.toLowerCase()) > -1
-            || server.sshPort.toString().indexOf(filterText.toLowerCase()) > -1; });
+        data = data.filter(function (pipeline) { return pipeline.title.toLowerCase().indexOf(filterText.toLowerCase()) > -1
+            || pipeline.slug.toLowerCase().indexOf(filterText.toLowerCase()) > -1
+            || pipeline.description.toLowerCase().indexOf(filterText.toLowerCase()) > -1
+            || pipeline.secretId.toLowerCase().indexOf(filterText.toLowerCase()) > -1
+            || pipeline.webhookCheckForBranch.toString().indexOf(filterText.toLowerCase()) > -1; });
     }
     return (react_1.default.createElement(react_1.default.Fragment, null,
-        portals(),
         LocalTabs,
         react_1.default.createElement("div", null,
             react_1.default.createElement("div", { className: "sm:flex sm:mb-4" },
                 react_1.default.createElement("div", { className: "mb-4 sm:mb-0 grow" },
-                    react_1.default.createElement("input", { type: "text", name: "filter", id: "filter", className: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6", placeholder: "Filter results", value: filterText, onChange: function (e) {
-                            setFilterText(e.target.value);
-                        } })))),
-        react_1.default.createElement(ServerList_1.default, { isArchive: isArchive, items: data })));
+                    react_1.default.createElement("input", { type: "text", name: "filter", id: "filter", className: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6", placeholder: "Filter results", value: filterText, onChange: function (e) { setFilterText(e.target.value); } })))),
+        react_1.default.createElement(PipelineList_1.default, { isArchive: isArchive, items: data })));
 };
 Page.defaultProps = {
     isArchive: false,
