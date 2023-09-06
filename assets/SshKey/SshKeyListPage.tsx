@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
-    createPortal, NoResultsAddItem,
+    createPortal,
+    NoResultsAddItem,
     PartialPageLoading,
     usePageTitle,
 } from 'buzzingpixel-mission-control-frontend-core';

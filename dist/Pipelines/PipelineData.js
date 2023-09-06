@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.useArchiveServerMutation = exports.useArchiveSelectedPipelinesMutation = exports.usePipelineData = void 0;
+exports.useAddPipelineMutation = exports.useArchiveServerMutation = exports.useArchiveSelectedPipelinesMutation = exports.usePipelineData = void 0;
 var buzzingpixel_mission_control_frontend_core_1 = require("buzzingpixel-mission-control-frontend-core");
 var Pipelines_1 = require("./Pipelines");
 var usePipelineData = function (archive) {
@@ -67,3 +67,17 @@ var useArchiveServerMutation = function (pipelineId, isArchive, projectId) {
     });
 };
 exports.useArchiveServerMutation = useArchiveServerMutation;
+var useAddPipelineMutation = function () { return (0, buzzingpixel_mission_control_frontend_core_1.useApiMutation)({
+    invalidateQueryKeysOnSuccess: [
+        '/pipelines',
+        '/pipelines/archived',
+    ],
+    prepareApiParams: function (data) { return ({
+        uri: '/pipelines',
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        payload: data,
+        method: buzzingpixel_mission_control_frontend_core_1.RequestMethod.POST,
+    }); },
+}); };
+exports.useAddPipelineMutation = useAddPipelineMutation;

@@ -47,18 +47,10 @@ var FormInputText_1 = __importDefault(require("./FormInputText"));
 var FormInputToggle_1 = __importDefault(require("./FormInputToggle"));
 var FormInputCodeEditor_1 = __importDefault(require("./FormInputCodeEditor"));
 var PipelineItems_1 = __importDefault(require("./PipelineItems"));
+var ErrorModal_1 = __importDefault(require("./ErrorModal"));
+var ShowLastErrorButton_1 = __importDefault(require("./ShowLastErrorButton"));
 var AddEditPipeline = function (_a) {
-    var pageName = _a.pageName, incomingValues = _a.incomingValues;
-    (0, buzzingpixel_mission_control_frontend_core_1.useBreadcrumbs)([
-        {
-            name: 'Pipelines',
-            href: '/pipelines',
-        },
-        {
-            name: pageName,
-            href: '/pipelines/add',
-        },
-    ]);
+    var pageName = _a.pageName, incomingValues = _a.incomingValues, mutation = _a.mutation, onSaveSuccess = _a.onSaveSuccess;
     incomingValues = incomingValues !== null && incomingValues !== void 0 ? incomingValues : {
         title: '',
         description: '',
@@ -120,47 +112,60 @@ var AddEditPipeline = function (_a) {
         setPipelineItems(newPipelineItems);
     };
     var _d = (0, react_1.useState)(''), errorMessage = _d[0], setErrorMessage = _d[1];
+    var _e = (0, react_1.useState)(false), errorMessageIsOpen = _e[0], setErrorMessageIsOpen = _e[1];
     var saveHandler = function () {
         setIsSaving(true);
         if (errorMessage) {
             setErrorMessage('');
         }
-        console.log(values);
+        mutation.mutate(values, {
+            onSuccess: onSaveSuccess,
+            onError: function (error) {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                setErrorMessage(error.message || 'Unable to add Pipeline');
+                setErrorMessageIsOpen(true);
+                setIsSaving(false);
+            },
+        });
     };
-    return (react_1.default.createElement("form", { onSubmit: function (e) {
-            e.preventDefault();
-            saveHandler();
-        } },
-        react_1.default.createElement("div", { className: "overflow-hidden bg-white shadow sm:rounded-lg max-w-6xl" },
-            react_1.default.createElement("div", { className: "px-4 py-6 sm:px-6" },
-                react_1.default.createElement("div", { className: "sm:grid sm:grid-cols-3 sm:gap-4" },
-                    react_1.default.createElement("h3", { className: "text-base font-semibold leading-7 text-gray-900 sm:col-span-2" }, pageName),
-                    react_1.default.createElement("div", { className: "text-right" },
-                        react_1.default.createElement(SubmitButton_1.default, { isSaving: isSaving })))),
-            react_1.default.createElement("div", { className: "border-t border-gray-100" },
-                react_1.default.createElement("dl", { className: "divide-y divide-gray-100" },
-                    react_1.default.createElement(LineItem_1.default, { label: "Title", labelFor: "title", RenderInput: (react_1.default.createElement(FormInputText_1.default, { name: "title", value: values.description, setValue: function (val) {
-                                setStringValue('title', val);
-                            } })) }),
-                    react_1.default.createElement(LineItem_1.default, { label: "Description", labelFor: "description", RenderInput: (react_1.default.createElement(FormInputText_1.default, { name: "description", value: values.description, setValue: function (val) {
-                                setStringValue('description', val);
-                            } })) }),
-                    react_1.default.createElement(LineItem_1.default, { label: "Project", labelFor: "project_id", RenderInput: (react_1.default.createElement(FormInputProjects_1.default, { value: values.project_id, setValue: function (val) {
-                                setStringValue('project_id', val);
-                            } })) }),
-                    react_1.default.createElement(LineItem_1.default, { label: "Enable Webhook", labelFor: "enable_webhook", RenderInput: (react_1.default.createElement(FormInputToggle_1.default, { name: "description", value: values.enable_webhook, setValue: function (val) {
-                                setBooleanValue('enable_webhook', val);
-                            } })) }),
-                    react_1.default.createElement(LineItem_1.default, { label: "Check for Branch in Payload (Post Request Only)", labelFor: "webhook_check_for_branch", RenderInput: (react_1.default.createElement(FormInputText_1.default, { name: "webhook_check_for_branch", value: values.webhook_check_for_branch, setValue: function (val) {
-                                setStringValue('webhook_check_for_branch', val);
-                            } })) }),
-                    react_1.default.createElement(LineItem_1.default, { label: "Run Before Every Item", labelFor: "run_before_every_item", RenderInput: (react_1.default.createElement(FormInputCodeEditor_1.default, { name: "run_before_every_item", value: values.run_before_every_item, setValue: function (val) {
-                                setStringValue('run_before_every_item', val);
-                            } })) }),
-                    react_1.default.createElement(LineItem_1.default, { label: "Pipeline Items", labelFor: "pipeline_items", RenderInput: (react_1.default.createElement(PipelineItems_1.default, { pipelineItems: values.pipeline_items, addPipelineItem: addPipelineItem, setPipelineItems: setPipelineItems, setPipelineItemInnerItem: setPipelineItemInnerItem, removePipelineItem: removePipelineItem })) }),
-                    react_1.default.createElement("div", { className: "px-4 py-6 sm:px-6" },
+    return (react_1.default.createElement(react_1.default.Fragment, null,
+        (0, buzzingpixel_mission_control_frontend_core_1.createPortal)(react_1.default.createElement(ErrorModal_1.default, { isOpen: errorMessageIsOpen, setIsOpen: setErrorMessageIsOpen, message: errorMessage })),
+        react_1.default.createElement("form", { onSubmit: function (e) {
+                e.preventDefault();
+                saveHandler();
+            } },
+            react_1.default.createElement("div", { className: "overflow-hidden bg-white shadow sm:rounded-lg max-w-6xl" },
+                react_1.default.createElement("div", { className: "px-4 py-6 sm:px-6" },
+                    react_1.default.createElement("div", { className: "sm:grid sm:grid-cols-3 sm:gap-4" },
+                        react_1.default.createElement("h3", { className: "text-base font-semibold leading-7 text-gray-900 sm:col-span-2" }, pageName),
                         react_1.default.createElement("div", { className: "text-right" },
-                            react_1.default.createElement(SubmitButton_1.default, { isSaving: isSaving }))))))));
+                            react_1.default.createElement(SubmitButton_1.default, { isSaving: isSaving })))),
+                react_1.default.createElement("div", { className: "border-t border-gray-100" },
+                    react_1.default.createElement("dl", { className: "divide-y divide-gray-100" },
+                        react_1.default.createElement(LineItem_1.default, { label: "Title", labelFor: "title", RenderInput: (react_1.default.createElement(FormInputText_1.default, { name: "title", value: values.description, setValue: function (val) {
+                                    setStringValue('title', val);
+                                } })) }),
+                        react_1.default.createElement(LineItem_1.default, { label: "Description", labelFor: "description", RenderInput: (react_1.default.createElement(FormInputText_1.default, { name: "description", value: values.description, setValue: function (val) {
+                                    setStringValue('description', val);
+                                } })) }),
+                        react_1.default.createElement(LineItem_1.default, { label: "Project", labelFor: "project_id", RenderInput: (react_1.default.createElement(FormInputProjects_1.default, { value: values.project_id, setValue: function (val) {
+                                    setStringValue('project_id', val);
+                                } })) }),
+                        react_1.default.createElement(LineItem_1.default, { label: "Enable Webhook", labelFor: "enable_webhook", RenderInput: (react_1.default.createElement(FormInputToggle_1.default, { name: "description", value: values.enable_webhook, setValue: function (val) {
+                                    setBooleanValue('enable_webhook', val);
+                                } })) }),
+                        react_1.default.createElement(LineItem_1.default, { label: "Check for Branch in Payload (Post Request Only)", labelFor: "webhook_check_for_branch", RenderInput: (react_1.default.createElement(FormInputText_1.default, { name: "webhook_check_for_branch", value: values.webhook_check_for_branch, setValue: function (val) {
+                                    setStringValue('webhook_check_for_branch', val);
+                                } })) }),
+                        react_1.default.createElement(LineItem_1.default, { label: "Run Before Every Item", labelFor: "run_before_every_item", RenderInput: (react_1.default.createElement(FormInputCodeEditor_1.default, { name: "run_before_every_item", value: values.run_before_every_item, setValue: function (val) {
+                                    setStringValue('run_before_every_item', val);
+                                } })) }),
+                        react_1.default.createElement(LineItem_1.default, { label: "Pipeline Items", labelFor: "pipeline_items", RenderInput: (react_1.default.createElement(PipelineItems_1.default, { pipelineItems: values.pipeline_items, addPipelineItem: addPipelineItem, setPipelineItems: setPipelineItems, setPipelineItemInnerItem: setPipelineItemInnerItem, removePipelineItem: removePipelineItem })) }),
+                        react_1.default.createElement("div", { className: "px-4 py-6 sm:px-6" },
+                            react_1.default.createElement("div", { className: "text-right align-middle" },
+                                react_1.default.createElement(ShowLastErrorButton_1.default, null),
+                                react_1.default.createElement(SubmitButton_1.default, { isSaving: isSaving })))))))));
 };
 AddEditPipeline.defaultProps = {
     incomingValues: undefined,

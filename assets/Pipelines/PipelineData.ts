@@ -1,6 +1,7 @@
 import {
     RequestMethod,
-    useAllProjectsData, useApiMutation,
+    useAllProjectsData,
+    useApiMutation,
     useApiQueryWithSignInRedirect,
 } from 'buzzingpixel-mission-control-frontend-core';
 import {
@@ -99,3 +100,17 @@ export const useArchiveServerMutation = (
         }),
     });
 };
+
+export const useAddPipelineMutation = () => useApiMutation({
+    invalidateQueryKeysOnSuccess: [
+        '/pipelines',
+        '/pipelines/archived',
+    ],
+    prepareApiParams: (data) => ({
+        uri: '/pipelines',
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        payload: data,
+        method: RequestMethod.POST,
+    }),
+});

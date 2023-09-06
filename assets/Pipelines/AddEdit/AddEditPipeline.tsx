@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useBreadcrumbs } from 'buzzingpixel-mission-control-frontend-core';
+import { createPortal } from 'buzzingpixel-mission-control-frontend-core';
 import { v4 as uuid } from 'uuid';
+import { UseMutationResult } from '@tanstack/react-query/src/types';
 import LineItem from './LineItem';
 import SubmitButton from './SubmitButton';
 import FormInputProjects from './FormInputProjects';
@@ -9,27 +10,22 @@ import FormInputToggle from './FormInputToggle';
 import FormInputCodeEditor from './FormInputCodeEditor';
 import { AddEditValues, PipelineItem } from './AddEditValues';
 import PipelineItems from './PipelineItems';
+import ErrorModal from './ErrorModal';
+import ShowLastErrorButton from './ShowLastErrorButton';
 
 const AddEditPipeline = (
     {
         pageName,
         incomingValues,
+        mutation,
+        onSaveSuccess,
     }: {
         pageName: string;
         incomingValues?: AddEditValues | undefined;
+        mutation: UseMutationResult;
+        onSaveSuccess: () => void;
     },
 ) => {
-    useBreadcrumbs([
-        {
-            name: 'Pipelines',
-            href: '/pipelines',
-        },
-        {
-            name: pageName,
-            href: '/pipelines/add',
-        },
-    ]);
-
     incomingValues = incomingValues ?? {
         title: '',
         description: '',
@@ -130,6 +126,8 @@ const AddEditPipeline = (
 
     const [errorMessage, setErrorMessage] = useState<string>('');
 
+    const [errorMessageIsOpen, setErrorMessageIsOpen] = useState(false);
+
     const saveHandler = () => {
         setIsSaving(true);
 
@@ -137,128 +135,148 @@ const AddEditPipeline = (
             setErrorMessage('');
         }
 
-        console.log(values);
+        mutation.mutate(values, {
+            onSuccess: onSaveSuccess,
+            onError: (error) => {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                setErrorMessage(error.message || 'Unable to add Pipeline');
+                setErrorMessageIsOpen(true);
+
+                setIsSaving(false);
+            },
+        });
     };
 
     return (
-        <form onSubmit={(e) => {
-            e.preventDefault();
+        <>
+            {createPortal(
+                <ErrorModal
+                    isOpen={errorMessageIsOpen}
+                    setIsOpen={setErrorMessageIsOpen}
+                    message={errorMessage}
+                />,
+            )}
+            <form onSubmit={(e) => {
+                e.preventDefault();
 
-            saveHandler();
-        }}
-        >
-            <div className="overflow-hidden bg-white shadow sm:rounded-lg max-w-6xl">
-                <div className="px-4 py-6 sm:px-6">
-                    <div className="sm:grid sm:grid-cols-3 sm:gap-4">
-                        <h3 className="text-base font-semibold leading-7 text-gray-900 sm:col-span-2">
-                            {pageName}
-                        </h3>
-                        <div className="text-right">
-                            <SubmitButton isSaving={isSaving} />
-                        </div>
-                    </div>
-                </div>
-                <div className="border-t border-gray-100">
-                    <dl className="divide-y divide-gray-100">
-                        <LineItem
-                            label="Title"
-                            labelFor="title"
-                            RenderInput={(
-                                <FormInputText
-                                    name="title"
-                                    value={values.description}
-                                    setValue={(val: string) => {
-                                        setStringValue('title', val);
-                                    }}
-                                />
-                            )}
-                        />
-                        <LineItem
-                            label="Description"
-                            labelFor="description"
-                            RenderInput={(
-                                <FormInputText
-                                    name="description"
-                                    value={values.description}
-                                    setValue={(val: string) => {
-                                        setStringValue('description', val);
-                                    }}
-                                />
-                            )}
-                        />
-                        <LineItem
-                            label="Project"
-                            labelFor="project_id"
-                            RenderInput={(
-                                <FormInputProjects
-                                    value={values.project_id}
-                                    setValue={(val: string) => {
-                                        setStringValue('project_id', val);
-                                    }}
-                                />
-                            )}
-                        />
-                        <LineItem
-                            label="Enable Webhook"
-                            labelFor="enable_webhook"
-                            RenderInput={(
-                                <FormInputToggle
-                                    name="description"
-                                    value={values.enable_webhook}
-                                    setValue={(val: boolean) => {
-                                        setBooleanValue('enable_webhook', val);
-                                    }}
-                                />
-                            )}
-                        />
-                        <LineItem
-                            label="Check for Branch in Payload (Post Request Only)"
-                            labelFor="webhook_check_for_branch"
-                            RenderInput={(
-                                <FormInputText
-                                    name="webhook_check_for_branch"
-                                    value={values.webhook_check_for_branch}
-                                    setValue={(val: string) => {
-                                        setStringValue('webhook_check_for_branch', val);
-                                    }}
-                                />
-                            )}
-                        />
-                        <LineItem
-                            label="Run Before Every Item"
-                            labelFor="run_before_every_item"
-                            RenderInput={(
-                                <FormInputCodeEditor
-                                    name="run_before_every_item"
-                                    value={values.run_before_every_item}
-                                    setValue={(val: string) => {
-                                        setStringValue('run_before_every_item', val);
-                                    }}
-                                />
-                            )}
-                        />
-                        <LineItem
-                            label="Pipeline Items"
-                            labelFor="pipeline_items"
-                            RenderInput={(
-                                <PipelineItems
-                                    pipelineItems={values.pipeline_items}
-                                    addPipelineItem={addPipelineItem}
-                                    setPipelineItems={setPipelineItems}
-                                    setPipelineItemInnerItem={setPipelineItemInnerItem}
-                                    removePipelineItem={removePipelineItem}
-                                />
-                            )}
-                        />
-                        <div className="px-4 py-6 sm:px-6">
+                saveHandler();
+            }}
+            >
+                <div className="overflow-hidden bg-white shadow sm:rounded-lg max-w-6xl">
+                    <div className="px-4 py-6 sm:px-6">
+                        <div className="sm:grid sm:grid-cols-3 sm:gap-4">
+                            <h3 className="text-base font-semibold leading-7 text-gray-900 sm:col-span-2">
+                                {pageName}
+                            </h3>
                             <div className="text-right">
                                 <SubmitButton isSaving={isSaving} />
                             </div>
                         </div>
-                    </dl>
+                    </div>
+                    <div className="border-t border-gray-100">
+                        <dl className="divide-y divide-gray-100">
+                            <LineItem
+                                label="Title"
+                                labelFor="title"
+                                RenderInput={(
+                                    <FormInputText
+                                        name="title"
+                                        value={values.description}
+                                        setValue={(val: string) => {
+                                            setStringValue('title', val);
+                                        }}
+                                    />
+                                )}
+                            />
+                            <LineItem
+                                label="Description"
+                                labelFor="description"
+                                RenderInput={(
+                                    <FormInputText
+                                        name="description"
+                                        value={values.description}
+                                        setValue={(val: string) => {
+                                            setStringValue('description', val);
+                                        }}
+                                    />
+                                )}
+                            />
+                            <LineItem
+                                label="Project"
+                                labelFor="project_id"
+                                RenderInput={(
+                                    <FormInputProjects
+                                        value={values.project_id}
+                                        setValue={(val: string) => {
+                                            setStringValue('project_id', val);
+                                        }}
+                                    />
+                                )}
+                            />
+                            <LineItem
+                                label="Enable Webhook"
+                                labelFor="enable_webhook"
+                                RenderInput={(
+                                    <FormInputToggle
+                                        name="description"
+                                        value={values.enable_webhook}
+                                        setValue={(val: boolean) => {
+                                            setBooleanValue('enable_webhook', val);
+                                        }}
+                                    />
+                                )}
+                            />
+                            <LineItem
+                                label="Check for Branch in Payload (Post Request Only)"
+                                labelFor="webhook_check_for_branch"
+                                RenderInput={(
+                                    <FormInputText
+                                        name="webhook_check_for_branch"
+                                        value={values.webhook_check_for_branch}
+                                        setValue={(val: string) => {
+                                            setStringValue('webhook_check_for_branch', val);
+                                        }}
+                                    />
+                                )}
+                            />
+                            <LineItem
+                                label="Run Before Every Item"
+                                labelFor="run_before_every_item"
+                                RenderInput={(
+                                    <FormInputCodeEditor
+                                        name="run_before_every_item"
+                                        value={values.run_before_every_item}
+                                        setValue={(val: string) => {
+                                            setStringValue('run_before_every_item', val);
+                                        }}
+                                    />
+                                )}
+                            />
+                            <LineItem
+                                label="Pipeline Items"
+                                labelFor="pipeline_items"
+                                RenderInput={(
+                                    <PipelineItems
+                                        pipelineItems={values.pipeline_items}
+                                        addPipelineItem={addPipelineItem}
+                                        setPipelineItems={setPipelineItems}
+                                        setPipelineItemInnerItem={setPipelineItemInnerItem}
+                                        removePipelineItem={removePipelineItem}
+                                    />
+                                )}
+                            />
+                            <div className="px-4 py-6 sm:px-6">
+                                <div className="text-right align-middle">
+                                    <ShowLastErrorButton />
+                                    <SubmitButton isSaving={isSaving} />
+                                </div>
+                            </div>
+                        </dl>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </>
     );
 };
 
