@@ -4,6 +4,10 @@ export declare const useServerData: (archive?: boolean) => {
     status: 'loading' | 'error' | 'success';
     data: ServersWithViewOptions;
 };
+export declare const useAllServerData: () => {
+    status: 'loading' | 'error' | 'success';
+    data: ServersWithViewOptions;
+};
 export declare const useAddServerMutation: () => import("@tanstack/react-query/src/types").UseMutationResult<unknown, import("buzzingpixel-mission-control-frontend-core/dist/Api/ApiError").default, unknown>;
 export declare const useArchiveSelectedServersMutation: (servers: {
     id?: string;

@@ -59,6 +59,48 @@ export const useServerData = (archive = false): {
     };
 };
 
+export const useAllServerData = (): {
+    status: 'loading' | 'error' | 'success';
+    data: ServersWithViewOptions;
+} => {
+    const {
+        status: unarchivedStatus,
+        data: unarchivedData,
+    } = useServerData();
+
+    const {
+        status: archivedStatus,
+        data: archivedData,
+    } = useServerData(true);
+
+    if (unarchivedStatus === 'error' || archivedStatus === 'error') {
+        return {
+            status: 'error',
+            data: [],
+        };
+    }
+
+    if (unarchivedStatus === 'loading' || archivedStatus === 'loading') {
+        return {
+            status: 'loading',
+            data: [],
+        };
+    }
+
+    const archivedDataUpdated = archivedData.map((item) => {
+        const newItem = item;
+
+        newItem.title += ' (archived)';
+
+        return { ...newItem };
+    });
+
+    return {
+        status: 'success',
+        data: unarchivedData.concat(archivedDataUpdated),
+    };
+};
+
 export const useAddServerMutation = () => useApiMutation({
     invalidateQueryKeysOnSuccess: [
         '/servers',

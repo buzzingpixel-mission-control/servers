@@ -1,16 +1,15 @@
 import React, { Dispatch, SetStateAction } from 'react';
-declare const FormInputText: {
-    ({ name, value, setValue, placeholder, useMaxWidth, }: {
+declare const PipelineItemTextInput: {
+    ({ label, name, value, setValue, placeholder, }: {
+        label: string;
         name: string;
         value?: string;
         setValue: Dispatch<SetStateAction<string>>;
         placeholder?: string;
-        useMaxWidth?: boolean;
     }): React.JSX.Element;
     defaultProps: {
         value: string;
         placeholder: string;
-        useMaxWidth: boolean;
     };
 };
-export default FormInputText;
+export default PipelineItemTextInput;
