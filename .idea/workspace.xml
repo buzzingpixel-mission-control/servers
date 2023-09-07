@@ -7,14 +7,19 @@
     <list default="true" id="8c8273f2-18a5-4161-892d-93478ef60dd9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/Pipelines/AddEdit/AddEditPipeline.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Pipelines/AddEdit/AddEditPipeline.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Pipelines/AddEdit/AddPipelinePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Pipelines/AddEdit/AddPipelinePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Pipelines/PipelineData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Pipelines/PipelineData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/SshKey/SshKeyListPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/SshKey/SshKeyListPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/Pipelines/AddEdit/AddEditPipeline.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Pipelines/AddEdit/AddEditPipeline.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Pipelines/AddEdit/AddEditValues.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Pipelines/AddEdit/AddEditValues.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Pipelines/AddEdit/PipelineItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Pipelines/AddEdit/PipelineItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Pipelines/AddEdit/PipelineItemRunOnServers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Pipelines/AddEdit/PipelineItemRunOnServers.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Pipelines/AddEdit/PipelineItemSourceOrCode.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Pipelines/AddEdit/PipelineItemSourceOrCode.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Pipelines/AddEdit/PipelineItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Pipelines/AddEdit/PipelineItems.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/Pipelines/AddEdit/AddEditPipeline.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Pipelines/AddEdit/AddEditPipeline.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/Pipelines/AddEdit/AddPipelinePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Pipelines/AddEdit/AddPipelinePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/Pipelines/PipelineData.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Pipelines/PipelineData.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/Pipelines/PipelineData.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Pipelines/PipelineData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Pipelines/AddEdit/AddEditValues.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Pipelines/AddEdit/AddEditValues.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Pipelines/AddEdit/PipelineItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Pipelines/AddEdit/PipelineItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EventListeners/Routing.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventListeners/Routing.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pipelines/Persistence/PipelineRecord.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pipelines/Persistence/PipelineRecord.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pipelines/Persistence/PipelineRecordCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pipelines/Persistence/PipelineRecordCollection.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pipelines/Pipeline.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pipelines/Pipeline.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pipelines/PipelineCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pipelines/PipelineCollection.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

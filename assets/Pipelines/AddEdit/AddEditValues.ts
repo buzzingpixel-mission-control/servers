@@ -3,6 +3,7 @@ export type PipelineItem = {
     type: 'source' | 'code';
     description: string;
     run_on_servers: Array<string>;
+    run_after_fail: boolean;
     script: string;
 };
 

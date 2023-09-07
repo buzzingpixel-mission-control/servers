@@ -21,6 +21,7 @@ var utilities_1 = require("@dnd-kit/utilities");
 var PipelineItemTextInput_1 = __importDefault(require("./PipelineItemTextInput"));
 var PipelineItemSourceOrCode_1 = __importDefault(require("./PipelineItemSourceOrCode"));
 var PipelineItemRunOnServers_1 = __importDefault(require("./PipelineItemRunOnServers"));
+var FormInputToggle_1 = __importDefault(require("./FormInputToggle"));
 var PipelineItem = function (_a) {
     var item = _a.item, setPipelineItemInnerItem = _a.setPipelineItemInnerItem, removePipelineItem = _a.removePipelineItem;
     var _b = (0, sortable_1.useSortable)({ id: item.id }), attributes = _b.attributes, listeners = _b.listeners, setNodeRef = _b.setNodeRef, transform = _b.transform, transition = _b.transition, isDragging = _b.isDragging;
@@ -54,6 +55,10 @@ var PipelineItem = function (_a) {
             react_1.default.createElement("div", { className: "mb-2" },
                 react_1.default.createElement(PipelineItemSourceOrCode_1.default, { item: item, setPipelineItemInnerItem: setPipelineItemInnerItem })),
             react_1.default.createElement("div", { className: "mb-2" },
-                react_1.default.createElement(PipelineItemRunOnServers_1.default, { item: item, setPipelineItemInnerItem: setPipelineItemInnerItem })))));
+                react_1.default.createElement(PipelineItemRunOnServers_1.default, { item: item, setPipelineItemInnerItem: setPipelineItemInnerItem })),
+            react_1.default.createElement("div", { className: "mb-2" },
+                react_1.default.createElement(FormInputToggle_1.default, { name: "pipeline_item_".concat(item.id, "_run_after_fail"), value: item.run_after_fail, setValue: function (val) {
+                        setPipelineItemInnerItem(item.id, 'run_after_fail', val);
+                    } })))));
 };
 exports.default = PipelineItem;

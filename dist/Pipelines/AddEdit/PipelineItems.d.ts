@@ -4,7 +4,7 @@ declare const PipelineItems: ({ pipelineItems, addPipelineItem, setPipelineItems
     pipelineItems: Array<PipelineItemValues>;
     addPipelineItem: (type: 'source' | 'code') => void;
     setPipelineItems: (pipelineItems: Array<PipelineItemValues>) => void;
-    setPipelineItemInnerItem: (id: string, key: 'description' | 'script' | 'run_on_servers', value: string | Array<string>) => void;
+    setPipelineItemInnerItem: (id: string, key: 'description' | 'script' | 'run_on_servers' | 'run_after_fail', value: string | boolean | Array<string>) => void;
     removePipelineItem: (id: string) => void;
 }) => React.JSX.Element;
 export default PipelineItems;

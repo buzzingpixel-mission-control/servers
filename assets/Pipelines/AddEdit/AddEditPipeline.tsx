@@ -74,6 +74,7 @@ const AddEditPipeline = (
             type,
             description: '',
             run_on_servers: [],
+            run_after_fail: false,
             script: '',
         });
 
@@ -90,8 +91,8 @@ const AddEditPipeline = (
 
     const setPipelineItemInnerItem = (
         id: string,
-        key: 'description' | 'script' | 'run_on_servers',
-        value: string | Array<string>,
+        key: 'description' | 'script' | 'run_on_servers' | 'run_after_fail',
+        value: string | boolean | Array<string>,
     ) => {
         const newPipelineItems = values.pipeline_items;
 
@@ -103,8 +104,14 @@ const AddEditPipeline = (
             }
 
             newPipelineItems[index][key] = value;
+        } else if (key === 'run_after_fail') {
+            if (typeof value !== 'boolean') {
+                throw new Error('Value must be boolean');
+            }
+
+            newPipelineItems[index][key] = value;
         } else {
-            if (!(typeof value === 'string')) {
+            if (typeof value !== 'string') {
                 throw new Error('Value must be string');
             }
 

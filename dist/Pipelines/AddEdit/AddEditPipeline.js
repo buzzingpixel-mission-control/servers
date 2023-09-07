@@ -79,6 +79,7 @@ var AddEditPipeline = function (_a) {
             type: type,
             description: '',
             run_on_servers: [],
+            run_after_fail: false,
             script: '',
         });
         setValues(function () { return (__assign({}, newValues)); });
@@ -97,8 +98,14 @@ var AddEditPipeline = function (_a) {
             }
             newPipelineItems[index][key] = value;
         }
+        else if (key === 'run_after_fail') {
+            if (typeof value !== 'boolean') {
+                throw new Error('Value must be boolean');
+            }
+            newPipelineItems[index][key] = value;
+        }
         else {
-            if (!(typeof value === 'string')) {
+            if (typeof value !== 'string') {
                 throw new Error('Value must be string');
             }
             newPipelineItems[index][key] = value;

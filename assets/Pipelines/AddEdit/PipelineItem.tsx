@@ -6,6 +6,7 @@ import { PipelineItem as PipeLineItemValues } from './AddEditValues';
 import PipelineItemTextInput from './PipelineItemTextInput';
 import PipelineItemSourceOrCode from './PipelineItemSourceOrCode';
 import PipelineItemRunOnServers from './PipelineItemRunOnServers';
+import FormInputToggle from './FormInputToggle';
 
 const PipelineItem = (
     {
@@ -16,8 +17,8 @@ const PipelineItem = (
         item: PipeLineItemValues;
         setPipelineItemInnerItem: (
             id: string,
-            key: 'description' | 'script' | 'run_on_servers',
-            value: string | Array<string>,
+            key: 'description' | 'script' | 'run_on_servers' | 'run_after_fail',
+            value: string | boolean | Array<string>,
         ) => void;
         removePipelineItem: (id: string) => void;
     },
@@ -101,6 +102,19 @@ const PipelineItem = (
                     <PipelineItemRunOnServers
                         item={item}
                         setPipelineItemInnerItem={setPipelineItemInnerItem}
+                    />
+                </div>
+                <div className="mb-2">
+                    <FormInputToggle
+                        name={`pipeline_item_${item.id}_run_after_fail`}
+                        value={item.run_after_fail}
+                        setValue={(val: boolean) => {
+                            setPipelineItemInnerItem(
+                                item.id,
+                                'run_after_fail',
+                                val,
+                            );
+                        }}
                     />
                 </div>
             </div>

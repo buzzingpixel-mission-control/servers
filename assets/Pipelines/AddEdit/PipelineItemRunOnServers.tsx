@@ -18,8 +18,8 @@ const Input = (
         item: PipeLineItemValues;
         setPipelineItemInnerItem: (
             id: string,
-            key: 'description' | 'script' | 'run_on_servers',
-            value: string | Array<string>,
+            key: 'description' | 'script' | 'run_on_servers' | 'run_after_fail',
+            value: string | boolean | Array<string>,
         ) => void;
     },
 ) => {
