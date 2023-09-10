@@ -172,12 +172,18 @@ const AddEditPipeline = (
             >
                 <div className="overflow-hidden bg-white shadow sm:rounded-lg max-w-6xl">
                     <div className="px-4 py-6 sm:px-6">
-                        <div className="sm:grid sm:grid-cols-3 sm:gap-4">
+                        <div className="sm:grid sm:grid-cols-4 sm:gap-4">
                             <h3 className="text-base font-semibold leading-7 text-gray-900 sm:col-span-2">
                                 {pageName}
                             </h3>
-                            <div className="text-right">
-                                <SubmitButton isSaving={isSaving} />
+                            <div className="text-right align-middle sm:col-span-2">
+                                <ShowLastErrorButton
+                                    errorMessage={errorMessage}
+                                    setErrorMessageIsOpen={setErrorMessageIsOpen}
+                                />
+                                <SubmitButton
+                                    isSaving={isSaving}
+                                />
                             </div>
                         </div>
                     </div>
@@ -189,7 +195,7 @@ const AddEditPipeline = (
                                 RenderInput={(
                                     <FormInputText
                                         name="title"
-                                        value={values.description}
+                                        value={values.title}
                                         setValue={(val: string) => {
                                             setStringValue('title', val);
                                         }}
@@ -275,8 +281,13 @@ const AddEditPipeline = (
                             />
                             <div className="px-4 py-6 sm:px-6">
                                 <div className="text-right align-middle">
-                                    <ShowLastErrorButton />
-                                    <SubmitButton isSaving={isSaving} />
+                                    <ShowLastErrorButton
+                                        errorMessage={errorMessage}
+                                        setErrorMessageIsOpen={setErrorMessageIsOpen}
+                                    />
+                                    <SubmitButton
+                                        isSaving={isSaving}
+                                    />
                                 </div>
                             </div>
                         </dl>

@@ -144,13 +144,14 @@ var AddEditPipeline = function (_a) {
             } },
             react_1.default.createElement("div", { className: "overflow-hidden bg-white shadow sm:rounded-lg max-w-6xl" },
                 react_1.default.createElement("div", { className: "px-4 py-6 sm:px-6" },
-                    react_1.default.createElement("div", { className: "sm:grid sm:grid-cols-3 sm:gap-4" },
+                    react_1.default.createElement("div", { className: "sm:grid sm:grid-cols-4 sm:gap-4" },
                         react_1.default.createElement("h3", { className: "text-base font-semibold leading-7 text-gray-900 sm:col-span-2" }, pageName),
-                        react_1.default.createElement("div", { className: "text-right" },
+                        react_1.default.createElement("div", { className: "text-right align-middle sm:col-span-2" },
+                            react_1.default.createElement(ShowLastErrorButton_1.default, { errorMessage: errorMessage, setErrorMessageIsOpen: setErrorMessageIsOpen }),
                             react_1.default.createElement(SubmitButton_1.default, { isSaving: isSaving })))),
                 react_1.default.createElement("div", { className: "border-t border-gray-100" },
                     react_1.default.createElement("dl", { className: "divide-y divide-gray-100" },
-                        react_1.default.createElement(LineItem_1.default, { label: "Title", labelFor: "title", RenderInput: (react_1.default.createElement(FormInputText_1.default, { name: "title", value: values.description, setValue: function (val) {
+                        react_1.default.createElement(LineItem_1.default, { label: "Title", labelFor: "title", RenderInput: (react_1.default.createElement(FormInputText_1.default, { name: "title", value: values.title, setValue: function (val) {
                                     setStringValue('title', val);
                                 } })) }),
                         react_1.default.createElement(LineItem_1.default, { label: "Description", labelFor: "description", RenderInput: (react_1.default.createElement(FormInputText_1.default, { name: "description", value: values.description, setValue: function (val) {
@@ -171,7 +172,7 @@ var AddEditPipeline = function (_a) {
                         react_1.default.createElement(LineItem_1.default, { label: "Pipeline Items", labelFor: "pipeline_items", RenderInput: (react_1.default.createElement(PipelineItems_1.default, { pipelineItems: values.pipeline_items, addPipelineItem: addPipelineItem, setPipelineItems: setPipelineItems, setPipelineItemInnerItem: setPipelineItemInnerItem, removePipelineItem: removePipelineItem })) }),
                         react_1.default.createElement("div", { className: "px-4 py-6 sm:px-6" },
                             react_1.default.createElement("div", { className: "text-right align-middle" },
-                                react_1.default.createElement(ShowLastErrorButton_1.default, null),
+                                react_1.default.createElement(ShowLastErrorButton_1.default, { errorMessage: errorMessage, setErrorMessageIsOpen: setErrorMessageIsOpen }),
                                 react_1.default.createElement(SubmitButton_1.default, { isSaving: isSaving })))))))));
 };
 AddEditPipeline.defaultProps = {

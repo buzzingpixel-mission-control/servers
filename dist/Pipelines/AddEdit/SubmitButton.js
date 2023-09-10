@@ -12,7 +12,7 @@ var SubmitButton = function (_a) {
         buttonBgClass = 'bg-gray-600 focus:ring-gray-500';
         spinnerSavingClass = 'opacity-100';
     }
-    return (react_1.default.createElement("button", { type: "submit", className: "inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 sm:col-start-2 sm:text-sm ".concat(buttonBgClass) },
+    return (react_1.default.createElement("button", { type: "submit", className: "w-full my-1.5 sm:my-0 sm:w-auto inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 sm:col-start-2 sm:text-sm ".concat(buttonBgClass) },
         react_1.default.createElement("div", { className: "inline-block align-middle h-3 w-3 animate-spin rounded-full border-2 border-solid border-current border-r-transparent text-info motion-reduce:animate-[spin_1.5s_linear_infinite] ".concat(spinnerSavingClass), style: { marginTop: '0.25rem' }, role: "status" },
             react_1.default.createElement("span", { className: "!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]" }, "Loading...")),
         react_1.default.createElement("span", { className: "ml-1 inline-block align-middle" }, "Submit"),
