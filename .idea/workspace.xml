@@ -7,14 +7,15 @@
     <list default="true" id="8c8273f2-18a5-4161-892d-93478ef60dd9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/Pipelines/AddEdit/AddEditPipeline.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Pipelines/AddEdit/AddEditPipeline.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Pipelines/AddEdit/ShowLastErrorButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Pipelines/AddEdit/ShowLastErrorButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Pipelines/AddEdit/SubmitButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Pipelines/AddEdit/SubmitButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/Pipelines/AddEdit/AddEditPipeline.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Pipelines/AddEdit/AddEditPipeline.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EventListeners/Routing.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventListeners/Routing.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pipelines/NewPipeline.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pipelines/NewPipeline.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pipelines/Persistence/CreatePipeline.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pipelines/Persistence/CreatePipeline.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pipelines/Persistence/PipelineRecord.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pipelines/Persistence/PipelineRecord.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pipelines/Persistence/PipelineRecordCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pipelines/Persistence/PipelineRecordCollection.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pipelines/Pipeline.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pipelines/Pipeline.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pipelines/PipelineCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pipelines/PipelineCollection.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pipelines/PipelineRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pipelines/PipelineRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -25,13 +25,7 @@ readonly class PipelineRepository
     public function create(NewPipeline $entity): ActionResult
     {
         return $this->create->create(
-            PipelineRecord::fromNewEntity(
-                $entity->withSlugFromString(
-                    $this->slugify->slugify(
-                        $entity->title->toNative(),
-                    ),
-                ),
-            ),
+            PipelineRecord::fromNewEntity($entity),
         );
     }
 

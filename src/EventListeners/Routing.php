@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace MissionControlServers\EventListeners;
 
 use MissionControlBackend\Http\ApiApplyRoutesEvent;
+use MissionControlServers\Pipelines\AddEdit\PostAddPipelineAction;
 use MissionControlServers\Pipelines\GetPipelinesListAction;
 use MissionControlServers\Pipelines\GetPipelinesListArchivedAction;
 use MissionControlServers\Servers\AddEdit\PatchArchiveServerAction;
@@ -65,5 +66,6 @@ class Routing
          */
         GetPipelinesListAction::registerRoute($event);
         GetPipelinesListArchivedAction::registerRoute($event);
+        PostAddPipelineAction::registerRoute($event);
     }
 }

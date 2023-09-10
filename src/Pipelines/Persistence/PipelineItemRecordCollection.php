@@ -10,32 +10,34 @@ use function array_map;
 use function array_values;
 use function count;
 
-class PipelineRecordCollection
+class PipelineItemRecordCollection
 {
-    /** @var PipelineRecord[] */
+    /** @var PipelineItemRecord[] */
     public array $records;
 
-    /** @param PipelineRecord[] $records */
+    /** @param PipelineItemRecord[] $records */
     public function __construct(array $records = [])
     {
         $this->records = array_values(array_map(
-            static fn (PipelineRecord $r) => $r,
+            static fn (PipelineItemRecord $r) => $r,
             $records,
         ));
     }
 
-    public function first(): PipelineRecord
+    public function first(): PipelineItemRecord
     {
         $record = $this->firstOrNull();
 
         if ($record === null) {
-            throw new RuntimeException('No Pipeline record found');
+            throw new RuntimeException(
+                'No PipelineItem record found',
+            );
         }
 
         return $record;
     }
 
-    public function firstOrNull(): PipelineRecord|null
+    public function firstOrNull(): PipelineItemRecord|null
     {
         return $this->records[0] ?? null;
     }

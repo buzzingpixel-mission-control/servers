@@ -56,10 +56,11 @@ readonly class Pipeline
         public Slug $slug,
         public Description $description,
         public RunBeforeEveryItem $runBeforeEveryItem,
+        public PipelineItemCollection $pipelineItems = new PipelineItemCollection(),
     ) {
     }
 
-    /** @return array<string, scalar|null> */
+    /** @return array<string, scalar|array<array-key, array<string, scalar|null>>|null> */
     public function asArray(): array
     {
         return [
@@ -73,11 +74,24 @@ readonly class Pipeline
             'slug' => $this->slug->toNative(),
             'description' => $this->description->toNative(),
             'runBeforeEveryItem' => $this->runBeforeEveryItem->toNative(),
+            'pipelineItems' => $this->pipelineItems->asArray(),
         ];
     }
 
     public function withSlugFromString(string $slug): static
     {
         return $this->with(slug: Slug::fromNative($slug));
+    }
+
+    public function withPipelineItems(PipelineItemCollection $items): static
+    {
+        return $this->with(pipelineItems: $items);
+    }
+
+    public function withPipelineItem(PipelineItem $item): static
+    {
+        return $this->withPipelineItems(
+            $this->pipelineItems->withPipeline($item),
+        );
     }
 }

@@ -24,6 +24,7 @@ readonly class NewPipeline
         public EnableWebhook $enableWebhook = new EnableWebhook(true),
         public WebhookCheckForBranch $webhookCheckForBranch = new WebhookCheckForBranch(''),
         public RunBeforeEveryItem $runBeforeEveryItem = new RunBeforeEveryItem(''),
+        public NewPipelineItemCollection $pipelineItems = new NewPipelineItemCollection(),
         public Slug $slug = new Slug(''),
     ) {
     }
