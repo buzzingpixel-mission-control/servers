@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace MissionControlServers\Pipelines;
 
+use MissionControlServers\Pipelines\Persistence\PipelineItemRecord;
 use MissionControlServers\Pipelines\Persistence\PipelineRecord;
 use MissionControlServers\Pipelines\ValueObjects\Description;
 use MissionControlServers\Pipelines\ValueObjects\EnableWebhook;
@@ -16,6 +17,8 @@ use MissionControlServers\Pipelines\ValueObjects\Slug;
 use MissionControlServers\Pipelines\ValueObjects\Title;
 use MissionControlServers\Pipelines\ValueObjects\WebhookCheckForBranch;
 use Spatie\Cloneable\Cloneable;
+
+use function array_map;
 
 // phpcs:disable Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
 
@@ -41,6 +44,16 @@ readonly class Pipeline
             Description::fromNative($record->description),
             RunBeforeEveryItem::fromNative(
                 $record->run_before_every_item,
+            ),
+            new PipelineItemCollection(
+                array_map(
+                    static function (
+                        PipelineItemRecord $record,
+                    ): PipelineItem {
+                        return PipelineItem::fromRecord($record);
+                    },
+                    $record->pipelineItems()->records,
+                ),
             ),
         );
     }

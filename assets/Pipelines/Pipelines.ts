@@ -3,6 +3,7 @@ import {
     ProjectsWithViewOptions,
     ProjectWithViewOptions,
 } from 'buzzingpixel-mission-control-frontend-core';
+import { PipelineItemsSchema } from './PipelineItems';
 
 export const PipelineSchema = z.object({
     id: z.string().min(1),
@@ -15,6 +16,8 @@ export const PipelineSchema = z.object({
     slug: z.string().min(1),
     description: z.string(),
     runBeforeEveryItem: z.string(),
+    pipelineItems: PipelineItemsSchema,
+    webhookTrigger: z.string(),
 });
 
 export type Pipeline = z.infer<typeof PipelineSchema>;

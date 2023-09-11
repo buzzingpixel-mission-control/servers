@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MissionControlServers\Servers\GetDetails;
+namespace MissionControlServers\Pipelines\GetDetails;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

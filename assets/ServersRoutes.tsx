@@ -7,6 +7,7 @@ import { default as ServerDetailsPage } from './Servers/Details/Page';
 import { default as AuthorizedKeysPage } from './Servers/AuthorizedKeys/Page';
 import { default as PipelinesPage } from './Pipelines/Page';
 import AddPipelinePage from './Pipelines/AddEdit/AddPipelinePage';
+import { default as PipelineDetailsPage } from './Pipelines/Details/Page';
 
 const ServersRoutes = () => (
     <>
@@ -20,6 +21,7 @@ const ServersRoutes = () => (
         <Route path="/pipelines" element={<PipelinesPage />} />
         <Route path="/pipelines/archived" element={<PipelinesPage isArchive />} />
         <Route path="/pipelines/add" element={<AddPipelinePage />} />
+        <Route path="/pipelines/:slug" element={<PipelineDetailsPage />} />
     </>
 );
 

@@ -13,6 +13,7 @@ var __assign = (this && this.__assign) || function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.transformPipelines = exports.transformPipeline = exports.PipelinesSchema = exports.PipelineSchema = void 0;
 var zod_1 = require("zod");
+var PipelineItems_1 = require("./PipelineItems");
 exports.PipelineSchema = zod_1.z.object({
     id: zod_1.z.string().min(1),
     projectId: zod_1.z.string().nullable(),
@@ -24,6 +25,8 @@ exports.PipelineSchema = zod_1.z.object({
     slug: zod_1.z.string().min(1),
     description: zod_1.z.string(),
     runBeforeEveryItem: zod_1.z.string(),
+    pipelineItems: PipelineItems_1.PipelineItemsSchema,
+    webhookTrigger: zod_1.z.string(),
 });
 exports.PipelinesSchema = zod_1.z.array(exports.PipelineSchema);
 var transformPipeline = function (pipeline, projects) {

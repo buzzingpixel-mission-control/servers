@@ -2,26 +2,33 @@
 
 declare(strict_types=1);
 
-namespace MissionControlServers\Servers\GetDetails;
+namespace MissionControlServers\Pipelines\GetDetails;
 
-use MissionControlServers\Servers\Server;
+use MissionControlServers\Pipelines\Pipeline;
+use MissionControlServers\Pipelines\PipelineOutputFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 readonly class GetDetailsResponderFactory
 {
+    public function __construct(
+        private PipelineOutputFactory $outputFactory,
+    ) {
+    }
+
     public function createResponder(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        Server|null $server,
+        Pipeline|null $pipeline,
     ): GetDetailsResponder {
-        if ($server === null) {
+        if ($pipeline === null) {
             return new GetDetailsResponderNotFound($request);
         }
 
         return new GetDetailsResponderFound(
-            $server,
+            $pipeline,
             $response,
+            $this->outputFactory,
         );
     }
 }

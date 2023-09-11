@@ -11,6 +11,32 @@ export declare const PipelineSchema: z.ZodObject<{
     slug: z.ZodString;
     description: z.ZodString;
     runBeforeEveryItem: z.ZodString;
+    pipelineItems: z.ZodArray<z.ZodObject<{
+        id: z.ZodString;
+        pipelineId: z.ZodString;
+        type: z.ZodString;
+        description: z.ZodString;
+        script: z.ZodString;
+        runOnServers: z.ZodArray<z.ZodString, "many">;
+        runAfterFail: z.ZodBoolean;
+    }, "strip", z.ZodTypeAny, {
+        id?: string;
+        pipelineId?: string;
+        type?: string;
+        description?: string;
+        script?: string;
+        runOnServers?: string[];
+        runAfterFail?: boolean;
+    }, {
+        id?: string;
+        pipelineId?: string;
+        type?: string;
+        description?: string;
+        script?: string;
+        runOnServers?: string[];
+        runAfterFail?: boolean;
+    }>, "many">;
+    webhookTrigger: z.ZodString;
 }, "strip", z.ZodTypeAny, {
     id?: string;
     projectId?: string;
@@ -22,6 +48,16 @@ export declare const PipelineSchema: z.ZodObject<{
     slug?: string;
     description?: string;
     runBeforeEveryItem?: string;
+    pipelineItems?: {
+        id?: string;
+        pipelineId?: string;
+        type?: string;
+        description?: string;
+        script?: string;
+        runOnServers?: string[];
+        runAfterFail?: boolean;
+    }[];
+    webhookTrigger?: string;
 }, {
     id?: string;
     projectId?: string;
@@ -33,6 +69,16 @@ export declare const PipelineSchema: z.ZodObject<{
     slug?: string;
     description?: string;
     runBeforeEveryItem?: string;
+    pipelineItems?: {
+        id?: string;
+        pipelineId?: string;
+        type?: string;
+        description?: string;
+        script?: string;
+        runOnServers?: string[];
+        runAfterFail?: boolean;
+    }[];
+    webhookTrigger?: string;
 }>;
 export type Pipeline = z.infer<typeof PipelineSchema>;
 export declare const PipelinesSchema: z.ZodArray<z.ZodObject<{
@@ -46,6 +92,32 @@ export declare const PipelinesSchema: z.ZodArray<z.ZodObject<{
     slug: z.ZodString;
     description: z.ZodString;
     runBeforeEveryItem: z.ZodString;
+    pipelineItems: z.ZodArray<z.ZodObject<{
+        id: z.ZodString;
+        pipelineId: z.ZodString;
+        type: z.ZodString;
+        description: z.ZodString;
+        script: z.ZodString;
+        runOnServers: z.ZodArray<z.ZodString, "many">;
+        runAfterFail: z.ZodBoolean;
+    }, "strip", z.ZodTypeAny, {
+        id?: string;
+        pipelineId?: string;
+        type?: string;
+        description?: string;
+        script?: string;
+        runOnServers?: string[];
+        runAfterFail?: boolean;
+    }, {
+        id?: string;
+        pipelineId?: string;
+        type?: string;
+        description?: string;
+        script?: string;
+        runOnServers?: string[];
+        runAfterFail?: boolean;
+    }>, "many">;
+    webhookTrigger: z.ZodString;
 }, "strip", z.ZodTypeAny, {
     id?: string;
     projectId?: string;
@@ -57,6 +129,16 @@ export declare const PipelinesSchema: z.ZodArray<z.ZodObject<{
     slug?: string;
     description?: string;
     runBeforeEveryItem?: string;
+    pipelineItems?: {
+        id?: string;
+        pipelineId?: string;
+        type?: string;
+        description?: string;
+        script?: string;
+        runOnServers?: string[];
+        runAfterFail?: boolean;
+    }[];
+    webhookTrigger?: string;
 }, {
     id?: string;
     projectId?: string;
@@ -68,6 +150,16 @@ export declare const PipelinesSchema: z.ZodArray<z.ZodObject<{
     slug?: string;
     description?: string;
     runBeforeEveryItem?: string;
+    pipelineItems?: {
+        id?: string;
+        pipelineId?: string;
+        type?: string;
+        description?: string;
+        script?: string;
+        runOnServers?: string[];
+        runAfterFail?: boolean;
+    }[];
+    webhookTrigger?: string;
 }>, "many">;
 export type Pipelines = z.infer<typeof PipelinesSchema>;
 export type PipelineWithViewOptions = Pipeline & {
@@ -88,4 +180,14 @@ export declare const transformPipelines: (pipelines: {
     slug?: string;
     description?: string;
     runBeforeEveryItem?: string;
+    pipelineItems?: {
+        id?: string;
+        pipelineId?: string;
+        type?: string;
+        description?: string;
+        script?: string;
+        runOnServers?: string[];
+        runAfterFail?: boolean;
+    }[];
+    webhookTrigger?: string;
 }[], projects?: ProjectsWithViewOptions) => PipelinesWithViewOptions;

@@ -14,6 +14,16 @@ export declare const useArchiveSelectedPipelinesMutation: (pipelines: {
     slug?: string;
     description?: string;
     runBeforeEveryItem?: string;
+    pipelineItems?: {
+        id?: string;
+        pipelineId?: string;
+        type?: string;
+        description?: string;
+        script?: string;
+        runOnServers?: string[];
+        runAfterFail?: boolean;
+    }[];
+    webhookTrigger?: string;
 }[], isArchive: boolean) => import("@tanstack/react-query/src/types").UseMutationResult<unknown, import("buzzingpixel-mission-control-frontend-core/dist/Api/ApiError").default, unknown>;
 export declare const useArchiveServerMutation: (pipelineId: string, isArchive: boolean, projectId?: string | undefined | null) => import("@tanstack/react-query/src/types").UseMutationResult<unknown, import("buzzingpixel-mission-control-frontend-core/dist/Api/ApiError").default, unknown>;
 export declare const useAddPipelineMutation: () => import("@tanstack/react-query/src/types").UseMutationResult<unknown, import("buzzingpixel-mission-control-frontend-core/dist/Api/ApiError").default, unknown>;

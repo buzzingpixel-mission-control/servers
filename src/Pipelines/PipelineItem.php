@@ -73,7 +73,7 @@ readonly class PipelineItem
             'description' => $this->description->toNative(),
             'script' => $this->script->toNative(),
             'runOnServers' => $this->runOnServers->asArray(),
-            'run_after_fail' => $this->runAfterFail->toNative(),
+            'runAfterFail' => $this->runAfterFail->toNative(),
         ];
     }
 }

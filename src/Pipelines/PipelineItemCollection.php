@@ -56,7 +56,7 @@ readonly class PipelineItemCollection
     {
         /** @phpstan-ignore-next-line */
         return $this->map(
-            static fn (Pipeline $e) => $e->asArray(),
+            static fn (PipelineItem $e) => $e->asArray(),
         );
     }
 
