@@ -6,7 +6,7 @@ declare const AddEditPipeline: {
         pageName: string;
         incomingValues?: AddEditValues | undefined;
         mutation: UseMutationResult;
-        onSaveSuccess: () => void;
+        onSaveSuccess: (jsonResponse: any) => void;
     }): React.JSX.Element;
     defaultProps: {
         incomingValues: any;

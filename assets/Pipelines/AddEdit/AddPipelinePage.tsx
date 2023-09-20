@@ -1,5 +1,9 @@
 import React from 'react';
-import { useBreadcrumbs, useHidePageTitle, usePageTitle } from 'buzzingpixel-mission-control-frontend-core';
+import {
+    useBreadcrumbs,
+    useHidePageTitle,
+    usePageTitle,
+} from 'buzzingpixel-mission-control-frontend-core';
 import { useNavigate } from 'react-router-dom';
 import AddEditPipeline from './AddEditPipeline';
 import { useAddPipelineMutation } from '../PipelineData';

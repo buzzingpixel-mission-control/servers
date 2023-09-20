@@ -23,7 +23,7 @@ use function assert;
 use function is_array;
 use function is_string;
 
-class PatchEditServerAction
+readonly class PatchEditServerAction
 {
     public static function registerRoute(ApplyRoutesEvent $event): void
     {
@@ -38,10 +38,8 @@ class PatchEditServerAction
     ) {
     }
 
-    public function __invoke(
-        ServerRequestInterface $request,
-        ResponseInterface $response,
-    ): ResponseInterface {
+    public function __invoke(ServerRequestInterface $request): ResponseInterface
+    {
         $slug = $request->getAttribute('slug');
         assert(is_string($slug));
 

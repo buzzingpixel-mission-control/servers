@@ -14,7 +14,7 @@ export declare const PipelineSchema: z.ZodObject<{
     pipelineItems: z.ZodArray<z.ZodObject<{
         id: z.ZodString;
         pipelineId: z.ZodString;
-        type: z.ZodString;
+        type: z.ZodEnum<["source", "code"]>;
         description: z.ZodString;
         script: z.ZodString;
         runOnServers: z.ZodArray<z.ZodString, "many">;
@@ -22,7 +22,7 @@ export declare const PipelineSchema: z.ZodObject<{
     }, "strip", z.ZodTypeAny, {
         id?: string;
         pipelineId?: string;
-        type?: string;
+        type?: "code" | "source";
         description?: string;
         script?: string;
         runOnServers?: string[];
@@ -30,7 +30,7 @@ export declare const PipelineSchema: z.ZodObject<{
     }, {
         id?: string;
         pipelineId?: string;
-        type?: string;
+        type?: "code" | "source";
         description?: string;
         script?: string;
         runOnServers?: string[];
@@ -51,7 +51,7 @@ export declare const PipelineSchema: z.ZodObject<{
     pipelineItems?: {
         id?: string;
         pipelineId?: string;
-        type?: string;
+        type?: "code" | "source";
         description?: string;
         script?: string;
         runOnServers?: string[];
@@ -72,7 +72,7 @@ export declare const PipelineSchema: z.ZodObject<{
     pipelineItems?: {
         id?: string;
         pipelineId?: string;
-        type?: string;
+        type?: "code" | "source";
         description?: string;
         script?: string;
         runOnServers?: string[];
@@ -95,7 +95,7 @@ export declare const PipelinesSchema: z.ZodArray<z.ZodObject<{
     pipelineItems: z.ZodArray<z.ZodObject<{
         id: z.ZodString;
         pipelineId: z.ZodString;
-        type: z.ZodString;
+        type: z.ZodEnum<["source", "code"]>;
         description: z.ZodString;
         script: z.ZodString;
         runOnServers: z.ZodArray<z.ZodString, "many">;
@@ -103,7 +103,7 @@ export declare const PipelinesSchema: z.ZodArray<z.ZodObject<{
     }, "strip", z.ZodTypeAny, {
         id?: string;
         pipelineId?: string;
-        type?: string;
+        type?: "code" | "source";
         description?: string;
         script?: string;
         runOnServers?: string[];
@@ -111,7 +111,7 @@ export declare const PipelinesSchema: z.ZodArray<z.ZodObject<{
     }, {
         id?: string;
         pipelineId?: string;
-        type?: string;
+        type?: "code" | "source";
         description?: string;
         script?: string;
         runOnServers?: string[];
@@ -132,7 +132,7 @@ export declare const PipelinesSchema: z.ZodArray<z.ZodObject<{
     pipelineItems?: {
         id?: string;
         pipelineId?: string;
-        type?: string;
+        type?: "code" | "source";
         description?: string;
         script?: string;
         runOnServers?: string[];
@@ -153,7 +153,7 @@ export declare const PipelinesSchema: z.ZodArray<z.ZodObject<{
     pipelineItems?: {
         id?: string;
         pipelineId?: string;
-        type?: string;
+        type?: "code" | "source";
         description?: string;
         script?: string;
         runOnServers?: string[];
@@ -164,6 +164,7 @@ export declare const PipelinesSchema: z.ZodArray<z.ZodObject<{
 export type Pipelines = z.infer<typeof PipelinesSchema>;
 export type PipelineWithViewOptions = Pipeline & {
     href: string;
+    editHref: string;
     activeOrArchivedText: string;
     project?: ProjectWithViewOptions;
 };
@@ -183,7 +184,7 @@ export declare const transformPipelines: (pipelines: {
     pipelineItems?: {
         id?: string;
         pipelineId?: string;
-        type?: string;
+        type?: "code" | "source";
         description?: string;
         script?: string;
         runOnServers?: string[];

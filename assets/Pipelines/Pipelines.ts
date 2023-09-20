@@ -28,6 +28,7 @@ export type Pipelines = z.infer<typeof PipelinesSchema>;
 
 export type PipelineWithViewOptions = Pipeline & {
     href: string;
+    editHref: string;
     activeOrArchivedText: string;
     project?: ProjectWithViewOptions;
 };
@@ -53,9 +54,12 @@ export const transformPipeline = (
         }
     }
 
+    const href = `/pipelines/${pipeline.slug}`;
+
     return ({
         ...pipeline,
-        href: `/pipelines/${pipeline.slug}`,
+        href,
+        editHref: `${href}/edit`,
         activeOrArchivedText: pipeline.isActive ? 'Active' : 'Archive',
         project,
     });

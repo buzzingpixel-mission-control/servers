@@ -5,44 +5,86 @@ declare(strict_types=1);
 namespace MissionControlServers\Pipelines\Persistence;
 
 use Assert\Assert;
+use Cocur\Slugify\Slugify;
 use MissionControlBackend\ActionResult;
 use MissionControlBackend\Persistence\MissionControlPdo;
 use Throwable;
 
 use function count;
-use function implode;
 
 readonly class SavePipeline
 {
     public function __construct(
+        private Slugify $slugify,
         private FindPipelines $find,
         private MissionControlPdo $pdo,
+        private AddNewPipelineItems $addNewPipelineItems,
+        private DeleteOrphanedItems $deleteOrphanedItems,
+        private SavePipelineUpdateMainRecord $updateMainRecord,
+        private SavePipelineDetermineItemResults $determineItemIds,
+        private UpdateExistingPipelineItems $updateExistingPipelineItems,
     ) {
     }
 
     public function save(PipelineRecord $record): ActionResult
     {
+        $record->slug = $this->slugify->slugify($record->title);
+
         $validationResult = $this->validateRecord($record);
 
         if (! $validationResult->success) {
             return $validationResult;
         }
 
-        $statement = $this->pdo->prepare(implode(' ', [
-            'UPDATE',
-            $record->tableName(),
-            'SET',
-            $record->columnsAsUpdateSetPlaceholders(),
-            'WHERE id = :id',
-        ]));
+        $itemResults = $this->determineItemIds->determine($record);
 
-        if (! $statement->execute($record->asParametersArray())) {
-            return new ActionResult(
-                false,
-                $this->pdo->errorInfo(),
-                $this->pdo->errorCode(),
-            );
+        $this->pdo->beginTransaction();
+
+        $result = $this->updateMainRecord->update(
+            $this->pdo,
+            $record,
+        );
+
+        if (! $result->success) {
+            $this->pdo->rollBack();
+
+            return $result;
         }
+
+        $result = $this->deleteOrphanedItems->delete(
+            $this->pdo,
+            $itemResults->orphanedItemIds,
+        );
+
+        if (! $result->success) {
+            $this->pdo->rollBack();
+
+            return $result;
+        }
+
+        $result = $this->addNewPipelineItems->add(
+            $this->pdo,
+            $itemResults->newItems,
+        );
+
+        if (! $result->success) {
+            $this->pdo->rollBack();
+
+            return $result;
+        }
+
+        $result = $this->updateExistingPipelineItems->update(
+            $this->pdo,
+            $itemResults->existingItems,
+        );
+
+        if (! $result->success) {
+            $this->pdo->rollBack();
+
+            return $result;
+        }
+
+        $this->pdo->commit();
 
         return new ActionResult();
     }

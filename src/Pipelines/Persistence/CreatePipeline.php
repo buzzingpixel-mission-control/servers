@@ -22,6 +22,7 @@ readonly class CreatePipeline
         private Slugify $slugify,
         private FindPipelines $find,
         private MissionControlPdo $pdo,
+        private AddNewPipelineItems $addNewPipelineItems,
         private UuidFactoryWithOrderedTimeCodec $uuidFactory,
     ) {
     }
@@ -41,9 +42,11 @@ readonly class CreatePipeline
         $record->secret_id = $this->uuidFactory->uuid4()->toString();
 
         $record->pipelineItems()->map(
-            static function (PipelineItemRecord $itemRecord) use (
+            function (PipelineItemRecord $itemRecord) use (
                 $record,
             ): void {
+                $itemRecord->id = $this->uuidFactory->uuid4()->toString();
+
                 $itemRecord->pipeline_id = $record->id;
             },
         );
@@ -68,29 +71,15 @@ readonly class CreatePipeline
             );
         }
 
-        foreach ($record->pipelineItems()->records as $itemRecord) {
-            $statement = $this->pdo->prepare(implode(
-                ' ',
-                [
-                    'INSERT INTO',
-                    $itemRecord->tableName(),
-                    $itemRecord->columnsAsInsertIntoString(),
-                    'VALUES',
-                    $itemRecord->columnsAsValuePlaceholders(),
-                ],
-            ));
+        $result = $this->addNewPipelineItems->add(
+            $this->pdo,
+            $record->pipelineItems(),
+        );
 
-            if (
-                ! $statement->execute($itemRecord->asParametersArray())
-            ) {
-                $this->pdo->rollBack();
+        if (! $result->success) {
+            $this->pdo->rollBack();
 
-                return new ActionResult(
-                    false,
-                    $this->pdo->errorInfo(),
-                    $this->pdo->errorCode(),
-                );
-            }
+            return $result;
         }
 
         $this->pdo->commit();

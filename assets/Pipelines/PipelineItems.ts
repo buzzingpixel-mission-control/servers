@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const PipelineItemSchema = z.object({
     id: z.string().min(1),
     pipelineId: z.string().min(1),
-    type: z.string(),
+    type: z.enum(['source', 'code']),
     description: z.string(),
     script: z.string(),
     runOnServers: z.array(z.string()),

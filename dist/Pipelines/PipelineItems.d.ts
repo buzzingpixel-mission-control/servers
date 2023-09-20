@@ -2,7 +2,7 @@ import { z } from 'zod';
 export declare const PipelineItemSchema: z.ZodObject<{
     id: z.ZodString;
     pipelineId: z.ZodString;
-    type: z.ZodString;
+    type: z.ZodEnum<["source", "code"]>;
     description: z.ZodString;
     script: z.ZodString;
     runOnServers: z.ZodArray<z.ZodString, "many">;
@@ -10,7 +10,7 @@ export declare const PipelineItemSchema: z.ZodObject<{
 }, "strip", z.ZodTypeAny, {
     id?: string;
     pipelineId?: string;
-    type?: string;
+    type?: "code" | "source";
     description?: string;
     script?: string;
     runOnServers?: string[];
@@ -18,7 +18,7 @@ export declare const PipelineItemSchema: z.ZodObject<{
 }, {
     id?: string;
     pipelineId?: string;
-    type?: string;
+    type?: "code" | "source";
     description?: string;
     script?: string;
     runOnServers?: string[];
@@ -28,7 +28,7 @@ export type PipelineItem = z.infer<typeof PipelineItemSchema>;
 export declare const PipelineItemsSchema: z.ZodArray<z.ZodObject<{
     id: z.ZodString;
     pipelineId: z.ZodString;
-    type: z.ZodString;
+    type: z.ZodEnum<["source", "code"]>;
     description: z.ZodString;
     script: z.ZodString;
     runOnServers: z.ZodArray<z.ZodString, "many">;
@@ -36,7 +36,7 @@ export declare const PipelineItemsSchema: z.ZodArray<z.ZodObject<{
 }, "strip", z.ZodTypeAny, {
     id?: string;
     pipelineId?: string;
-    type?: string;
+    type?: "code" | "source";
     description?: string;
     script?: string;
     runOnServers?: string[];
@@ -44,7 +44,7 @@ export declare const PipelineItemsSchema: z.ZodArray<z.ZodObject<{
 }, {
     id?: string;
     pipelineId?: string;
-    type?: string;
+    type?: "code" | "source";
     description?: string;
     script?: string;
     runOnServers?: string[];

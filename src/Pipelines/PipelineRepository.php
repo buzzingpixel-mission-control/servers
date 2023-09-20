@@ -32,13 +32,7 @@ readonly class PipelineRepository
     public function save(Pipeline $entity): ActionResult
     {
         return $this->save->save(
-            PipelineRecord::fromEntity(
-                $entity->withSlugFromString(
-                    $this->slugify->slugify(
-                        $entity->title->toNative(),
-                    ),
-                ),
-            ),
+            PipelineRecord::fromEntity($entity),
         );
     }
 

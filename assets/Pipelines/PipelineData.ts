@@ -7,6 +7,7 @@ import {
 import {
     Pipelines, PipelinesSchema, PipelinesWithViewOptions, transformPipelines,
 } from './Pipelines';
+import { AddEditValues } from './AddEdit/AddEditValues';
 
 export const usePipelineData = (archive = false): {
     status: 'loading' | 'error' | 'success';
@@ -112,5 +113,20 @@ export const useAddPipelineMutation = () => useApiMutation({
         // @ts-ignore
         payload: data,
         method: RequestMethod.POST,
+    }),
+});
+
+export const useEditPipelineMutation = (
+    slug: string,
+) => useApiMutation<unknown, AddEditValues>({
+    invalidateQueryKeysOnSuccess: [
+        `/pipelines/${slug}`,
+        '/pipelines',
+        '/pipelines/archived',
+    ],
+    prepareApiParams: (data) => ({
+        uri: `/pipelines/${slug}`,
+        payload: data,
+        method: RequestMethod.PATCH,
     }),
 });

@@ -43,8 +43,6 @@ class PipelineRecord extends Record
         foreach ($entity->pipelineItems->entities as $index => $item) {
             $itemRecord = new PipelineItemRecord();
 
-            $itemRecord->id = $item->pipelineId->toNative();
-
             $itemRecord->item_order = $index;
 
             $itemRecord->type = $item->type->toNative();
@@ -90,6 +88,34 @@ class PipelineRecord extends Record
         $record->description = $entity->description->toNative();
 
         $record->run_before_every_item = $entity->runBeforeEveryItem->toNative();
+
+        $pipelineItemRecords = [];
+
+        foreach ($entity->pipelineItems->entities as $index => $item) {
+            $itemRecord = new PipelineItemRecord();
+
+            $itemRecord->id = $item->id->toNative();
+
+            $itemRecord->pipeline_id = $item->pipelineId->toNative();
+
+            $itemRecord->item_order = $index;
+
+            $itemRecord->type = $item->type->toNative();
+
+            $itemRecord->description = $item->description->toNative();
+
+            $itemRecord->script = $item->script->toNative();
+
+            $itemRecord->run_on_servers = $item->runOnServers->asJson();
+
+            $itemRecord->run_after_fail = $item->runAfterFail->toNative();
+
+            $pipelineItemRecords[] = $itemRecord;
+        }
+
+        $record->setPipelineItems(new PipelineItemRecordCollection(
+            $pipelineItemRecords,
+        ));
 
         return $record;
     }

@@ -96,6 +96,11 @@ readonly class Pipeline
         return $this->with(slug: Slug::fromNative($slug));
     }
 
+    public function withResetPipelineItems(): static
+    {
+        return $this->with(pipelineItems: new PipelineItemCollection());
+    }
+
     public function withPipelineItems(PipelineItemCollection $items): static
     {
         return $this->with(pipelineItems: $items);
@@ -106,5 +111,45 @@ readonly class Pipeline
         return $this->withPipelineItems(
             $this->pipelineItems->withPipeline($item),
         );
+    }
+
+    public function withTitleFromNative(string $value): static
+    {
+        return $this->with(title: Title::fromNative($value));
+    }
+
+    public function withDescriptionFromNative(string $value): static
+    {
+        return $this->with(description: Description::fromNative(
+            $value,
+        ));
+    }
+
+    public function withProjectIdFromNative(string|null $value): static
+    {
+        return $this->with(projectId: ProjectId::fromNative($value));
+    }
+
+    public function withEnableWebhookFromNative(bool $value): static
+    {
+        return $this->with(enableWebhook: EnableWebhook::fromNative(
+            $value,
+        ));
+    }
+
+    public function withWebhookCheckForBranchFromNative(string $value): static
+    {
+        return $this->with(
+            webhookCheckForBranch: WebhookCheckForBranch::fromNative(
+                $value,
+            ),
+        );
+    }
+
+    public function withRunBeforeEveryItemFromNative(string $value): static
+    {
+        return $this->with(runBeforeEveryItem: RunBeforeEveryItem::fromNative(
+            $value,
+        ));
     }
 }

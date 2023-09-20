@@ -5,7 +5,7 @@ var zod_1 = require("zod");
 exports.PipelineItemSchema = zod_1.z.object({
     id: zod_1.z.string().min(1),
     pipelineId: zod_1.z.string().min(1),
-    type: zod_1.z.string(),
+    type: zod_1.z.enum(['source', 'code']),
     description: zod_1.z.string(),
     script: zod_1.z.string(),
     runOnServers: zod_1.z.array(zod_1.z.string()),

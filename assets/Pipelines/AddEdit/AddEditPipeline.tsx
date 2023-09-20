@@ -23,7 +23,8 @@ const AddEditPipeline = (
         pageName: string;
         incomingValues?: AddEditValues | undefined;
         mutation: UseMutationResult;
-        onSaveSuccess: () => void;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onSaveSuccess: (jsonResponse: any) => void;
     },
 ) => {
     incomingValues = incomingValues ?? {

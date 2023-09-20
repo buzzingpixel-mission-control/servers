@@ -39,7 +39,8 @@ var transformPipeline = function (pipeline, projects) {
             project = filteredProjects[0];
         }
     }
-    return (__assign(__assign({}, pipeline), { href: "/pipelines/".concat(pipeline.slug), activeOrArchivedText: pipeline.isActive ? 'Active' : 'Archive', project: project }));
+    var href = "/pipelines/".concat(pipeline.slug);
+    return (__assign(__assign({}, pipeline), { href: href, editHref: "".concat(href, "/edit"), activeOrArchivedText: pipeline.isActive ? 'Active' : 'Archive', project: project }));
 };
 exports.transformPipeline = transformPipeline;
 var transformPipelines = function (pipelines, projects) { return pipelines.map(function (pipeline) { return (0, exports.transformPipeline)(pipeline, projects); }); };
