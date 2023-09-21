@@ -46,11 +46,11 @@ class PipelineJobsTable
                 PostgresAdapter::PHINX_TYPE_FLOAT,
             )
             ->addColumn(
-                'job_added_at',
+                'added_at',
                 PostgresAdapter::PHINX_TYPE_DATETIME,
             )
             ->addColumn(
-                'job_finished_at',
+                'finished_at',
                 PostgresAdapter::PHINX_TYPE_DATETIME,
             )
             ->addIndex(['pipeline_id'])
