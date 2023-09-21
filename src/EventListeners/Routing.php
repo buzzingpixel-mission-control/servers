@@ -10,6 +10,7 @@ use MissionControlServers\Pipelines\AddEdit\PostAddPipelineAction;
 use MissionControlServers\Pipelines\GetDetails\GetDetailsBySlugAction;
 use MissionControlServers\Pipelines\GetPipelinesListAction;
 use MissionControlServers\Pipelines\GetPipelinesListArchivedAction;
+use MissionControlServers\Pipelines\Jobs\PostRunPipelineAction;
 use MissionControlServers\Servers\AddEdit\PatchArchiveServerAction;
 use MissionControlServers\Servers\AddEdit\PatchEditServerAction;
 use MissionControlServers\Servers\AddEdit\PatchUnArchiveServerAction;
@@ -71,5 +72,6 @@ class Routing
         PostAddPipelineAction::registerRoute($event);
         GetDetailsBySlugAction::registerRoute($event);
         PatchEditPipelineAction::registerRoute($event);
+        PostRunPipelineAction::registerRoute($event);
     }
 }
