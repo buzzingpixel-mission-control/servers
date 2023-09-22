@@ -36,4 +36,31 @@ class PipelineJobRecord extends Record
     public string $added_at = '';
 
     public string $finished_at = '';
+
+    private PipelineJobItemRecordCollection $pipelineJobItems;
+
+    public function __construct()
+    {
+        $this->pipelineJobItems = new PipelineJobItemRecordCollection();
+    }
+
+    public function pipelineJobItems(): PipelineJobItemRecordCollection
+    {
+        return $this->pipelineJobItems;
+    }
+
+    public function setPipelineJobItems(
+        PipelineJobItemRecordCollection $items,
+    ): self {
+        $this->pipelineJobItems = $items;
+
+        return $this;
+    }
+
+    public function addPipelineJobItem(PipelineJobItemRecord $item): self
+    {
+        $this->pipelineJobItems->records[] = $item;
+
+        return $this;
+    }
 }

@@ -71,7 +71,7 @@ readonly class FindPipelineParameters extends FetchParameters
         $notProjectIds = $this->notProjectIds ?? new StringCollection();
 
         return $this->with(
-            projectIds: $notProjectIds->withString($notProjectId),
+            notProjectIds: $notProjectIds->withString($notProjectId),
         );
     }
 

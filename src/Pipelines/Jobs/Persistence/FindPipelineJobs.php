@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MissionControlServers\Pipelines\Persistence;
+namespace MissionControlServers\Pipelines\Jobs\Persistence;
 
 use MissionControlBackend\Persistence\MissionControlPdo;
 use PDO;
@@ -14,16 +14,16 @@ use function array_values;
 use function count;
 use function implode;
 
-readonly class FindPipelines
+readonly class FindPipelineJobs
 {
     public function __construct(private MissionControlPdo $pdo)
     {
     }
 
     public function findOne(
-        FindPipelineParameters|null $parameters = null,
-    ): PipelineRecord {
-        $parameters ??= new FindPipelineParameters();
+        FindPipelineJobParameters|null $parameters = null,
+    ): PipelineJobRecord {
+        $parameters ??= new FindPipelineJobParameters();
 
         $parameters = $parameters->with(limit: 1);
 
@@ -31,9 +31,9 @@ readonly class FindPipelines
     }
 
     public function findOneOrNull(
-        FindPipelineParameters|null $parameters = null,
-    ): PipelineRecord|null {
-        $parameters ??= new FindPipelineParameters();
+        FindPipelineJobParameters|null $parameters = null,
+    ): PipelineJobRecord|null {
+        $parameters ??= new FindPipelineJobParameters();
 
         $parameters = $parameters->with(limit: 1);
 
@@ -41,10 +41,10 @@ readonly class FindPipelines
     }
 
     public function findAll(
-        FindPipelineParameters|null $parameters = null,
-    ): PipelineRecordCollection {
+        FindPipelineJobParameters|null $parameters = null,
+    ): PipelineJobRecordCollection {
         try {
-            $parameters ??= new FindPipelineParameters();
+            $parameters ??= new FindPipelineJobParameters();
 
             $customQuery = $parameters->buildQuery();
 
@@ -54,26 +54,26 @@ readonly class FindPipelines
 
             $results = $statement->fetchAll(
                 PDO::FETCH_CLASS,
-                PipelineRecord::class,
+                PipelineJobRecord::class,
             );
 
             $ids = array_map(
-                static fn (PipelineRecord $r) => $r->id,
+                static fn (PipelineJobRecord $r) => $r->id,
                 $results,
             );
 
             $itemRecords = $this->getItemRecords($ids);
 
-            $records = new PipelineRecordCollection(
+            $records = new PipelineJobRecordCollection(
                 $results !== false ? $results : [],
             );
 
             $records->map(
-                static function (PipelineRecord $record) use (
+                static function (PipelineJobRecord $record) use (
                     $itemRecords,
                 ): void {
-                    $record->setPipelineItems(
-                        $itemRecords->filterByPipelineId(
+                    $record->setPipelineJobItems(
+                        $itemRecords->filterByPipelineJobId(
                             $record->id,
                         ),
                     );
@@ -84,15 +84,15 @@ readonly class FindPipelines
         } catch (PDOException) {
             // Annoyingly, an invalidly formatted UUID will cause a PDO
             // exception
-            return new PipelineRecordCollection();
+            return new PipelineJobRecordCollection();
         }
     }
 
     /** @param string[] $ids */
-    private function getItemRecords(array $ids): PipelineItemRecordCollection
+    private function getItemRecords(array $ids): PipelineJobItemRecordCollection
     {
         if (count($ids) < 1) {
-            return new PipelineItemRecordCollection();
+            return new PipelineJobItemRecordCollection();
         }
 
         try {
@@ -111,8 +111,8 @@ readonly class FindPipelines
                 ' ',
                 [
                     'SELECT * FROM',
-                    PipelineItemRecord::getTableName(),
-                    'WHERE pipeline_id IN (' . $in . ')',
+                    PipelineJobItemRecord::getTableName(),
+                    'WHERE pipeline_job_id IN (' . $in . ')',
                 ],
             ));
 
@@ -120,14 +120,14 @@ readonly class FindPipelines
 
             $results = $statement->fetchAll(
                 PDO::FETCH_CLASS,
-                PipelineItemRecord::class,
+                PipelineJobItemRecord::class,
             );
 
-            return new PipelineItemRecordCollection(
+            return new PipelineJobItemRecordCollection(
                 $results !== false ? $results : [],
             );
         } catch (PDOException) {
-            return new PipelineItemRecordCollection();
+            return new PipelineJobItemRecordCollection();
         }
     }
 }

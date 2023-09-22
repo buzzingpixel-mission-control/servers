@@ -6,11 +6,14 @@ namespace MissionControlServers\Pipelines\Jobs\Persistence;
 
 use RuntimeException;
 
+use function array_filter;
 use function array_map;
 use function array_values;
 use function count;
 
-readonly class PipelineJobItemRecordCollection
+// phpcs:disable Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
+
+class PipelineJobItemRecordCollection
 {
     /** @var PipelineJobItemRecord[] */
     public array $records;
@@ -54,5 +57,24 @@ readonly class PipelineJobItemRecordCollection
     public function count(): int
     {
         return count($this->records);
+    }
+
+    public function filter(callable $callback): self
+    {
+        return new self(array_filter(
+            $this->records,
+            $callback,
+        ));
+    }
+
+    public function filterByPipelineJobId(string $id): self
+    {
+        return $this->filter(
+            static function (PipelineJobItemRecord $record) use (
+                $id,
+            ): bool {
+                return $record->pipeline_job_id === $id;
+            },
+        );
     }
 }
