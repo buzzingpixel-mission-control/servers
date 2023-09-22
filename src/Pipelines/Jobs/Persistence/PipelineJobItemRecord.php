@@ -29,11 +29,11 @@ class PipelineJobItemRecord extends Record
 
     public string $pipeline_item_id = '';
 
-    public int $order = 0;
+    public int $item_order = 0;
 
     public bool $has_failed = false;
 
     public string $log_content = '';
 
-    public string $finished_at = '';
+    public string|null $finished_at = null;
 }

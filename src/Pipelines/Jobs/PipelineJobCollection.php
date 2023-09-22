@@ -2,42 +2,39 @@
 
 declare(strict_types=1);
 
-namespace MissionControlServers\Pipelines;
+namespace MissionControlServers\Pipelines\Jobs;
 
 use RuntimeException;
-use Spatie\Cloneable\Cloneable;
 
 use function array_map;
 use function array_values;
 
-readonly class PipelineItemCollection
+class PipelineJobCollection
 {
-    use Cloneable;
-
-    /** @var PipelineItem[] */
+    /** @var PipelineJob[] */
     public array $entities;
 
-    /** @param PipelineItem[] $entities */
+    /** @param PipelineJob[] $entities */
     public function __construct(array $entities = [])
     {
         $this->entities = array_values(array_map(
-            static fn (PipelineItem $e) => $e,
+            static fn (PipelineJob $e) => $e,
             $entities,
         ));
     }
 
-    public function first(): PipelineItem
+    public function first(): PipelineJob
     {
         $entity = $this->firstOrNull();
 
         if ($entity === null) {
-            throw new RuntimeException('No PipelineItem found');
+            throw new RuntimeException('No PipelineJob found');
         }
 
         return $entity;
     }
 
-    public function firstOrNull(): PipelineItem|null
+    public function firstOrNull(): PipelineJob|null
     {
         return $this->entities[0] ?? null;
     }
@@ -56,16 +53,7 @@ readonly class PipelineItemCollection
     {
         /** @phpstan-ignore-next-line */
         return $this->map(
-            static fn (PipelineItem $e) => $e->asArray(),
+            static fn (PipelineJob $e) => $e->asArray(),
         );
-    }
-
-    public function withPipelineItem(PipelineItem $pipeline): static
-    {
-        $entities = $this->entities;
-
-        $entities[] = $pipeline;
-
-        return $this->with(entities: $entities);
     }
 }

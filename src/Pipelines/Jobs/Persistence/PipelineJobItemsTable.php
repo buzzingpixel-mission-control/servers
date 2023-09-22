@@ -39,7 +39,7 @@ class PipelineJobItemsTable
                 PostgresAdapter::PHINX_TYPE_UUID,
             )
             ->addColumn(
-                'order',
+                'item_order',
                 AdapterInterface::PHINX_TYPE_TINY_INTEGER,
                 ['signed' => false],
             )
@@ -54,6 +54,7 @@ class PipelineJobItemsTable
             ->addColumn(
                 'finished_at',
                 PostgresAdapter::PHINX_TYPE_DATETIME,
+                ['null' => true],
             )
             ->addIndex(['pipeline_id'])
             ->addIndex(['pipeline_job_id'])

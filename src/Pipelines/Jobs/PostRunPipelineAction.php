@@ -18,7 +18,7 @@ readonly class PostRunPipelineAction
 {
     public static function registerRoute(ApplyRoutesEvent $event): void
     {
-        $event->get('/pipelines/{slug}/run', self::class)
+        $event->post('/pipelines/{slug}/run', self::class)
             ->add(ResourceServerMiddlewareWrapper::class);
     }
 

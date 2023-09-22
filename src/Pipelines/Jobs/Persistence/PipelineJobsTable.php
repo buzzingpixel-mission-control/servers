@@ -52,6 +52,7 @@ class PipelineJobsTable
             ->addColumn(
                 'finished_at',
                 PostgresAdapter::PHINX_TYPE_DATETIME,
+                ['null' => true],
             )
             ->addIndex(['pipeline_id'])
             ->addIndex(['has_started'])

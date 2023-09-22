@@ -109,7 +109,7 @@ readonly class Pipeline
     public function withPipelineItem(PipelineItem $item): static
     {
         return $this->withPipelineItems(
-            $this->pipelineItems->withPipeline($item),
+            $this->pipelineItems->withPipelineItem($item),
         );
     }
 

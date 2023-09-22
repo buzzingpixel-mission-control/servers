@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace MissionControlServers\Pipelines;
 
-use Cocur\Slugify\Slugify;
 use MissionControlBackend\ActionResult;
 use MissionControlServers\Pipelines\Persistence\CreatePipeline;
 use MissionControlServers\Pipelines\Persistence\FindPipelineParameters;
@@ -15,7 +14,6 @@ use MissionControlServers\Pipelines\Persistence\SavePipeline;
 readonly class PipelineRepository
 {
     public function __construct(
-        private Slugify $slugify,
         private SavePipeline $save,
         private FindPipelines $find,
         private CreatePipeline $create,
