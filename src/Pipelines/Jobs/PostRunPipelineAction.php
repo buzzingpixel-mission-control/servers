@@ -20,6 +20,9 @@ readonly class PostRunPipelineAction
     {
         $event->post('/pipelines/{slug}/run', self::class)
             ->add(ResourceServerMiddlewareWrapper::class);
+
+        // TODO: remove
+        $event->get('/pipelines/{slug}/run', self::class);
     }
 
     public function __construct(
