@@ -13,14 +13,22 @@ use RuntimeException;
 
 use function implode;
 
-readonly class ConnectionFactory
+class ConnectionFactory
 {
-    public function __construct(private SshKeyRepository $sshKeyRepository)
-    {
+    /** @var SSH2[] $cachedConnections */
+    private array $cachedConnections = [];
+
+    public function __construct(
+        private readonly SshKeyRepository $sshKeyRepository,
+    ) {
     }
 
     public function createLoggedInConnection(Server $server): SSH2
     {
+        if (isset($this->cachedConnections[$server->id->toNative()])) {
+            return $this->cachedConnections[$server->id->toNative()];
+        }
+
         $sshKey = null;
 
         if (! $server->sshKeyId->isNull()) {
@@ -59,11 +67,16 @@ readonly class ConnectionFactory
         }
 
         if (! $connected) {
-            throw new RuntimeException(implode(' ', [
-                'Unable to connect to server',
-                $server->title->toNative(),
-            ]));
+            throw new RuntimeException(implode(
+                ' ',
+                [
+                    'Unable to connect to server',
+                    $server->title->toNative(),
+                ],
+            ));
         }
+
+        $this->cachedConnections[$server->id->toNative()] = $connection;
 
         return $connection;
     }

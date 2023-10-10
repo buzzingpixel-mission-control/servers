@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace MissionControlServers\Pipelines\Jobs;
 
+use DateTimeImmutable;
 use MissionControlServers\Pipelines\Jobs\Persistence\PipelineJobItemRecord;
 use MissionControlServers\Pipelines\Jobs\ValueObjects\FinishedAt;
 use MissionControlServers\Pipelines\Jobs\ValueObjects\HasFailed;
@@ -56,6 +57,28 @@ class PipelineJobItem
         public LogContent $logContent,
         public FinishedAt|NullValue $finishedAt,
     ) {
+    }
+
+    public function isFinished(): bool
+    {
+        return ! $this->finishedAt->isNull();
+    }
+
+    public function withHasFailed(bool $hasFailed): self
+    {
+        return $this->with(hasFailed: HasFailed::fromNative($hasFailed));
+    }
+
+    public function withLogContent(string $logContent): self
+    {
+        return $this->with(logContent: LogContent::fromNative(
+            $logContent,
+        ));
+    }
+
+    public function withFinishedAt(DateTimeImmutable $dateTime): self
+    {
+        return $this->with(finishedAt: new FinishedAt($dateTime));
     }
 
     /** @return array<array-key, scalar|array<array-key, string>|null> */

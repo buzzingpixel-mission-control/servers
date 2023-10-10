@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace MissionControlServers\Pipelines\Jobs\Persistence;
 
 use MissionControlBackend\Persistence\Record;
+use MissionControlServers\Pipelines\Jobs\PipelineJob;
 
 // phpcs:disable Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
 
@@ -18,6 +19,29 @@ class PipelineJobRecord extends Record
     public function tableName(): string
     {
         return PipelineJobsTable::TABLE_NAME;
+    }
+
+    public static function fromEntity(PipelineJob $entity): self
+    {
+        $record = new self();
+
+        $record->id = $entity->id->toNative();
+
+        $record->pipeline_id = $entity->pipelineId->toNative();
+
+        $record->has_failed = $entity->hasStarted->toNative();
+
+        $record->is_finished = $entity->isFinished->toNative();
+
+        $record->has_failed = $entity->hasFailed->toNative();
+
+        $record->percent_complete = $entity->percentComplete->toNative();
+
+        $record->added_at = $entity->addedAt->toNative();
+
+        $record->finished_at = $entity->finishedAt->toNative();
+
+        return $record;
     }
 
     /** Primary key */

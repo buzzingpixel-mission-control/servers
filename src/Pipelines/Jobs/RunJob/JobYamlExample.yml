@@ -1,0 +1,17 @@
+runBeforeEveryItem: |
+  DATE_STAMP={{time 'YmdHis'}};
+
+pipelineItems:
+  - description: "Yaml Item 1"
+    script: |
+      tmp=YamlItem1;
+      echo ${DATE_STAMP};
+      echo ${tmp};
+  - description: "Yaml Item 2"
+    script: |
+      tmp=YamlItem2;
+      echo ${DATE_STAMP};
+      echo ${tmp};
+    runOnServers:
+      - buzzingpixel-do-ee-docker-demo
+      - local-shell

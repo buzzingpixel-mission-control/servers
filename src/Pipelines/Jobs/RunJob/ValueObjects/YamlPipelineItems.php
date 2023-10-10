@@ -2,23 +2,22 @@
 
 declare(strict_types=1);
 
-namespace MissionControlServers\Pipelines\ValueObjects;
+namespace MissionControlServers\Pipelines\Jobs\RunJob\ValueObjects;
 
 use function array_map;
 use function array_values;
 use function count;
-use function json_encode;
 
-class RunOnServers
+class YamlPipelineItems
 {
-    /** @var ServerId[] */
+    /** @var YamlPipelineItem[] */
     public array $entities;
 
-    /** @param ServerId[] $entities */
+    /** @param YamlPipelineItem[] $entities */
     public function __construct(array $entities = [])
     {
         $this->entities = array_values(array_map(
-            static fn (ServerId $e) => $e,
+            static fn (YamlPipelineItem $e) => $e,
             $entities,
         ));
     }
@@ -30,20 +29,6 @@ class RunOnServers
             $callback,
             $this->entities,
         ));
-    }
-
-    /** @return array<array-key, string> */
-    public function asArray(): array
-    {
-        /** @phpstan-ignore-next-line */
-        return $this->map(
-            static fn (ServerId $e) => $e->toNative(),
-        );
-    }
-
-    public function asJson(): string
-    {
-        return (string) json_encode($this->asArray());
     }
 
     public function count(): int

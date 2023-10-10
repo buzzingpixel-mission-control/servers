@@ -7,6 +7,7 @@ namespace MissionControlServers\Pipelines;
 use RuntimeException;
 use Spatie\Cloneable\Cloneable;
 
+use function array_filter;
 use function array_map;
 use function array_values;
 
@@ -23,6 +24,14 @@ readonly class PipelineItemCollection
         $this->entities = array_values(array_map(
             static fn (PipelineItem $e) => $e,
             $entities,
+        ));
+    }
+
+    public function filter(callable $callback): self
+    {
+        return new self(array_filter(
+            $this->entities,
+            $callback,
         ));
     }
 

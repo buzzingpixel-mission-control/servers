@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace MissionControlServers\Servers;
 
+use MissionControlServers\Pipelines\Jobs\Specialized\SpecialCases;
 use MissionControlServers\Servers\Persistence\ServerRecord;
 use MissionControlServers\Servers\ValueObjects\Address;
 use MissionControlServers\Servers\ValueObjects\Id;
@@ -50,6 +51,11 @@ readonly class Server
         public SshPort $sshPort,
         public SshKeyId $sshKeyId,
     ) {
+    }
+
+    public function isSpecialCase(): bool
+    {
+        return $this->id->toNative() === SpecialCases::LOCAL_SHELL_ID->value;
     }
 
     /** @return array<string, scalar|null> */

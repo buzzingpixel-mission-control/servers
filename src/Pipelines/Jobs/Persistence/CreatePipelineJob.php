@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace MissionControlServers\Pipelines\Jobs\Persistence;
 
-use DateTimeInterface;
-use MissionControlBackend\ActionResult;
+use MissionControlBackend\Persistence\DateFormats;
 use MissionControlBackend\Persistence\MissionControlPdo;
 use MissionControlBackend\Persistence\UuidFactoryWithOrderedTimeCodec;
+use MissionControlServers\Pipelines\Jobs\PipelineJob;
 use MissionControlServers\Pipelines\Persistence\FindPipelineParameters;
 use MissionControlServers\Pipelines\Persistence\FindPipelines;
 use Psr\Clock\ClockInterface;
@@ -27,7 +27,7 @@ readonly class CreatePipelineJob
     ) {
     }
 
-    public function create(string $pipelineId): ActionResult
+    public function create(string $pipelineId): CreatePipelineActionResult
     {
         $pipeline = $this->findPipelines->findOneOrNull(
             FindPipelineParameters::create()->withId(
@@ -36,7 +36,7 @@ readonly class CreatePipelineJob
         );
 
         if ($pipeline === null) {
-            return new ActionResult(
+            return new CreatePipelineActionResult(
                 false,
                 ['Unknown pipeline'],
             );
@@ -49,7 +49,7 @@ readonly class CreatePipelineJob
         $record->pipeline_id = $pipeline->id;
 
         $record->added_at = $this->clock->now()->format(
-            DateTimeInterface::ATOM,
+            DateFormats::POSTGRES_ISO8601,
         );
 
         foreach ($pipeline->pipelineItems()->records as $i => $itemRecord) {
@@ -83,7 +83,7 @@ readonly class CreatePipelineJob
         if (! $statement->execute($record->asParametersArray())) {
             $this->pdo->rollBack();
 
-            return new ActionResult(
+            return new CreatePipelineActionResult(
                 false,
                 $this->pdo->errorInfo(),
                 $this->pdo->errorCode(),
@@ -98,11 +98,13 @@ readonly class CreatePipelineJob
         if (! $result->success) {
             $this->pdo->rollBack();
 
-            return $result;
+            return CreatePipelineActionResult::fromActionResult($result);
         }
 
         $this->pdo->commit();
 
-        return new ActionResult();
+        return new CreatePipelineActionResult(job: PipelineJob::fromRecord(
+            $record,
+        ));
     }
 }

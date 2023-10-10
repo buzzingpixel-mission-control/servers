@@ -7,8 +7,10 @@ namespace MissionControlServers\Pipelines\Jobs;
 use RuntimeException;
 use Spatie\Cloneable\Cloneable;
 
+use function array_filter;
 use function array_map;
 use function array_values;
+use function count;
 
 class PipelineJobItemCollection
 {
@@ -23,6 +25,19 @@ class PipelineJobItemCollection
         $this->entities = array_values(array_map(
             static fn (PipelineJobItem $e) => $e,
             $entities,
+        ));
+    }
+
+    public function count(): int
+    {
+        return count($this->entities);
+    }
+
+    public function filter(callable $callback): self
+    {
+        return new self(array_filter(
+            $this->entities,
+            $callback,
         ));
     }
 

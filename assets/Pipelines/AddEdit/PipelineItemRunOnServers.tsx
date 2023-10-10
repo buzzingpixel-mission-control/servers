@@ -2,6 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 import { PipelineItem as PipeLineItemValues } from './AddEditValues';
 import { useAllServerData } from '../../Servers/ServerData';
+import SpecialCases from '../SpecialCases';
 
 type Option = {
     value: string;
@@ -40,7 +41,10 @@ const Input = (
         );
     }
 
-    const options = [] as Options;
+    const options = [{
+        value: SpecialCases.localShell,
+        label: 'Local Shell',
+    }] as Options;
 
     data.forEach((project) => {
         options.push({

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace MissionControlServers\Pipelines\Jobs;
 
+use DateTimeImmutable;
 use MissionControlServers\Pipelines\Jobs\Persistence\PipelineJobItemRecord;
 use MissionControlServers\Pipelines\Jobs\Persistence\PipelineJobRecord;
 use MissionControlServers\Pipelines\Jobs\ValueObjects\AddedAt;
@@ -66,6 +67,43 @@ readonly class PipelineJob
         public FinishedAt|NullValue $finishedAt,
         public PipelineJobItemCollection $pipelineJobItems = new PipelineJobItemCollection(),
     ) {
+    }
+
+    public function withHasStarted(bool $hasStarted = true): self
+    {
+        return $this->with(hasStarted: HasStarted::fromNative(
+            $hasStarted,
+        ));
+    }
+
+    public function withIsFinished(bool $isFinished = true): self
+    {
+        return $this->with(isFinished: IsFinished::fromNative(
+            $isFinished,
+        ));
+    }
+
+    public function withHasFailed(bool $hasFailed = true): self
+    {
+        return $this->with(hasFailed: HasFailed::fromNative(
+            $hasFailed,
+        ));
+    }
+
+    public function withPercentComplete(int|float $percentComplete): self
+    {
+        return $this->with(percentComplete: PercentComplete::fromNative(
+            $percentComplete,
+        ));
+    }
+
+    public function withFinishedAt(DateTimeImmutable|null $dateTime): self
+    {
+        if ($dateTime === null) {
+            return $this->with(finishedAt: new NullValue());
+        }
+
+        return $this->with(finishedAt: new FinishedAt($dateTime));
     }
 
     /** @return array<string, scalar|array<array-key, array<string, scalar|null>>|null> */
