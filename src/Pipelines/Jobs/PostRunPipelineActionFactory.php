@@ -10,9 +10,8 @@ use Psr\Http\Message\ServerRequestInterface;
 
 readonly class PostRunPipelineActionFactory
 {
-    public function __construct(
-        private JobApi $jobApi,
-    ) {
+    public function __construct(private JobApi $jobApi)
+    {
     }
 
     public function runActionAndSendResponder(
@@ -24,9 +23,7 @@ readonly class PostRunPipelineActionFactory
             return new PostRunPipelineResponderNotFound($request);
         }
 
-        $result = $this->jobApi->runPipelineIfNotRunning(
-            $pipeline,
-        );
+        $result = $this->jobApi->runPipelineIfNotRunning($pipeline);
 
         if (! $result->success) {
             return new PostRunPipelineResponderAlreadyRunning(

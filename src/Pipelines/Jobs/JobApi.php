@@ -28,9 +28,11 @@ readonly class JobApi
     public function runPipelineIfNotRunning(Pipeline $pipeline): ActionResult
     {
         $unRunJob = $this->repository->findOneOrNull(
-            FindPipelineJobParameters::create()->withPipelineId(
-                $pipeline->id->toNative(),
-            ),
+            FindPipelineJobParameters::create()
+                ->withPipelineId(
+                    $pipeline->id->toNative(),
+                )
+                ->withIsFinished(false),
         );
 
         if ($unRunJob !== null) {

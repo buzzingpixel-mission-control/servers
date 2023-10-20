@@ -29,11 +29,11 @@ class PipelineJobRecord extends Record
 
         $record->pipeline_id = $entity->pipelineId->toNative();
 
-        $record->has_failed = $entity->hasStarted->toNative();
+        $record->has_started = $entity->hasStarted->toNative();
 
         $record->is_finished = $entity->isFinished->toNative();
 
-        $record->has_failed = $entity->hasFailed->toNative();
+        $record->has_failed = $entity->hasStarted->toNative();
 
         $record->percent_complete = $entity->percentComplete->toNative();
 

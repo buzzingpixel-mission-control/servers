@@ -11,6 +11,7 @@ use MissionControlServers\Pipelines\GetDetails\GetDetailsBySlugAction;
 use MissionControlServers\Pipelines\GetPipelinesListAction;
 use MissionControlServers\Pipelines\GetPipelinesListArchivedAction;
 use MissionControlServers\Pipelines\Jobs\PostRunPipelineAction;
+use MissionControlServers\Pipelines\Jobs\WebhookTriggerAction;
 use MissionControlServers\Servers\AddEdit\PatchArchiveServerAction;
 use MissionControlServers\Servers\AddEdit\PatchEditServerAction;
 use MissionControlServers\Servers\AddEdit\PatchUnArchiveServerAction;
@@ -73,5 +74,6 @@ class Routing
         GetDetailsBySlugAction::registerRoute($event);
         PatchEditPipelineAction::registerRoute($event);
         PostRunPipelineAction::registerRoute($event);
+        WebhookTriggerAction::registerRoute($event);
     }
 }
