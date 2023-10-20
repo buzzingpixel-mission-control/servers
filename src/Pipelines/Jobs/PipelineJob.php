@@ -107,7 +107,7 @@ readonly class PipelineJob
     }
 
     /** @return array<string, scalar|array<array-key, array<string, scalar|null>>|null> */
-    public function asArray(): array
+    public function asArray(string $itemsKey = 'pipelineJobItems'): array
     {
         return [
             'id' => $this->id->toNative(),
@@ -118,7 +118,7 @@ readonly class PipelineJob
             'percentComplete' => $this->percentComplete->toNative(),
             'addedAt' => $this->addedAt->toNative(),
             'finishedAt' => $this->finishedAt->toNative(),
-            'pipelineJobItems' => $this->pipelineJobItems->asArray(),
+            $itemsKey => $this->pipelineJobItems->asArray(),
         ];
     }
 

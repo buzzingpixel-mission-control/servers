@@ -31,6 +31,7 @@ var react_router_dom_1 = require("react-router-dom");
 var buzzingpixel_mission_control_frontend_core_1 = require("buzzingpixel-mission-control-frontend-core");
 var PipelineDetailsData_1 = require("./PipelineDetailsData");
 var PageHeader_1 = __importDefault(require("./PageHeader"));
+var RecentRunsList_1 = __importDefault(require("./RecentRunsList"));
 var Page = function () {
     var slug = (0, react_router_dom_1.useParams)().slug;
     (0, buzzingpixel_mission_control_frontend_core_1.useHidePageTitle)(true);
@@ -59,6 +60,7 @@ var Page = function () {
         setIsArchive(true);
     }
     return (react_1.default.createElement(react_1.default.Fragment, null,
-        react_1.default.createElement(PageHeader_1.default, { data: data })));
+        react_1.default.createElement(PageHeader_1.default, { data: data }),
+        react_1.default.createElement(RecentRunsList_1.default, { pipeline: data })));
 };
 exports.default = Page;

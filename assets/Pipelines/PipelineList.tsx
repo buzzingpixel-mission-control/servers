@@ -3,9 +3,7 @@ import React, {
     useEffect,
     useState,
 } from 'react';
-import {
-    NoResultsAddItem,
-} from 'buzzingpixel-mission-control-frontend-core';
+import { NoResultsAddItem } from 'buzzingpixel-mission-control-frontend-core';
 import { RectangleGroupIcon } from '@heroicons/react/24/outline';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';

@@ -61,4 +61,16 @@ readonly class PipelineJobRepository
 
         return PipelineJob::fromRecord($record);
     }
+
+    public function findAll(
+        FindPipelineJobParameters|null $parameters = null,
+    ): PipelineJobCollection {
+        $records = $this->find->findAll($parameters);
+
+        return new PipelineJobCollection($records->map(
+            static fn (
+                PipelineJobRecord $record,
+            ) => PipelineJob::fromRecord($record),
+        ));
+    }
 }

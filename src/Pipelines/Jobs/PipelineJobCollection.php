@@ -49,11 +49,13 @@ class PipelineJobCollection
     }
 
     /** @return array<array-key, array<string, scalar|null>> */
-    public function asArray(): array
+    public function asArray(string $itemsKey = 'pipelineJobItems'): array
     {
         /** @phpstan-ignore-next-line */
         return $this->map(
-            static fn (PipelineJob $e) => $e->asArray(),
+            static fn (PipelineJob $e) => $e->asArray(
+                $itemsKey,
+            ),
         );
     }
 }

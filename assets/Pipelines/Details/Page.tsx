@@ -8,6 +8,7 @@ import {
 } from 'buzzingpixel-mission-control-frontend-core';
 import { usePipelineDetailsData } from './PipelineDetailsData';
 import PageHeader from './PageHeader';
+import RecentRunsList from './RecentRunsList';
 
 const Page = () => {
     const { slug } = useParams();
@@ -52,6 +53,7 @@ const Page = () => {
     return (
         <>
             <PageHeader data={data} />
+            <RecentRunsList pipeline={data} />
         </>
     );
 };
