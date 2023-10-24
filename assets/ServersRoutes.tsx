@@ -9,6 +9,7 @@ import { default as PipelinesPage } from './Pipelines/Page';
 import AddPipelinePage from './Pipelines/AddEdit/AddPipelinePage';
 import { default as PipelineDetailsPage } from './Pipelines/Details/Page';
 import EditPipelinePage from './Pipelines/AddEdit/EditPipelinePage';
+import DeployRunPage from './Pipelines/Details/DeployRun/Page';
 
 const ServersRoutes = () => (
     <>
@@ -24,6 +25,7 @@ const ServersRoutes = () => (
         <Route path="/pipelines/add" element={<AddPipelinePage />} />
         <Route path="/pipelines/:slug" element={<PipelineDetailsPage />} />
         <Route path="/pipelines/:slug/edit" element={<EditPipelinePage />} />
+        <Route path="/pipelines/:slug/run/:id" element={<DeployRunPage />} />
     </>
 );
 

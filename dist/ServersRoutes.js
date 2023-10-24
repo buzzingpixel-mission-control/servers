@@ -14,6 +14,7 @@ var Page_4 = __importDefault(require("./Pipelines/Page"));
 var AddPipelinePage_1 = __importDefault(require("./Pipelines/AddEdit/AddPipelinePage"));
 var Page_5 = __importDefault(require("./Pipelines/Details/Page"));
 var EditPipelinePage_1 = __importDefault(require("./Pipelines/AddEdit/EditPipelinePage"));
+var Page_6 = __importDefault(require("./Pipelines/Details/DeployRun/Page"));
 var ServersRoutes = function () { return (react_1.default.createElement(react_1.default.Fragment, null,
     react_1.default.createElement(react_router_dom_1.Route, { path: "/ssh-keys", element: react_1.default.createElement(SshKeyListPage_1.default, null) }),
     react_1.default.createElement(react_router_dom_1.Route, { path: "/ssh-keys/archived", element: react_1.default.createElement(SshKeyListPage_1.default, { isArchive: true }) }),
@@ -26,5 +27,6 @@ var ServersRoutes = function () { return (react_1.default.createElement(react_1.
     react_1.default.createElement(react_router_dom_1.Route, { path: "/pipelines/archived", element: react_1.default.createElement(Page_4.default, { isArchive: true }) }),
     react_1.default.createElement(react_router_dom_1.Route, { path: "/pipelines/add", element: react_1.default.createElement(AddPipelinePage_1.default, null) }),
     react_1.default.createElement(react_router_dom_1.Route, { path: "/pipelines/:slug", element: react_1.default.createElement(Page_5.default, null) }),
-    react_1.default.createElement(react_router_dom_1.Route, { path: "/pipelines/:slug/edit", element: react_1.default.createElement(EditPipelinePage_1.default, null) }))); };
+    react_1.default.createElement(react_router_dom_1.Route, { path: "/pipelines/:slug/edit", element: react_1.default.createElement(EditPipelinePage_1.default, null) }),
+    react_1.default.createElement(react_router_dom_1.Route, { path: "/pipelines/:slug/run/:id", element: react_1.default.createElement(Page_6.default, null) }))); };
 exports.default = ServersRoutes;

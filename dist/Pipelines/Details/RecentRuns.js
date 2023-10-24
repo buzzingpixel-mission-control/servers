@@ -58,7 +58,15 @@ var transformRecentRun = function (recentRun) { return (__assign(__assign({}, re
         ? null
         : new Date(recentRun.finishedAt), items: recentRun.items.map(function (item) { return (__assign(__assign({}, item), { finishedAtDate: item.finishedAt === null
             ? null
-            : new Date(item.finishedAt) })); }) })); };
+            : new Date(item.finishedAt), isFinished: item.finishedAt !== null, status: (function () {
+            if (item.hasFailed) {
+                return RecentRunStatus.failed;
+            }
+            if (item.finishedAt !== null) {
+                return RecentRunStatus.finished;
+            }
+            return RecentRunStatus.inQueue;
+        })() })); }) })); };
 exports.transformRecentRun = transformRecentRun;
 var transformRecentRuns = function (recentRuns) { return recentRuns.map(function (recentRun) { return (0, exports.transformRecentRun)(recentRun); }); };
 exports.transformRecentRuns = transformRecentRuns;

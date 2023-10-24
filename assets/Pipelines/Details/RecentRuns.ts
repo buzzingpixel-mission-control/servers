@@ -44,11 +44,13 @@ export type RecentRuns = z.infer<typeof RecentRunsSchema>;
 
 export type RecentRunItemWithViewOptions = RecentRunItem & {
     finishedAtDate: Date | null;
+    isFinished: boolean;
+    status: RecentRunStatus;
 };
 
 export type RecentRunItemsWithViewOptions = Array<RecentRunItemWithViewOptions>;
 
-export type RecentRunWithViewOptions = RecentRun & {
+export type RecentRunWithViewOptions = Omit<RecentRun, 'items'> & {
     status: RecentRunStatus;
     addedAtDate: Date;
     finishedAtDate: Date | null;
@@ -85,6 +87,18 @@ export const transformRecentRun = (
         finishedAtDate: item.finishedAt === null
             ? null
             : new Date(item.finishedAt),
+        isFinished: item.finishedAt !== null,
+        status: (() => {
+            if (item.hasFailed) {
+                return RecentRunStatus.failed;
+            }
+
+            if (item.finishedAt !== null) {
+                return RecentRunStatus.finished;
+            }
+
+            return RecentRunStatus.inQueue;
+        })(),
     })),
 });
 

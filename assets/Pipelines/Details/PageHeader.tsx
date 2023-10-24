@@ -25,10 +25,6 @@ const PageHeader = ({ data }: { data: PipelineWithViewOptions }) => {
                 <div className="border-b border-gray-200 pb-4">
                     <div className="md:flex md:items-center md:justify-between md:space-x-5">
                         <div className="flex items-start space-x-5 overflow-hidden">
-                            {/*
-                              Use vertical padding to simulate center alignment when both lines of text are one line,
-                              but preserve the same layout if the text wraps without making the image jump around.
-                            */}
                             <div className="pt-1.5">
                                 <h1 className="text-2xl font-bold text-gray-900">
                                     {data.title}
