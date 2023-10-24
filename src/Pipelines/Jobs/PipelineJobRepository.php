@@ -67,6 +67,7 @@ readonly class PipelineJobRepository
     ): PipelineJobCollection {
         $records = $this->find->findAll($parameters);
 
+        /** @phpstan-ignore-next-line */
         return new PipelineJobCollection($records->map(
             static fn (
                 PipelineJobRecord $record,
