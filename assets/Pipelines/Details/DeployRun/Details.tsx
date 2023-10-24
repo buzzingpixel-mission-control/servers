@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PartialPageLoading } from 'buzzingpixel-mission-control-frontend-core';
 import { PipelineWithViewOptions } from '../../Pipelines';
 import { useDeployRunData } from './DeployRunData';
 import DetailsItem from './DetailsItem';
+import { RecentRunStatus } from '../RecentRuns';
 
 const Details = (
     {
@@ -13,10 +14,24 @@ const Details = (
         pipeline: PipelineWithViewOptions;
     },
 ) => {
-    const { status, data } = useDeployRunData(pipeline.id, jobId);
+    const [continuousRefetch, setContinuousRefetch] = useState(true);
+
+    const { status, data } = useDeployRunData(
+        pipeline.id,
+        jobId,
+        continuousRefetch,
+    );
 
     if (status === 'loading') {
         return <PartialPageLoading />;
+    }
+
+    if (
+        data.status !== RecentRunStatus.running
+        && data.status !== RecentRunStatus.inQueue
+        && continuousRefetch === true
+    ) {
+        setContinuousRefetch(false);
     }
 
     return (
