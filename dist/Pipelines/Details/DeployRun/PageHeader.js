@@ -38,6 +38,9 @@ var PageHeader = function (_a) {
                             return (react_1.default.createElement("p", { className: "text-sm font-medium text-gray-600 mb-2" }, pipeline.description));
                         })(),
                         react_1.default.createElement("div", { className: "flex items-start gap-x-3" },
-                            react_1.default.createElement("p", { className: classNames(StatusPillStyleClasses_1.StatusPillStyleClasses[data.status], 'rounded-md whitespace-nowrap mt-0.5 px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset') }, data.status))))))));
+                            react_1.default.createElement("p", { className: classNames(StatusPillStyleClasses_1.StatusPillStyleClasses[data.status], 'rounded-md whitespace-nowrap mt-0.5 px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset') }, data.status),
+                            react_1.default.createElement("p", { className: "text-sm font-medium text-gray-600 mb-2" },
+                                data.percentComplete,
+                                "%"))))))));
 };
 exports.default = PageHeader;

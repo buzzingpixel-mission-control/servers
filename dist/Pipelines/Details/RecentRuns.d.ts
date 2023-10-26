@@ -225,6 +225,7 @@ export type RecentRunItemWithViewOptions = RecentRunItem & {
 export type RecentRunItemsWithViewOptions = Array<RecentRunItemWithViewOptions>;
 export type RecentRunWithViewOptions = Omit<RecentRun, 'items'> & {
     status: RecentRunStatus;
+    isRunning: boolean;
     addedAtDate: Date;
     finishedAtDate: Date | null;
     items: RecentRunItemsWithViewOptions;

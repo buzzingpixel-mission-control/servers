@@ -19,6 +19,9 @@ export const useRunPipelineMutation = (pipeline: Pipeline) => {
         success: boolean;
         message: 'alreadyRunning' | '';
     }>({
+        invalidateQueryKeysOnSuccess: [
+            `/pipelines/${pipeline.id}/recent-runs`,
+        ],
         prepareApiParams: () => ({
             uri: `/pipelines/${pipeline.slug}/run`,
             method: RequestMethod.POST,

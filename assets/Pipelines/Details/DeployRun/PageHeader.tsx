@@ -56,6 +56,10 @@ const PageHeader = (
                                 >
                                     {data.status}
                                 </p>
+                                <p className="text-sm font-medium text-gray-600 mb-2">
+                                    {data.percentComplete}
+                                    %
+                                </p>
                             </div>
                         </div>
                     </div>

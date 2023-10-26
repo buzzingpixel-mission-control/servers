@@ -36,6 +36,9 @@ var useRunPipelineMutation = function (pipeline) {
     var _b = (0, react_1.useState)(''), overlayHeading = _b[0], setOverlayHeading = _b[1];
     var _c = (0, react_1.useState)(''), overlayMessage = _c[0], setOverlayMessage = _c[1];
     var runPipelineMutation = (0, buzzingpixel_mission_control_frontend_core_1.useApiMutation)({
+        invalidateQueryKeysOnSuccess: [
+            "/pipelines/".concat(pipeline.id, "/recent-runs"),
+        ],
         prepareApiParams: function () { return ({
             uri: "/pipelines/".concat(pipeline.slug, "/run"),
             method: buzzingpixel_mission_control_frontend_core_1.RequestMethod.POST,

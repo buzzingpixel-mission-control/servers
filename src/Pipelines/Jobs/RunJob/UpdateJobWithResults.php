@@ -51,7 +51,9 @@ readonly class UpdateJobWithResults
         }
 
         if (! $result->success) {
-            $job = $job->withHasFailed();
+            $job = $job->withHasFailed()
+                ->withIsFinished()
+                ->withFinishedAt($this->clock->now());
         }
 
         $this->jobRepository->saveWithoutSavingItems($job);

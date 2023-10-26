@@ -43,7 +43,8 @@ exports.RecentRunSchema = zod_1.z.object({
     items: exports.RecentRunItemsSchema,
 });
 exports.RecentRunsSchema = zod_1.z.array(exports.RecentRunSchema);
-var transformRecentRun = function (recentRun) { return (__assign(__assign({}, recentRun), { status: (function () {
+var transformRecentRun = function (recentRun) {
+    var status = (function () {
         if (recentRun.hasFailed) {
             return RecentRunStatus.failed;
         }
@@ -54,19 +55,22 @@ var transformRecentRun = function (recentRun) { return (__assign(__assign({}, re
             return RecentRunStatus.running;
         }
         return RecentRunStatus.inQueue;
-    })(), addedAtDate: new Date(recentRun.addedAt), finishedAtDate: recentRun.finishedAt === null
-        ? null
-        : new Date(recentRun.finishedAt), items: recentRun.items.map(function (item) { return (__assign(__assign({}, item), { finishedAtDate: item.finishedAt === null
+    })();
+    return (__assign(__assign({}, recentRun), { status: status, isRunning: (function () { return status === RecentRunStatus.running
+            || status === RecentRunStatus.inQueue; })(), addedAtDate: new Date(recentRun.addedAt), finishedAtDate: recentRun.finishedAt === null
             ? null
-            : new Date(item.finishedAt), isFinished: item.finishedAt !== null, status: (function () {
-            if (item.hasFailed) {
-                return RecentRunStatus.failed;
-            }
-            if (item.finishedAt !== null) {
-                return RecentRunStatus.finished;
-            }
-            return RecentRunStatus.inQueue;
-        })() })); }) })); };
+            : new Date(recentRun.finishedAt), items: recentRun.items.map(function (item) { return (__assign(__assign({}, item), { finishedAtDate: item.finishedAt === null
+                ? null
+                : new Date(item.finishedAt), isFinished: item.finishedAt !== null, status: (function () {
+                if (item.hasFailed) {
+                    return RecentRunStatus.failed;
+                }
+                if (item.finishedAt !== null) {
+                    return RecentRunStatus.finished;
+                }
+                return RecentRunStatus.inQueue;
+            })() })); }) }));
+};
 exports.transformRecentRun = transformRecentRun;
 var transformRecentRuns = function (recentRuns) { return recentRuns.map(function (recentRun) { return (0, exports.transformRecentRun)(recentRun); }); };
 exports.transformRecentRuns = transformRecentRuns;

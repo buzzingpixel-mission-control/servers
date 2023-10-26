@@ -25,7 +25,6 @@ export const useDeployRunData = (
 
     if (continuousRefetch) {
         options.staleTime = 3000;
-
         options.refetchInterval = 3000;
     }
 

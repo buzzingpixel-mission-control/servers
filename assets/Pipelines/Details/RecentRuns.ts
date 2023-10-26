@@ -52,6 +52,7 @@ export type RecentRunItemsWithViewOptions = Array<RecentRunItemWithViewOptions>;
 
 export type RecentRunWithViewOptions = Omit<RecentRun, 'items'> & {
     status: RecentRunStatus;
+    isRunning: boolean;
     addedAtDate: Date;
     finishedAtDate: Date | null;
     items: RecentRunItemsWithViewOptions;
@@ -61,9 +62,8 @@ export type RecentRunsWithViewOptions = Array<RecentRunWithViewOptions>;
 
 export const transformRecentRun = (
     recentRun: RecentRun,
-): RecentRunWithViewOptions => ({
-    ...recentRun,
-    status: (() => {
+): RecentRunWithViewOptions => {
+    const status = (() => {
         if (recentRun.hasFailed) {
             return RecentRunStatus.failed;
         }
@@ -77,30 +77,37 @@ export const transformRecentRun = (
         }
 
         return RecentRunStatus.inQueue;
-    })(),
-    addedAtDate: new Date(recentRun.addedAt),
-    finishedAtDate: recentRun.finishedAt === null
-        ? null
-        : new Date(recentRun.finishedAt),
-    items: recentRun.items.map((item) => ({
-        ...item,
-        finishedAtDate: item.finishedAt === null
+    })();
+
+    return ({
+        ...recentRun,
+        status,
+        isRunning: (() => status === RecentRunStatus.running
+            || status === RecentRunStatus.inQueue)(),
+        addedAtDate: new Date(recentRun.addedAt),
+        finishedAtDate: recentRun.finishedAt === null
             ? null
-            : new Date(item.finishedAt),
-        isFinished: item.finishedAt !== null,
-        status: (() => {
-            if (item.hasFailed) {
-                return RecentRunStatus.failed;
-            }
+            : new Date(recentRun.finishedAt),
+        items: recentRun.items.map((item) => ({
+            ...item,
+            finishedAtDate: item.finishedAt === null
+                ? null
+                : new Date(item.finishedAt),
+            isFinished: item.finishedAt !== null,
+            status: (() => {
+                if (item.hasFailed) {
+                    return RecentRunStatus.failed;
+                }
 
-            if (item.finishedAt !== null) {
-                return RecentRunStatus.finished;
-            }
+                if (item.finishedAt !== null) {
+                    return RecentRunStatus.finished;
+                }
 
-            return RecentRunStatus.inQueue;
-        })(),
-    })),
-});
+                return RecentRunStatus.inQueue;
+            })(),
+        })),
+    });
+};
 
 export const transformRecentRuns = (
     recentRuns: RecentRuns,
