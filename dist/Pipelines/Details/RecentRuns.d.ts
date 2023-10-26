@@ -3,7 +3,8 @@ export declare enum RecentRunStatus {
     inQueue = "In Queue",
     running = "Running",
     finished = "Finished",
-    failed = "Failed"
+    failed = "Failed",
+    other = "--"
 }
 export declare const RecentRunItemSchema: z.ZodObject<{
     id: z.ZodString;

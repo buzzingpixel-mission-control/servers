@@ -19,6 +19,7 @@ var RecentRunStatus;
     RecentRunStatus["running"] = "Running";
     RecentRunStatus["finished"] = "Finished";
     RecentRunStatus["failed"] = "Failed";
+    RecentRunStatus["other"] = "--";
 })(RecentRunStatus || (exports.RecentRunStatus = RecentRunStatus = {}));
 exports.RecentRunItemSchema = zod_1.z.object({
     id: zod_1.z.string(),
@@ -67,6 +68,9 @@ var transformRecentRun = function (recentRun) {
                 }
                 if (item.finishedAt !== null) {
                     return RecentRunStatus.finished;
+                }
+                if (recentRun.hasFailed) {
+                    return RecentRunStatus.other;
                 }
                 return RecentRunStatus.inQueue;
             })() })); }) }));

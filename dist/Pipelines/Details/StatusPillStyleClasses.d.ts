@@ -1,6 +1,7 @@
 export declare const StatusPillStyleClasses: {
-    'In Queue': string;
+    "In Queue": string;
     Running: string;
     Finished: string;
     Failed: string;
+    "--": string;
 };

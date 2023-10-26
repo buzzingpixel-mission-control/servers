@@ -5,6 +5,7 @@ export enum RecentRunStatus {
     running = 'Running',
     finished = 'Finished',
     failed = 'Failed',
+    other = '--',
 }
 
 export const RecentRunItemSchema = z.object({
@@ -101,6 +102,9 @@ export const transformRecentRun = (
 
                 if (item.finishedAt !== null) {
                     return RecentRunStatus.finished;
+                }
+                if (recentRun.hasFailed) {
+                    return RecentRunStatus.other;
                 }
 
                 return RecentRunStatus.inQueue;
