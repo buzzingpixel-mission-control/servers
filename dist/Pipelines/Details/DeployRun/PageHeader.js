@@ -7,6 +7,7 @@ var react_1 = __importDefault(require("react"));
 var date_1 = __importDefault(require("locutus/php/datetime/date"));
 var StatusPillStyleClasses_1 = require("../StatusPillStyleClasses");
 var DeployRunData_1 = require("./DeployRunData");
+var RecentRuns_1 = require("../RecentRuns");
 function classNames() {
     var classes = [];
     for (var _i = 0; _i < arguments.length; _i++) {
@@ -39,8 +40,13 @@ var PageHeader = function (_a) {
                         })(),
                         react_1.default.createElement("div", { className: "flex items-start gap-x-3" },
                             react_1.default.createElement("p", { className: classNames(StatusPillStyleClasses_1.StatusPillStyleClasses[data.status], 'rounded-md whitespace-nowrap mt-0.5 px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset') }, data.status),
-                            react_1.default.createElement("p", { className: "text-sm font-medium text-gray-600 mb-2" },
-                                data.percentComplete,
-                                "%"))))))));
+                            (function () {
+                                if (data.status === RecentRuns_1.RecentRunStatus.failed) {
+                                    return null;
+                                }
+                                return (react_1.default.createElement("p", { className: "text-sm font-medium text-gray-600 mb-2" },
+                                    data.percentComplete,
+                                    "%"));
+                            })())))))));
 };
 exports.default = PageHeader;

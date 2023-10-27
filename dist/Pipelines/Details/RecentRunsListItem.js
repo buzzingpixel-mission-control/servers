@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
 var date_1 = __importDefault(require("locutus/php/datetime/date"));
 var react_router_dom_1 = require("react-router-dom");
+var RecentRuns_1 = require("./RecentRuns");
 var StatusPillStyleClasses_1 = require("./StatusPillStyleClasses");
 function classNames() {
     var classes = [];
@@ -22,9 +23,14 @@ var RecentRunsListItem = function (_a) {
                 react_1.default.createElement("div", { className: "flex items-start gap-x-3" },
                     react_1.default.createElement("p", { className: "text-sm font-semibold leading-6 text-gray-900" }, (0, date_1.default)('Y-m-d g:i:s A', item.addedAtDate)),
                     react_1.default.createElement("p", { className: classNames(StatusPillStyleClasses_1.StatusPillStyleClasses[item.status], 'rounded-md whitespace-nowrap mt-0.5 px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset') }, item.status),
-                    react_1.default.createElement("p", { className: "text-sm leading-6 text-gray-900" },
-                        item.percentComplete,
-                        "%"))),
+                    (function () {
+                        if (item.status === RecentRuns_1.RecentRunStatus.failed) {
+                            return null;
+                        }
+                        return (react_1.default.createElement("p", { className: "text-sm leading-6 text-gray-900" },
+                            item.percentComplete,
+                            "%"));
+                    })())),
             react_1.default.createElement("div", { className: "mt-2 sm:mt-0 flex flex-none items-center gap-x-4" },
                 react_1.default.createElement(react_router_dom_1.Link, { to: "".concat(pipeline.href, "/run/").concat(item.id), className: "block rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" }, "View Details")))));
 };

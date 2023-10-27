@@ -3,6 +3,7 @@ import phpDateFormat from 'locutus/php/datetime/date';
 import { PipelineWithViewOptions } from '../../Pipelines';
 import { StatusPillStyleClasses } from '../StatusPillStyleClasses';
 import { useDeployRunData } from './DeployRunData';
+import { RecentRunStatus } from '../RecentRuns';
 
 function classNames (...classes: Array<string>) {
     return classes.filter(Boolean).join(' ');
@@ -56,10 +57,18 @@ const PageHeader = (
                                 >
                                     {data.status}
                                 </p>
-                                <p className="text-sm font-medium text-gray-600 mb-2">
-                                    {data.percentComplete}
-                                    %
-                                </p>
+                                {(() => {
+                                    if (data.status === RecentRunStatus.failed) {
+                                        return null;
+                                    }
+
+                                    return (
+                                        <p className="text-sm font-medium text-gray-600 mb-2">
+                                            {data.percentComplete}
+                                            %
+                                        </p>
+                                    );
+                                })()}
                             </div>
                         </div>
                     </div>

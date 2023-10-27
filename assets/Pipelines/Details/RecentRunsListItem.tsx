@@ -1,7 +1,7 @@
 import React from 'react';
 import phpDateFormat from 'locutus/php/datetime/date';
 import { Link } from 'react-router-dom';
-import { RecentRunWithViewOptions } from './RecentRuns';
+import { RecentRunStatus, RecentRunWithViewOptions } from './RecentRuns';
 import { PipelineWithViewOptions } from '../Pipelines';
 import { StatusPillStyleClasses } from './StatusPillStyleClasses';
 
@@ -33,10 +33,18 @@ const RecentRunsListItem = (
                     >
                         {item.status}
                     </p>
-                    <p className="text-sm leading-6 text-gray-900">
-                        {item.percentComplete}
-                        %
-                    </p>
+                    {(() => {
+                        if (item.status === RecentRunStatus.failed) {
+                            return null;
+                        }
+
+                        return (
+                            <p className="text-sm leading-6 text-gray-900">
+                                {item.percentComplete}
+                                %
+                            </p>
+                        );
+                    })()}
                 </div>
             </div>
             <div className="mt-2 sm:mt-0 flex flex-none items-center gap-x-4">
