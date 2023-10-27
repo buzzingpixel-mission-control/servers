@@ -33,7 +33,7 @@ class PipelineJobRecord extends Record
 
         $record->is_finished = $entity->isFinished->toNative();
 
-        $record->has_failed = $entity->hasStarted->toNative();
+        $record->has_failed = $entity->hasFailed->toNative();
 
         $record->percent_complete = $entity->percentComplete->toNative();
 
