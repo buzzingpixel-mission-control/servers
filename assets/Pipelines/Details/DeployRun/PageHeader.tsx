@@ -58,7 +58,7 @@ const PageHeader = (
                                     {data.status}
                                 </p>
                                 {(() => {
-                                    if (data.status === RecentRunStatus.failed) {
+                                    if (!data.isRunning) {
                                         return null;
                                     }
 

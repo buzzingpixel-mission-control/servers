@@ -34,7 +34,7 @@ const RecentRunsListItem = (
                         {item.status}
                     </p>
                     {(() => {
-                        if (item.status === RecentRunStatus.failed) {
+                        if (!item.isRunning) {
                             return null;
                         }
 

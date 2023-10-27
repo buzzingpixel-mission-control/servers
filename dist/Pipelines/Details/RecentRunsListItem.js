@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
 var date_1 = __importDefault(require("locutus/php/datetime/date"));
 var react_router_dom_1 = require("react-router-dom");
-var RecentRuns_1 = require("./RecentRuns");
 var StatusPillStyleClasses_1 = require("./StatusPillStyleClasses");
 function classNames() {
     var classes = [];
@@ -24,7 +23,7 @@ var RecentRunsListItem = function (_a) {
                     react_1.default.createElement("p", { className: "text-sm font-semibold leading-6 text-gray-900" }, (0, date_1.default)('Y-m-d g:i:s A', item.addedAtDate)),
                     react_1.default.createElement("p", { className: classNames(StatusPillStyleClasses_1.StatusPillStyleClasses[item.status], 'rounded-md whitespace-nowrap mt-0.5 px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset') }, item.status),
                     (function () {
-                        if (item.status === RecentRuns_1.RecentRunStatus.failed) {
+                        if (!item.isRunning) {
                             return null;
                         }
                         return (react_1.default.createElement("p", { className: "text-sm leading-6 text-gray-900" },
