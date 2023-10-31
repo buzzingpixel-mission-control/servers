@@ -152,4 +152,9 @@ readonly class Pipeline
             $value,
         ));
     }
+
+    public function withIsActive(bool $isActive = true): static
+    {
+        return $this->with(isActive: IsActive::fromNative($isActive));
+    }
 }

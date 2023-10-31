@@ -43,9 +43,9 @@ var useArchiveSelectedPipelinesMutation = function (pipelines, isArchive) {
     return (0, buzzingpixel_mission_control_frontend_core_1.useApiMutation)({
         invalidateQueryKeysOnSuccess: invalidateQueryKeysOnSuccess,
         prepareApiParams: function () { return ({
-            uri: "/servers/".concat(isArchive ? 'un-archive' : 'archive'),
+            uri: "/pipelines/".concat(isArchive ? 'un-archive' : 'archive'),
             method: buzzingpixel_mission_control_frontend_core_1.RequestMethod.PATCH,
-            payload: { serverIds: pipelineIds },
+            payload: { pipelineIds: pipelineIds },
         }); },
     });
 };

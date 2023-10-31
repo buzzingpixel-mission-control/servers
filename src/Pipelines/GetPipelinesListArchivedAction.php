@@ -23,8 +23,10 @@ readonly class GetPipelinesListArchivedAction
             ->add(ResourceServerMiddlewareWrapper::class);
     }
 
-    public function __construct(private PipelineRepository $repository)
-    {
+    public function __construct(
+        private PipelineRepository $repository,
+        private PipelineOutputFactory $outputFactory,
+    ) {
     }
 
     public function __invoke(
@@ -44,7 +46,7 @@ readonly class GetPipelinesListArchivedAction
         );
 
         $response->getBody()->write((string) json_encode(
-            $items->asArray(),
+            $this->outputFactory->createForAll($items),
             JSON_PRETTY_PRINT,
         ));
 

@@ -14,6 +14,10 @@ use MissionControlServers\Pipelines\Jobs\PostRunPipelineAction;
 use MissionControlServers\Pipelines\Jobs\RecentRuns\GetRecentRunsListAction;
 use MissionControlServers\Pipelines\Jobs\Run\GetRunAction;
 use MissionControlServers\Pipelines\Jobs\WebhookTriggerAction;
+use MissionControlServers\Pipelines\PatchArchivePipelineAction;
+use MissionControlServers\Pipelines\PatchPipelinesArchiveAction;
+use MissionControlServers\Pipelines\PatchPipelinesUnArchiveAction;
+use MissionControlServers\Pipelines\PatchUnArchivePipelineAction;
 use MissionControlServers\Servers\AddEdit\PatchArchiveServerAction;
 use MissionControlServers\Servers\AddEdit\PatchEditServerAction;
 use MissionControlServers\Servers\AddEdit\PatchUnArchiveServerAction;
@@ -70,6 +74,8 @@ class Routing
         /**
          * Pipelines
          */
+        PatchPipelinesArchiveAction::registerRoute($event);
+        PatchPipelinesUnArchiveAction::registerRoute($event);
         GetPipelinesListAction::registerRoute($event);
         GetPipelinesListArchivedAction::registerRoute($event);
         PostAddPipelineAction::registerRoute($event);
@@ -79,5 +85,7 @@ class Routing
         WebhookTriggerAction::registerRoute($event);
         GetRecentRunsListAction::registerRoute($event);
         GetRunAction::registerRoute($event);
+        PatchArchivePipelineAction::registerRoute($event);
+        PatchUnArchivePipelineAction::registerRoute($event);
     }
 }

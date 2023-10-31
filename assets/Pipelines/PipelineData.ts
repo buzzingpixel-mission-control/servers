@@ -70,9 +70,9 @@ export const useArchiveSelectedPipelinesMutation = (
     return useApiMutation({
         invalidateQueryKeysOnSuccess,
         prepareApiParams: () => ({
-            uri: `/servers/${isArchive ? 'un-archive' : 'archive'}`,
+            uri: `/pipelines/${isArchive ? 'un-archive' : 'archive'}`,
             method: RequestMethod.PATCH,
-            payload: { serverIds: pipelineIds },
+            payload: { pipelineIds },
         }),
     });
 };
