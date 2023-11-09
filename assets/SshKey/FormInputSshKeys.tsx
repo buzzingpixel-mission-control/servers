@@ -1,5 +1,5 @@
 import Select from 'react-select';
-import EditorParams from 'buzzingpixel-mission-control-frontend-core/assets/Forms/EditorParams';
+import { EditorParams } from 'buzzingpixel-mission-control-frontend-core';
 import React, { useState } from 'react';
 import { useSshKeyData } from './SshKeyData';
 
